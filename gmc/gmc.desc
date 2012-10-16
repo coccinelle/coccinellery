@@ -1,0 +1,28 @@
+coccinellery-short = Avoid call to genlmsg_cancel
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+genlmsg_cancel subtracts some constants from its second argument before
+calling nlmsg_cancel.  nlmsg_cancel then calls nlmsg_trim on the same
+arguments.  nlmsg_trim tests for NULL before doing any computation, but a
+NULL second argument to genlmsg_cancel is no longer NULL due to the initial
+subtraction.  Nothing else happens in this execution, so the call to
+genlmsg_cancel is simply unnecessary in this case.
+
+The semantic match that finds this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression data;
+@@
+
+if (data == NULL) { ...
+* genlmsg_cancel(..., data);
+  ...
+  return ...;
+}
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

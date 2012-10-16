@@ -1,0 +1,24 @@
+coccinellery-short = add missing of_node_put
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+np is initialized to the result of calling a function that calls
+of_node_get, so of_node_put should be called before the pointer is dropped.
+
+The semantic match that finds this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression e,e1,e2;
+@@
+
+* e = \(of_find_node_by_type\|of_find_node_by_name\)(...)
+  ... when != of_node_put(e)
+      when != true e == NULL
+      when != e2 = e
+  e = e1
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

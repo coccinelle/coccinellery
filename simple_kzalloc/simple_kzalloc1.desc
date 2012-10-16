@@ -1,0 +1,27 @@
+coccinellery-short = Use kzalloc
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Use kzalloc rather than the combination of kmalloc and memset.
+
+The semantic patch that makes this change is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression x,size,flags;
+statement S;
+@@
+
+-x = kmalloc(size,flags);
++x = kzalloc(size,flags);
+ if (x == NULL) S
+-memset(x, 0, size);
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

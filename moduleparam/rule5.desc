@@ -1,0 +1,30 @@
+coccinellery-short = Drop redundant includes of moduleparam.h
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Send to:
+dan@dennedy.org, stefanr@s5r6.in-berlin.de, linux1394-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject: [PATCH 2/4] drivers/ieee1394: Drop redundant includes of moduleparam.h
+
+
+------------------------------------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Drop #include <linux/moduleparam.h> in files that also include #include
+<linux/module.h>.  module.h includes moduleparam.h already.
+
+The semantic patch implementing this change is as follows:
+
+@ includesmodule @
+@@
+
+#include <linux/module.h>
+
+@ depends on includesmodule @
+@@
+
+- #include <linux/moduleparam.h>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

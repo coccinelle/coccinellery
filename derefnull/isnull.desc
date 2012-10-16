@@ -1,0 +1,45 @@
+coccinellery-short = remove null pointer dereference
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+If session is NULL, it is not possible to access its name field.  So I have
+split apart the printing of the error message to drop the printing of the
+name field in this case.
+
+The macro PRINTK actually only evaluates its arguments starting with the
+third one if the bitwise conjunction of the first two is non-zero.
+Normally, this conjunction would only be non-zero if debugging mode were
+turned on, but when session is NULL, the first argument in both the old and
+new code is -1, and thus the bitwise conjunction is true.  Perhaps a
+different strategy is desired, such as using tunnel->debug, which
+session->debug is initialized to, but tunnel can also be NULL, so this does
+not completely solve the problem.
+
+
+This problem was found using the following semantic match
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression E, E1;
+identifier f;
+statement S1,S2,S3;
+@@
+
+* if (E == NULL)
+{
+  ... when != if (E == NULL) S1 else S2
+      when != E = E1
+* E->f
+  ... when any
+  return ...;
+}
+else S3
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

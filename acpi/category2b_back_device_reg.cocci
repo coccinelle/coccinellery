@@ -1,3 +1,14 @@
+//
+// dereference without an error test
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Julien Brunel <brunel@diku.dk>
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+//
+
 // category 2 should only have a IS_ERR test
 
 @def0@ // save the file name, run with -no_includes

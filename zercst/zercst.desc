@@ -1,0 +1,12 @@
+coccinellery-short = adjust suspicious bit operation
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+IO_DATA_PATH_WIDTH_8 is 0, so a bit-and with it is always false.  The
+value IO_DATA_PATH_WIDTH covers the bits of the IO_DATA_PATH constants, so
+first pick those bits and then make the test using !=.
+
+This problem was found using Coccinelle (http://coccinelle.lip6.fr/).
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

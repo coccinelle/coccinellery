@@ -1,0 +1,45 @@
+coccinellery-short = remove duplicate structure field initialization
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The definition of slic_netdev_ops has initializations of a local function
+and eth_mac_addr for its ndo_set_mac_address field.  This change uses only
+the local function.
+
+The semantic match that finds this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@r@
+identifier I, s, fld;
+position p0,p;
+expression E;
+@@
+
+struct I s =@p0 { ... .fld@p = E, ...};
+
+@s@
+identifier I, s, r.fld;
+position r.p0,p;
+expression E;
+@@
+
+struct I s =@p0 { ... .fld@p = E, ...};
+
+@script:python@
+p0 << r.p0;
+fld << r.fld;
+ps << s.p;
+pr << r.p;
+@@
+
+if int(ps[0].line)!=int(pr[0].line) or int(ps[0].column)!=int(pr[0].column):
+  cocci.print_main(fld,p0)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

@@ -1,0 +1,29 @@
+coccinellery-short = Convert kfree to kfree_skb
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Send to:
+marcel@holtmann.org, maxk@qualcomm.com, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject: [PATCH] drivers/bluetooth: Convert kfree to kfree_skb
+
+------------------------------------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+kfree_skb rather than kfree should be used for values of type struct
+sk_buff *.
+
+This was fixed using the following semantic patch
+(http://www.emn.fr/x-info/coccinelle/).
+
+// <smpl>
+@@
+struct sk_buff *skb;
+@@
+
+- kfree(skb)
++ kfree_skb(skb)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

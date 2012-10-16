@@ -1,0 +1,28 @@
+coccinellery-short = Fix unsigned return type
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+In each case, the function has an unsigned return type, but returns a
+negative constant to indicate an error condition.  For move_block_from_dma,
+there is only one call and the return value is dropped, so it need not be
+unsigned.  For labpc_eeprom_write, there is only one call and the result is
+stored in a signed variable, so again the unsigned return type is not
+necessary.
+
+A sematic match that finds this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@exists@
+identifier f;
+constant C;
+@@
+
+ unsigned f(...)
+ { <+...
+*  return -C;
+ ...+> }
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
