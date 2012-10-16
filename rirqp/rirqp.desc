@@ -1,0 +1,10 @@
+coccinellery-short = ensure arguments to request_irq and free_irq are compatible
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Change 0 to NULL in the last argument of request_irq, since the argument
+should have pointer type and so that the last argument of request_irq
+syntactically matches the second argument of the later call to free_irq.
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

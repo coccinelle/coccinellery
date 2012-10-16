@@ -1,0 +1,41 @@
+coccinellery-short = Add missing pci_dev_put
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Send to:
+davem@davemloft.net, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject: [PATCH 1/5] arch/sparc64: Add missing pci_dev_put
+
+
+------------------------------------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+There should be a pci_dev_put when breaking out of a loop that iterates
+over calls to pci_get_device and similar functions.
+
+This was fixed using the following semantic patch.
+
+// <smpl>
+@@
+type T;
+identifier d;
+expression e;
+@@
+
+T *d;
+...
+while ((d = \(pci_get_device\|pci_get_device_reverse\|pci_get_subsys\|pci_get_class\)(..., d)) != NULL)
+ {... when != pci_dev_put(d)
+      when != e = d
+(
+   return d;
+|
++  pci_dev_put(d);
+?  return ...;
+)
+...}
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

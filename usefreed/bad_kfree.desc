@@ -1,0 +1,39 @@
+coccinellery-short = Correct use after free
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+In the case of igafb.c, the free appears to be part of cleanup code in the
+case of an error.  The code afterwards under the #ifdef is not meaningful
+in this case, because it extensively refers to structures that have been
+freed.  Furthermore, this initialization function would seem to have failed
+in the case where the kfrees are executed, so it does not seem reasonable
+to return 0 in this case.  Some other errors in the course of the function
+cause -ENOXIO to be returned, so that is added here.
+
+In panel-sharp-ls037v7dw01.c, a variable is introduced to hold the error
+code to return before freeing the structure that contains it.
+
+A simplified version of the semantic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression x,e;
+identifier f;
+iterator I;
+statement S;
+@@
+
+*kfree(x);
+... when != &x
+    when != x = e
+    when != I(x,...) S
+*x->f
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

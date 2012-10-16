@@ -1,0 +1,52 @@
+coccinellery-short = Move dereference to after IS_ERR test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+If reply is ERR_PTR(...), then it should not be dereferenced, so I have
+moved the dereference from the declaration to after the IS_ERR test.
+
+The semantic match that finds the problem is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@match exists@
+expression x, E;
+identifier fld;
+position p1,p2;
+@@
+
+(
+x = E;
+|
+x = E
+|
+x@p1->fld
+... when != x = E
+IS_ERR(x@p2)
+... when any
+)
+
+@other_match exists@
+expression match.x, E1, E2;
+position match.p1,match.p2;
+@@
+
+x = E1
+... when != x = E2
+    when != x@p1
+x@p2
+
+@ script:python depends on !other_match@
+p1 << match.p1;
+p2 << match.p2;
+@@
+
+print \"* file %s dereference %s test %s\" % (p1[0].file,p1[0].line,p2[0].line)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

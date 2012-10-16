@@ -1,0 +1,35 @@
+coccinellery-short = Drop unnecessary NULL test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The result of container_of should not be NULL.  In particular, in this case
+the argument to the enclosing function has passed though INIT_WORK, which
+dereferences it, implying that its container cannot be NULL.
+
+A simplified version of the semantic patch that makes this change is as
+follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+identifier fn,work,x,fld;
+type T;
+expression E1,E2;
+statement S;
+@@
+
+static fn(struct work_struct *work) {
+  ... when != work = E1
+  x = container_of(work,T,fld)
+  ... when != x = E2
+- if (x == NULL) S
+  ...
+}
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

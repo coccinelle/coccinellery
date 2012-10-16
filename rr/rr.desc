@@ -1,0 +1,37 @@
+coccinellery-short = Correct use of request_region/request_mem_region
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+request_mem_region should be used when ioremap is used subsequently.
+release_region is then correspondingly replaced by release_mem_region.
+
+The semantic patch that fixes this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@r@
+expression start,E;
+@@
+
+- request_region
++ request_mem_region
+  (start,...)
+... when != request_mem_region(start,...)
+    when != start = E
+ioremap(start,...)
+
+@@
+expression r.start;
+@@
+
+- release_region
++ release_mem_region
+  (start,...)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

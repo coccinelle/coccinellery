@@ -1,0 +1,36 @@
+coccinellery-short = Put correct tty value
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+The tty value that should be put is the one that was just gotten by
+tty_port_tty_get, not the one that is the argument to the enclosing
+function.
+
+The semantic match that finds this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@exists@
+local idexpression struct tty_struct *x;
+expression ra,rr;
+statement S1,S2;
+@@
+
+x = tty_port_tty_get(...)
+... when != x = rr
+    when any
+    when != tty_kref_put(x,...)
+    when != if (...) { ... tty_kref_put(x,...) ...}
+(
+if(<+...x...+>) S1 else S2
+|
+if(...) { ... when != x = ra
+     when forall
+     when != tty_kref_put(x,...)
+*return...;
+}
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+

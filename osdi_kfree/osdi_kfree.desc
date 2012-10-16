@@ -1,0 +1,46 @@
+coccinellery-short = Eliminate use after free
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+In each case, the first argument to send_control_msg or __send_control_msg,
+respectively, has either not been successfully allocated or has been freed
+at the point of the call.  In the first case, the first argument, port, is
+only used to access the portdev and id fields, in order to call
+__send_control_msg.  Thus it seems possible instead to call
+__send_control_msg directly.  In the second case, the call to
+__send_control_msg is moved up to a place where it seems like the first
+argument, portdev, has been initialized sufficiently to make the call to
+__send_control_msg meaningful.
+
+This has only been compile tested.
+
+A simplified version of the semantic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@free@
+expression E;
+position p;
+@@
+kfree@p(E)
+
+@@
+expression free.E, subE<=free.E, E1;
+position free.p;
+@@
+
+  kfree@p(E)
+  ...
+(
+  subE = E1
+|
+* E
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
