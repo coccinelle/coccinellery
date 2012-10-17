@@ -1,0 +1,22 @@
+coccinellery-short = use kstrtoul, etc
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Use kstrtoul, etc instead of the now deprecated strict_strtoul, etc.
+
+A semantic patch rule for the kstrtoul case is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression a,b;
+{int,long} *c;
+@@
+
+-strict_strtoul
++kstrtoul
+ (a,b,c)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
