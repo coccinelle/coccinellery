@@ -1,3 +1,13 @@
+//
+// Use usb_endpoint_dir_out
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+//
+
 @@
 struct usb_endpoint_descriptor *endpoint;
 expression E;
