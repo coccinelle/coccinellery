@@ -1,0 +1,25 @@
+coccinellery-short = use devm_ functions consistently
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Use devm_kzalloc for all calls to kzalloc and not just the first.  Use devm
+functions for other allocations as well.
+
+Move the call to platform_get_resource(pdev, IORESOURCE_MEM, 0) closer to
+where its result is passed to devm_request_and_ioremap to make the lack of
+need for a NULL test more evident.
+
+The semantic match that finds the inconsistency is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+@@
+
+*devm_kzalloc(...)
+...
+*kzalloc(...)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
