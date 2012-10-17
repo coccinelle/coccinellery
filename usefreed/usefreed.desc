@@ -1,0 +1,32 @@
+coccinellery-short = Correct use after free
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+If the kfree is executed, the dereference of range afterwards will
+represent a use after free.  Added goto out, as done in the other nearby
+error handling code.
+
+A simplified version of the semantic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression x,e;
+identifier f;
+iterator I;
+statement S;
+@@
+
+*kfree(x);
+... when != &x
+    when != x = e
+    when != I(x,...) S
+*x->f
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
