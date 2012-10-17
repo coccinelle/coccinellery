@@ -1,0 +1,28 @@
+coccinellery-short = Remove potential NULL dereferences
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+If the NULL test is necessary, the initialization involving a dereference of
+the tested value should be moved after the NULL test.
+
+The sematic patch that fixes this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+type T;
+expression E;
+identifier i,fld;
+statement S;
+@@
+
+- T i = E->fld;
++ T i;
+  ... when != E
+      when != i
+  if (E == NULL) S
++ i = E->fld;
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
