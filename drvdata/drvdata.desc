@@ -1,0 +1,35 @@
+coccinellery-short = use dev_get_drvdata
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Eliminate direct accesses to the driver_data field.
+cf 82ab13b26f15f49be45f15ccc96bfa0b81dfd015
+
+The semantic patch that makes this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+struct device *dev;
+expression E;
+type T;
+@@
+
+- dev->driver_data = (T)E
++ dev_set_drvdata(dev, E)
+
+@@
+struct device *dev;
+type T;
+@@
+
+- (T)dev->driver_data
++ dev_get_drvdata(dev)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
