@@ -1,13 +1,25 @@
-//
-// Add missing pci_dev_get
-//
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
-// Author: Julia Lawall <Julia.Lawall@lip6.fr>
-//
+coccinellery-short = Add missing pci_dev_get
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+drivers/macintosh/via-pmu.c
 
+Send to:
+benh@kernel.crashing.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject: [PATCH] drivers/macintosh: Add missing pci_dev_get
+
+------------------------------------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+pci_get_bus_and_slot does a pci_dev_get, so pci_dev_put needs to be called
+in an error case.
+
+The problem was fixed using the following semantic patch.
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
 @exists@
 type T1,T2;
 identifier E;
@@ -57,3 +69,6 @@ int ret != 0;
 )
   }
 )
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
