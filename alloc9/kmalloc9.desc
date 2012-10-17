@@ -1,0 +1,41 @@
+coccinellery-short = Eliminate memory leak
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+This code is preceded by a call to btrfs_alloc_path, which allocates some
+memory.  There is some error handling code at the end of the function that
+frees it, that can be taken advantage of with a little ordering adjustment.
+
+A simplified version of the semantic match that finds this problem is:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@r exists@
+local idexpression x;
+expression E;
+identifier f1;
+iterator I;
+@@
+
+x = btrfs_alloc_path(...);
+<... when != x
+     when != true (x == NULL || ...)
+     when != if (...) { <+...x...+> }
+     when != I (...) { <+...x...+> }
+(
+ x == NULL
+|
+ x == E
+|
+ x->f1
+)
+...>
+* return ...;
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
