@@ -1,3 +1,13 @@
+//
+// Description not available
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Author name not available
+//
+
 // kzalloc should be used rather than kmalloc followed by memset 0
 // kcalloc should be used rather than kzalloc of a product of values
 //
