@@ -1,0 +1,25 @@
+coccinellery-short = Invert calls to platform_device_put and platform_device_del
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Platform_device_del should be called before platform_device_put, as
+platform_device_put can delete the structure.
+
+Additionally, improve the error handling code for the call to ioremap, so
+that it calls platform_device_put.
+
+The semantic match that finds this problem is:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression e1,e2;
+@@
+
+*platform_device_put(e1);
+... when != e1 = e2
+*platform_device_del(e1);
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
