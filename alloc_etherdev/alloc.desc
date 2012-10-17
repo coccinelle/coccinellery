@@ -1,0 +1,40 @@
+coccinellery-short = adjust error handling
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Converts a test in error handling code to a sequence of labels.
+
+The semantic match that found the problem is:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression E,E1,E2;
+@@
+
+E = alloc_etherdev(...)
+... when != E = E1
+if (...) { ... free_netdev(E); ... return ...; }
+... when != E = E2
+(
+  if (...)
+   {
+   ... when != free_netdev(E);
+   return dev; }
+|
+* if (...)
+   {
+   ... when != free_netdev(E);
+   return ...; }
+|
+register_netdev(E)
+)
+
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
