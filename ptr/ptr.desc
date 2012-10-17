@@ -1,0 +1,29 @@
+coccinellery-short = Correct error handling code
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+If it is reasonable to apply PTR_ERR to the result of calling clk_get, then
+that result should first be tested with IS_ERR, not with !.
+
+The semantic patch that makes this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression E,E1;
+@@
+
+if (
+-   E == NULL
++   IS_ERR(E)
+   ) { <+... when != E = E1
+        PTR_ERR(E)
+       ...+> }
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
