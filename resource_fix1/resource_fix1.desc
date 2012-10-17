@@ -1,0 +1,30 @@
+coccinellery-short = Convert release_resource to release_mem_region
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Request_mem_region should be used with release_mem_region, not
+release_resource.
+
+A semantic patch that partially fixes this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@b@
+expression x,E;
+@@
+
+x = request_mem_region(x->start,...)
+... when != release_mem_region(x->start,...)
+    when != x = E
+(
+- release_resource(x);
+- kfree(x);
++  release_mem_region(x->start,resource_size(x));
+|
+?- release_resource(x);
++  release_mem_region(x->start,resource_size(x));
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
