@@ -1,0 +1,49 @@
+coccinellery-short = Convert release_resource to release_region/release_mem_region
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Request_region should be used with release_region, not release_resource.
+
+This patch contains a number of changes, related to calls to request_region,
+request_mem_region, and the associated error handling code.
+
+1. For the call to request_region, the variable io_resource storing the
+result is dropped.  The call to release_resource at the end of the function
+is changed to a call to release_region with the first two arguments of
+request_region as its arguments.  The same call to release_region is also
+added to release_ipwireless.
+
+2. The first call to request_mem_region is now tested and ret is set to
+-EBUSY if the the call has failed.  This call was associated with the
+initialization of ipw->attr_memory.  But the error handling code was
+testing ipw->common_memory.  The definition of release_ipwireless also
+suggests that this call should be associated with ipw->common_memory, not
+ipw->attr_memory.
+
+3. The second call to request_mem_region is now tested and ret is
+set to -EBUSY if the the call has failed.
+
+4. The various gotos to the error handling code is adjusted so that there
+is no need for ifs.
+
+5. Return the value stored in the ret variable rather than -1.
+
+The semantic match that finds this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression x,E;
+@@
+(
+*x = request_region(...)
+|
+*x = request_mem_region(...)
+)
+... when != release_region(x)
+    when != x = E
+* release_resource(x);
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
