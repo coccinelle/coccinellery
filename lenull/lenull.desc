@@ -1,0 +1,29 @@
+coccinellery-short = Drop NULL test on list_entry result
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+list_entry, which is an alias for container_of, cannot return NULL, as
+there is no way to add a NULL value to a doubly linked list.
+
+A simplified version of the semantic match that findds this problem is as
+follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@r@
+expression x,E;
+statement S1,S2;
+position p,p1;
+@@
+
+*x = list_entry@p(...)
+... when != x = E
+*if@p1 (x == NULL) S1 else S2
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
