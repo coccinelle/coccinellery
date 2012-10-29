@@ -1,0 +1,28 @@
+coccinellery-short = Add missing call to gdth_ioctl_free
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Add missing call to gdth_ioctl_free before aborting.
+
+The semantic match that finds this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression buf,ha,len,addr,E;
+@@
+
+buf = gdth_ioctl_alloc(ha, len, FALSE, &addr)
+... when != false buf != NULL
+    when != true buf == NULL
+    when != \(E = buf\|buf = E\)
+    when != gdth_ioctl_free(ha, len, buf, addr)
+*return ...;
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
