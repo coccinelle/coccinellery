@@ -1,0 +1,29 @@
+coccinellery-short = Correct use of ! and &
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+ME_IO_SINGLE_TYPE_WRITE_NONBLOCKING and ME_IO_STREAM_CONFIG_WRAPAROUND both
+hanve 0 as the rightmost bit, and thus eg
+!flags & ME_IO_SINGLE_TYPE_WRITE_NONBLOCKING is always 0.
+I assume that !(flags & ME_IO_SINGLE_TYPE_WRITE_NONBLOCKING) and
+!(flags & ME_IO_STREAM_CONFIG_WRAPAROUND) were intended.
+
+The semantic patch that makes this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@ expression E; constant C; @@
+(
+  !E & !C
+|
+- !E & C
++ !(E & C)
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
