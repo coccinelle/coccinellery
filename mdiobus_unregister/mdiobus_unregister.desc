@@ -1,0 +1,21 @@
+coccinellery-short = Call mdiobus_unregister before mdiobus_free
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Peter Senna Tschudin <peter.senna@gmail.com>
+Based on commit b27393aecf66199f5ddad37c302d3e0cfadbe6c0
+
+Calling mdiobus_free without calling mdiobus_unregister causes
+BUG_ON(). This patch fixes the issue.
+
+The semantic patch that found this issue(http://coccinelle.lip6.fr/):
+// <smpl>
+@@
+expression E;
+@@
+  ... when != mdiobus_unregister(E);
+
++ mdiobus_unregister(E);
+  mdiobus_free(E);
+// </smpl>
+
+Signed-off-by: Peter Senna Tschudin <peter.senna@gmail.com>
