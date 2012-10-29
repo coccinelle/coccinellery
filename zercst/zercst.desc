@@ -1,0 +1,11 @@
+coccinellery-short = adjust suspicious bit operation
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+PCH_UDC_DMA_LAST is 0x08000000 so a bit-or with this value always gives a
+nonzero result.  The test is rewritten as done elsewhere in the same file.
+
+This problem was found using Coccinelle (http://coccinelle.lip6.fr/).
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
