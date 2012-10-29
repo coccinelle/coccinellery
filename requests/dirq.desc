@@ -1,0 +1,37 @@
+coccinellery-short = fix usage of devm functions
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Fix some problems with the use of devm_ functions.
+
+devm_kzalloc: devm_kfree is not needed
+
+devm_ioremap: iounmap should not be used, no free is needed
+
+devm_request_irq: the devm_free_irq is followed by irq_dispose_mapping.  I
+don't know if it is safe to move the freeing of the irq in this case, so I
+have just un-devm'd this function, since the implicit freeing is never
+taken advantage of.
+
+In the original code failure of of_address_to_resource jumped to free_mem,
+but should have jumped to irq_dispose, since irq_of_parse_and_map has
+completed at this point.
+
+In the original code unmap_mem was after irq_dispose, but it should have
+been before, again since irq_of_parse_and_map has completed at this point.
+
+One of these problems was found using the following semantic match:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression x;
+@@
+
+*x = devm_ioremap(...)
+...
+iounmap(x);
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
