@@ -1,0 +1,47 @@
+coccinellery-short = add missing fput
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+fget increments a reference count, so fput is needed to decrement it.  I
+have added a goto to the end of the function where there was already such a
+call.
+
+The semantic patch that finds this problem is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@r exists@
+local idexpression x;
+statement S;
+position p1,p2;
+identifier f;
+expression E;
+expression *ptr != NULL;
+@@
+
+ x@p1 = fget(...);
+ ... when != x
+ if (x == NULL) S
+ <... when != x
+      when != if (...) { <+...x...+> }
+  x->f = E
+ ...>
+(
+ return \(0\|<+...x...+>\|ptr\);
+|
+ return@p2 ...;
+)
+
+@ script:python @
+p1 << r.p1;
+p2 << r.p2;
+@@
+print \"%s: call: %s return: %s\" % (p1[0].file,p1[0].line,p2[0].line)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
