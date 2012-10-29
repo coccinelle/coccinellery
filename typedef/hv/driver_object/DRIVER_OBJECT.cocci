@@ -1,13 +1,3 @@
-//
-// Staging: hv: Remove typedef DRIVER_OBJECT and PDRIVER_OBJECT
-//
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
-// Author: Nicolas Palix <npalix@diku.dk>
-//
-
 @rm_DRIVER_OBJECT@
 @@
 -typedef struct _DRIVER_OBJECT

@@ -1,13 +1,3 @@
-//
-// Staging: hv: Transform PDEVICE_OBJECT and DEVICE_OBJECT typedefs into their corresponding structs
-//
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
-// Author: Nicolas Palix <npalix@diku.dk>
-//
-
 @rm_PDEVICE_OBJECT@
 @@
 -typedef struct _DEVICE_OBJECT *PDEVICE_OBJECT;

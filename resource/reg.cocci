@@ -1,13 +1,3 @@
-//
-// Convert release_resource to release_region/release_mem_region
-//
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
-// Author: Julia Lawall <Julia.Lawall@lip6.fr>
-//
-
 @r@
 expression e1,e2,e3,e4;
 position p1,p2;

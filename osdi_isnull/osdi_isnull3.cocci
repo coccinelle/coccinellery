@@ -1,13 +1,3 @@
-//
-// Eliminate what looks like a NULL pointer dereference
-//
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
-// Author: Julia Lawall <Julia.Lawall@lip6.fr>
-//
-
 // use argument -all_includes: too slow
 
 @ifm@

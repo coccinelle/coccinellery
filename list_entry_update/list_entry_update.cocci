@@ -1,13 +1,3 @@
-//
-// Eliminate update of list_for_each_entry loop cursor
-//
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
-// Author: Julia Lawall <Julia.Lawall@lip6.fr>
-//
-
 @r@
 iterator name list_for_each_entry;
 expression x,E;
