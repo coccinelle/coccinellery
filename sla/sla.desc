@@ -1,0 +1,25 @@
+coccinellery-short = Use GFP_ATOMIC when a lock is held
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+A spin lock is taken near the beginning of the enclosing function.
+
+The semantic patch that makes this change is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+@@
+
+spin_lock(...)
+... when != spin_unlock(...)
+-GFP_KERNEL
++GFP_ATOMIC
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
