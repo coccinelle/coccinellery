@@ -1,0 +1,30 @@
+coccinellery-short = decrement sizeof size in strncmp
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+As observed by Joe Perches, sizeof of a constant string includes the
+trailing 0.  If what is wanted is to check the initial characters of
+another string, this trailing 0 should not be taken into account.  If an
+exact match is wanted, strcmp should be used instead.
+
+The semantic patch that makes this change is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression foo;
+constant char *abc;
+@@
+
+strncmp(foo, abc, 
+- sizeof(abc)
++ sizeof(abc)-1
+ )
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
