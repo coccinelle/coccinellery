@@ -1,3 +1,13 @@
+//
+// Correct call to input_free_device
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+//
+
 @double_assign@
 expression e1,e2;
 position p;
