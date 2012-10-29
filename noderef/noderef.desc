@@ -1,0 +1,26 @@
+coccinellery-short = correct size computation
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The size argument to ioremap_nocache should be the size of desired
+information, not the pointer to it.
+
+The semantic match that finds this problem:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@expression@
+expression *x;
+@@
+
+x =
+ <+...
+*sizeof(x)
+...+>// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
