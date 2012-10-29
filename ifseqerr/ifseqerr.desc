@@ -1,0 +1,30 @@
+coccinellery-short = Add missing error handling code
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Extend the error handling code with operations found in other nearby error
+handling code
+
+A simplified version of the sematic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@r exists@
+@r@
+statement S1,S2,S3;
+constant C1,C2,C3;
+@@
+
+*if (...)
+ {... S1 return -C1;}
+...
+*if (...)
+ {... when != S1
+    return -C2;}
+...
+*if (...)
+ {... S1 return -C3;}
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
