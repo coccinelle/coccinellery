@@ -1,0 +1,26 @@
+coccinellery-short = Use DEFINE_SPINLOCK
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+SPIN_LOCK_UNLOCKED is deprecated.  The following makes the change suggested
+in Documentation/spinlocks.txt
+
+The semantic patch that makes this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+declarer name DEFINE_SPINLOCK;
+identifier xxx_lock;
+@@
+
+- spinlock_t xxx_lock = SPIN_LOCK_UNLOCKED;
++ DEFINE_SPINLOCK(xxx_lock);
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
