@@ -1,0 +1,25 @@
+coccinellery-short = drop redundant memset
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The region set by the call to memset is immediately overwritten by the
+subsequent call to memcpy.
+
+The semantic patch that makes this change is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression e1,e2,e3,e4;
+@@
+
+- memset(e1,e2,e3);
+  memcpy(e1,e4,e3);
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
