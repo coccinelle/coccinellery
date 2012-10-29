@@ -1,0 +1,44 @@
+coccinellery-short = use the constant InterlaceMode
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Use the constant InterlaceMode rather than the magic number 0x0080.
+
+The semantic patch that makes this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@r@
+type T;
+T E;
+identifier fld;
+identifier c;
+@@
+
+E->fld & c
+
+@s@
+constant C;
+identifier r.c;
+@@
+
+#define c C
+
+@@
+r.T E;
+identifier r.fld;
+identifier r.c;
+constant s.C;
+@@
+
+ E->fld &
+- C
++ c
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
