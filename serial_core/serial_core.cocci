@@ -1,3 +1,13 @@
+//
+// Use UPIO_MEM rather than SERIAL_IO_MEM
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+//
+
 @has_sc1@
 @@
 
