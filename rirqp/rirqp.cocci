@@ -1,3 +1,13 @@
+//
+// ensure arguments to request_irq and free_irq are compatible
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+//
+
 @r exists@
 expression e,e1,e2,e3,e4,e5;
 type T;
