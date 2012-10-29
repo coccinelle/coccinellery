@@ -1,0 +1,42 @@
+coccinellery-short = eliminate possible double free
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+The function initialize_flash_pde_data is only called four times.  All four
+calls are in the function rtas_flash_init, and on the failure of any of the
+calls, remove_flash_pde is called on the third argument of each of the
+calls.  There is thus no need for initialize_flash_pde_data to call
+remove_flash_pde on the same argument.  remove_flash_pde kfrees the data
+field of its argument, and does not clear that field, so this amounts ot a
+possible double free.
+
+A simplified version of the semantic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@r@
+identifier f,free,a;
+parameter list[n] ps;
+type T;
+expression e;
+@@
+
+f(ps,T a,...) {
+  ... when any
+      when != a = e
+  if(...) { ... free(a); ... return ...; }
+  ... when any
+}
+
+@@
+identifier r.f,r.free;
+expression x,a;
+expression list[r.n] xs;
+@@
+
+* x = f(xs,a,...);
+  if (...) { ... free(a); ... return ...; }
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
