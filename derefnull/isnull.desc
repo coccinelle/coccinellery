@@ -1,0 +1,35 @@
+coccinellery-short = remove null pointer dereference
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+If dev is NULL, it is not possible to access its name field.  So I have
+simply modified the error message to drop the printing of the name field.
+
+
+This problem was found using the following semantic match
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression E, E1;
+identifier f;
+statement S1,S2,S3;
+@@
+
+* if (E == NULL)
+{
+  ... when != if (E == NULL) S1 else S2
+      when != E = E1
+* E->f
+  ... when any
+  return ...;
+}
+else S3
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
