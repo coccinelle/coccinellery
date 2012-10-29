@@ -1,0 +1,49 @@
+coccinellery-short = add missing of_node_put
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+of_node_put is needed before discarding a value received from
+of_find_node_by_type, eg in error handling code.
+
+The semantic patch that makes the change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+struct device_node *n;
+struct device_node *n1;
+struct device_node *n2;
+statement S;
+identifier f1,f2;
+expression E1,E2;
+constant C;
+@@
+
+n = of_find_node_by_type(...)
+...
+if (!n) S
+... when != of_node_put(n)
+    when != n1 = f1(n,...)
+    when != E1 = n
+    when any
+    when strict
+(
++ of_node_put(n);
+  return -C;
+|
+  of_node_put(n);
+|
+  n2 = f2(n,...)
+|
+  E2 = n
+|
+  return ...;
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
