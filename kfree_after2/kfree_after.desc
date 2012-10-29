@@ -1,0 +1,33 @@
+coccinellery-short = avoid missing kfree
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Move the test on pdev->id before the kzalloc to avoid requiring kfree when
+the test fails.  This fix was suggested by Wolfram Sang.
+
+A simplified version of the semantic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+identifier x;
+expression E1!=0,E2,E3,E4;
+statement S;
+iterator I;
+@@
+
+(
+if (...) { ... when != kfree(x)
+               when != x = E3
+               when != E3 = x
+*  return ...;
+ }
+... when != x = E2
+    when != I(...,x,...) S
+if (...) { ... when != x = E4
+ kfree(x); ... return ...; }
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
