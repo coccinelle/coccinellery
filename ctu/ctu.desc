@@ -1,0 +1,10 @@
+coccinellery-short = initialize all fields
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+The c32 structure is allocated on the stack and its idx field is not
+initialized before copying it to user level.  This patch takes the value
+from the result of the ioctl, as done for the other fields.
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
