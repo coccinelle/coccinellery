@@ -1,0 +1,43 @@
+coccinellery-short = Fix use of skb after netif_rx
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+fpavlic@de.ibm.com, wangchen@cn.fujitsu.com, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject: [PATCH 3/3] Fix use of skb after netif_rx
+
+------------------------------------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Recently, Wang Chen submitted a patch
+(d30f53aeb31d453a5230f526bea592af07944564) to move a call to netif_rx(skb)
+after a subsequent reference to skb, because netif_rx may call kfree_skb on
+its argument.  netif_rx_ni calls netif_rx, so the same problem occurs in
+the files below.
+
+I have left the updating of dev->last_rx after the calls to netif_rx_ni
+because it seems time dependent, but moved the other field updates before.
+
+This was found using the following semantic match.
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression skb, e,e1;
+@@
+
+(
+ netif_rx(skb);
+|
+ netif_rx_ni(skb);
+)
+  ... when != skb = e
+(
+  skb = e1
+|
+* skb
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
