@@ -1,0 +1,11 @@
+coccinellery-short = use devm_ functions
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <julia.lawall@lip6.fr>
+The various devm_ functions allocate memory that is released when a driver
+detaches.  This patch uses devm_kzalloc, devm_request_mem_region and
+devm_ioremap for data that is allocated in the probe function of a platform
+device and is only freed in the remove function.
+
+Signed-off-by: Julia Lawall <julia.lawall@lip6.fr>
+
