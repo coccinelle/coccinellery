@@ -1,0 +1,39 @@
+coccinellery-short = Use an IS_ERR test rather than a NULL test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julien Brunel <brunel@diku.dk>
+coccinellery-author1 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julien Brunel <brunel@diku.dk>
+
+In case of error, the function isp1760_register returns an ERR
+pointer, but never returns a NULL pointer. So after a call to this
+function, a NULL test should be replaced by an IS_ERR test. Moreover,
+we have noticed that:
+(1) the result of isp1760_register is assigned through the function
+pci_set_drvdata without an error test,
+(2) if the call to isp1760_register fails, the current function
+(isp1761_pci_probe) returns 0, and if it succeeds, it returns -ENOMEM,
+which seems odd.
+
+Thus, we suggest to move the test before the call to pci_set_drvdata
+to correct (1), and to turn it into a non IS_ERR test to correct (2).
+
+The semantic match that finds this problem is as follows: 
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@bad_null_test@
+expression x,E;
+statement S1, S2;
+@@
+x =  isp1760_register(...)
+... when != x = E
+* if (x == NULL)
+S1 else S2
+// </smpl>
+
+Signed-off-by:  Julien Brunel <brunel@diku.dk>
+Signed-off-by:  Julia Lawall <Julia.Lawall@lip6.fr>
+
