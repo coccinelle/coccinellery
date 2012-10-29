@@ -1,0 +1,52 @@
+coccinellery-short = use BLOCK_NIL
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Use BLOCK_NIL consistently rather than sometimes 0xffff and sometimes
+BLOCK_NIL.
+
+The semantic patch that finds this issue is below
+(http://www.emn.fr/x-info/coccinelle/).  On the other hand, the changes
+were made by hand, in part because drivers/mtd/inftlcore.c contains dead
+code that causes spatch to ignore a relevant function.  Specifically, the
+function INFTL_findwriteunit contains a do-while loop, but always takes a
+return that leaves the loop on the first iteration.
+
+// <smpl>
+@r exists@
+identifier f,C;
+@@
+
+f(...) { ... return C; }
+
+@s@
+identifier r.C;
+expression E;
+@@
+
+#define C E
+
+@@
+identifier r.f,r.C,I;
+expression s.E;
+@@
+
+f(...) {
+ <...
+(
+  I
+|
+- E
++ C
+)
+ ...>
+}
+
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
