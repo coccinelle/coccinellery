@@ -581,6 +581,8 @@ uselesskfree/uselesskfree.cocci -  Remove useless kfree
 
 video/patch.cocci -  Use video_device_release rather than kfree
 
+videobuf_dvb_get_frontend_return_null/videobuf_dvb_get_frontend_return_null.cocci -  Test if videobuf_dvb_get_frontend return NULL
+
 write2/write2.cocci -  delete double assignment
 
 wrongtest/wrongtest.cocci -  test the just-initialized value
