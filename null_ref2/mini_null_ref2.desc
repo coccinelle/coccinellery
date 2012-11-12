@@ -1,0 +1,32 @@
+coccinellery-short = Adjust NULL test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Since card must already be non-NULL, it seems that what was intended
+was to test the result of kmalloc.
+
+The semantic patch that makes this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression E,E1;
+identifier f,fld,fld1;
+statement S1,S2;
+@@
+
+E->fld = f(...);
+... when != E = E1
+    when != E->fld1 = E1
+if (
+-   E
++   E->fld
+           == NULL) S1 else S2
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
