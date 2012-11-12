@@ -1,0 +1,53 @@
+coccinellery-short = Subject:
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Send to:
+acme@ghostprotocols.net, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject:
+[PATCH 19/38] drivers/net/appletalk: Use time_before, time_before_eq, etc.
+
+
+------------------------------------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The functions time_before, time_before_eq, time_after, and time_after_eq
+are more robust for comparing jiffies against other values.
+
+A simplified version of the semantic patch making this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@ change_compare_np @
+expression E;
+@@
+
+(
+- jiffies <= E
++ time_before_eq(jiffies,E)
+|
+- jiffies >= E
++ time_after_eq(jiffies,E)
+|
+- jiffies < E
++ time_before(jiffies,E)
+|
+- jiffies > E
++ time_after(jiffies,E)
+)
+
+@ include depends on change_compare_np @
+@@
+
+#include <linux/jiffies.h>
+
+@ no_include depends on !include && change_compare_np @
+@@
+
+  #include <linux/...>
++ #include <linux/jiffies.h>
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
