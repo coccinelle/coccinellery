@@ -1,0 +1,46 @@
+coccinellery-short = add missing put_tty_driver
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+alloc_tty_driver is called at the beginning of the function containing the
+lines of code shown in the patch.  Thus, put_tty_driver is needed before
+returning in the error handling code.
+
+The semantic match that finds this problem is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@nr exists@
+local idexpression x;
+expression E,f;
+position p1,p2,p3;
+identifier l;
+statement S;
+@@
+
+x = alloc_tty_driver@p1(...)
+...
+if (x == NULL) S
+... when != E = x
+    when != put_tty_driver(x)
+    when != goto l;
+(
+return \(0\|x\);
+|
+return@p3 ...;
+)
+
+@script:python@
+p1 << nr.p1;
+p3 << nr.p3;
+@@
+
+print \"%s: call on line %s not freed or saved before return on line %s\" % (p1[0].file,p1[0].line,p3[0].line)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
