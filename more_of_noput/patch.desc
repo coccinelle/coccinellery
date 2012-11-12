@@ -1,0 +1,55 @@
+coccinellery-short = Add missing of_node_put
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+arch/powerpc/platforms/82xx/mpc8272_ads.c
+arch/powerpc/platforms/82xx/pq2fads.c
+
+Send to:
+vbordug@ru.mvista.com, marcelo@kvack.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject: [PATCH 3/3] arch/powerpc/platforms/82xx: Add missing of_node_put
+
+------------------------------------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Of_get_parent and of_find_compatible_node do a of_node_get, and thus a
+corresponding of_code_put is needed in both the error case and the normal
+return case.
+
+
+The problem was found using the following semantic match.
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+type T,T1,T2;
+identifier E;
+statement S;
+expression x1,x2,x3;
+int ret;
+@@
+
+  T E;
+  ...
+* E = \(of_get_parent\|of_find_compatible_node\)(...);
+  if (E == NULL) S
+  ... when != of_node_put(...,(T1)E,...)
+      when != if (E != NULL) { ... of_node_put(...,(T1)E,...); ...}
+      when != x1 = (T1)E
+      when != E = x3;
+      when any
+  if (...) {
+    ... when != of_node_put(...,(T2)E,...)
+        when != if (E != NULL) { ... of_node_put(...,(T2)E,...); ...}
+        when != x2 = (T2)E
+(
+*   return;
+|
+*   return ret;
+)
+  }
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
