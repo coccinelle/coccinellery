@@ -1,0 +1,38 @@
+coccinellery-short = Eliminate a double lock
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The path around the loop ends with the lock held, so the call to mutex_lock
+is moved before the beginning of the loop.
+
+A simplified version of the semantic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@locked@
+expression E1;
+position p;
+@@
+
+read_lock(E1@p,...);
+
+@r exists@
+expression x <= locked.E1;
+expression locked.E1;
+expression E2;
+identifier lock;
+position locked.p,p1,p2;
+@@
+
+*lock@p1 (E1@p,...);
+... when != E1
+    when != \(x = E2\|&x\)
+*lock@p2 (E1,...);
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
