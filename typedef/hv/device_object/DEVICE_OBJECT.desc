@@ -1,0 +1,45 @@
+coccinellery-short = Staging: hv: Transform PDEVICE_OBJECT and DEVICE_OBJECT typedefs into their corresponding structs
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Nicolas Palix <npalix@diku.dk>
+
+Remove typedef DEVICE_OBJECT and use a struct named hv_device instead.
+
+Remove typedef PDEVICE_OBJECT which aliases a pointer and use the
+struct pointer (struct hv_device *).
+
+Here is the semantic patch to perform this transformation:
+(http://coccinelle.lip6.fr/)
+
+//<smpl>
+@rm_PDEVICE_OBJECT@
+@@
+-typedef struct _DEVICE_OBJECT *PDEVICE_OBJECT;
+
+@rm_DEVICE_OBJECT@
+@@
+-typedef struct _DEVICE_OBJECT
++struct hv_device
+{...}
+-DEVICE_OBJECT
+;
+
+@fixtypedef_PDEVICE_OBJECT@
+typedef PDEVICE_OBJECT;
+@@
+-PDEVICE_OBJECT
++struct hv_device*
+
+@fixtypedef_DEVICE_OBJECT@
+typedef DEVICE_OBJECT;
+@@
+-DEVICE_OBJECT
++struct hv_device
+
+@fixstruct__DEVICE_OBJECT@
+@@
+struct
+-_DEVICE_OBJECT
++hv_device
+//</smpl>
+
