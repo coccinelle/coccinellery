@@ -1,0 +1,27 @@
+coccinellery-short = Convert && to ||
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The pattern !E && !E->fld is nonsensical.  The patch below updates this
+according to the assumption that && should be ||.  But perhaps another
+solution was intended.
+
+The semantic patch that makes this change is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@disable and_comm@
+expression E;
+identifier fld;
+@@
+
+- !E && !E->fld
++ !E || !E->fld
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
