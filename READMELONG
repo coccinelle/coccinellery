@@ -3919,7 +3919,7 @@ iwcontainer/extra_null.cocci -  Drop unnecessary NULL test
 	// </smpl>
 	
 
-jiffies/jiffies.cocci -  Subject:
+jiffies/jiffies.cocci -  Use time_before, time_before_eq, etc
 
 	Send to:
 	acme@ghostprotocols.net, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
@@ -5850,7 +5850,7 @@ of_noput/of_noput.cocci -  Add missing of_node_put
 	// </smpl>
 	
 
-offset/offset.cocci -  Subject:
+offset/offset.cocci -  drivers/s390: Use offsetof
 
 	Send to:
 	schwidefsky@de.ibm.com, heiko.carstens@de.ibm.com, viro@ftp.linux.org.uk, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
