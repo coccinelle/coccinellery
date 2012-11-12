@@ -1,0 +1,27 @@
+coccinellery-short = Drop unnecessary NULL test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+The result of container_of should not be NULL.  In particular, in this case
+the argument to the enclosing function has passed though INIT_DELAYED_WORK,
+which dereferences it, implying that its container cannot be NULL.
+
+The semantic match that finds this problem is as follows:
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression x,e;
+@@
+
+x = container_of(...)
+... when != x = e
+* x == NULL
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
