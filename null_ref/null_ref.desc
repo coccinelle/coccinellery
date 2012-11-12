@@ -1,0 +1,34 @@
+coccinellery-short = Move dereference after NULL test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+If the NULL test on h is needed in snd_harmony_mixer_init, then the
+dereference should be after the NULL test.
+
+Actually, there is a sequence of calls: snd_harmony_create, then
+snd_harmony_pcm_init, and then snd_harmony_mixer_init.  snd_harmony_create
+initializes h, but may indeed leave it as NULL.  There was no NULL test at
+the beginning of snd_harmony_pcm_init, so I have added one.  The NULL test
+in snd_harmony_mixer_init is then not necessary, but in case the ordering
+of the calls changes, I have left it, and moved the dereference after it.
+
+A simplified version of the semantic match that detects this problem is as
+follows (http://coccinelle.lip6.fr/):
+
+// <smpl>
+@match exists@
+expression x, E;
+identifier fld;
+@@
+
+* x->fld
+  ... when != \(x = E\|&x\)
+* x == NULL
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
