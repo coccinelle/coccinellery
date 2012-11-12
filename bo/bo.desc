@@ -1,4 +1,4 @@
-coccinellery-short = trivial: use BUG_ON
+coccinellery-short = use BUG_ON
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
