@@ -1,0 +1,40 @@
+coccinellery-short = eliminate possible double free
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+The function __iio_add_event_config_attrs is only called once, by the
+function iio_device_register_eventset.  If the call fails,
+iio_device_register_eventset calls __iio_remove_event_config_attrs.  There
+is thus no need for __iio_add_event_config_attrs to also call
+__iio_remove_event_config_attrs on failure.
+
+A simplified version of the semantic match that finds this problem is as
+follows: (http://coccinelle.lip6.fr/)
+
+// <smpl>
+@r@
+identifier f,free,a;
+parameter list[n] ps;
+type T;
+expression e;
+@@
+
+f(ps,T a,...) {
+  ... when any
+      when != a = e
+  if(...) { ... free(a); ... return ...; }
+  ... when any
+}
+
+@@
+identifier r.f,r.free;
+expression x,a;
+expression list[r.n] xs;
+@@
+
+* x = f(xs,a,...);
+  if (...) { ... free(a); ... return ...; }
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
