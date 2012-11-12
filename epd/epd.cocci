@@ -1,3 +1,13 @@
+//
+// use USB API functions rather than constants
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+//
+
 @@ struct usb_endpoint_descriptor *epd; @@
 
 - ((epd->bmAttributes & \(USB_ENDPOINT_XFERTYPE_MASK\|3\)) ==
