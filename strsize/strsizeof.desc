@@ -1,0 +1,24 @@
+coccinellery-short = convert strncmp to strcmp
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+As an identical match is wanted in this case, strcmp can be used instead.
+
+The semantic match that lead to detecting this problem is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+expression foo;
+constant char *abc;
+@@
+
+*strncmp(foo, abc, sizeof(abc))
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
