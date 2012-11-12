@@ -1,0 +1,42 @@
+coccinellery-short = remove null dereference and unnecessary test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+In the first part of the patch, if ov is NULL, the previous call to
+mutex_lock would have failed.
+
+In the second part of the patch, a non-NULL test is removed, since if the
+value is NULL, the line before would have failed.
+
+Near the end of this function there is an initialization of ov to NULL
+after a kfree, even though no further reference to this variable is
+possible.  Perhaps this is considered good style, and thus I have left it
+as is.
+
+The first problem was detected using the following semantic match
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@@
+expression E, E1;
+identifier f;
+statement S1,S2,S3;
+@@
+
+* if (E == NULL)
+{
+  ... when != if (E == NULL) S1 else S2
+      when != E = E1
+* E->f
+  ... when any
+  return ...;
+}
+else S3
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
