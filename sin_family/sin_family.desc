@@ -1,0 +1,37 @@
+coccinellery-short = Use AF_INET for sin_family field
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+Elsewhere the sin_family field holds a value with a name of the form
+AF_..., so it seems reasonable to do so here as well.  Also the values of
+PF_INET and AF_INET are the same.
+
+The semantic patch that makes this change is as follows:
+(http://coccinelle.lip6.fr/)
+
+// <smpl>
+@@
+struct sockaddr_in sip;
+@@
+
+(
+sip.sin_family ==
+- PF_INET
++ AF_INET
+|
+sip.sin_family !=
+- PF_INET
++ AF_INET
+|
+sip.sin_family =
+- PF_INET
++ AF_INET
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
