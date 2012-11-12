@@ -1,0 +1,22 @@
+coccinellery-short = Test if videobuf_dvb_get_frontend return NULL
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Peter Senna Tschudin <peter.senna@gmail.com>
+Based on commit: e66131cee501ee720b7b58a4b87073b8fbaaaba6
+
+Not testing videobuf_dvb_get_frontend output may cause OOPS if it return
+NULL. This patch fixes this issue.
+
+The semantic patch that found this issue is(http://coccinelle.lip6.fr/):
+// <smpl>
+@@
+identifier i,a,b;
+statement S, S2;
+@@
+i = videobuf_dvb_get_frontend(...);
+... when != if (!i) S
+* if (i->a.b)
+S2
+// </smpl>
+
+Signed-off-by: Peter Senna Tschudin <peter.senna@gmail.com>
