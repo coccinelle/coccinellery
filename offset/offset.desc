@@ -1,0 +1,51 @@
+coccinellery-short = Subject:
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Send to:
+schwidefsky@de.ibm.com, heiko.carstens@de.ibm.com, viro@ftp.linux.org.uk, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+
+Subject:
+[PATCH 2/3] drivers/s390: Use offsetof
+
+
+------------------------------------------------------
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+In the patch cc154ac64aa8d3396b187f64cef01ce67f433324, Al Viro observed
+that the proper way to compute the distance between two structure fields is
+to use offsetof() or a cast to a pointer to character.  The same change can
+be applied to a few more files.
+
+The change was made using the following semantic patch
+(http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@r3 disable ptr_to_array@
+type T;
+T *s;
+type T1, T2;
+identifier fld1;
+@@
+
+(
+  (char *)&s->fld1 - (char *)s
+|
+  (uint8_t *)&s->fld1 - (uint8_t *)s
+|
+  (u8 *)&s->fld1 - (u8 *)s
+|
+- (T1)&s->fld1 - (T2)s
++ offsetof(T,fld1)
+)
+
+@@
+type T;
+expression E;
+@@
+
+- (int)(offsetof(T,E))
++ offsetof(T,E)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
