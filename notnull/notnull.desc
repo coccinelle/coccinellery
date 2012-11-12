@@ -1,0 +1,61 @@
+coccinellery-short = Remove redundant test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+----------------------------
+
+From: Julia Lawall <Julia.Lawall@lip6.fr>
+
+vpage is checked not to be NULL just after it is initialized at the
+beginning of each loop iteration.
+
+A simplified version of the semantic patch that makes this change is as
+follows: (http://www.emn.fr/x-info/coccinelle/)
+
+// <smpl>
+@r exists@
+local idexpression x;
+expression E;
+position p1,p2;
+@@
+
+if (x@p1 == NULL || ...) { ... when forall
+   return ...; }
+... when != \(x=E\|x--\|x++\|--x\|++x\|x-=E\|x+=E\|x|=E\|x&=E\|&x\)
+(
+x@p2 == NULL
+|
+x@p2 != NULL
+)
+
+// another path to the test that is not through p1?
+@s exists@
+local idexpression r.x;
+position r.p1,r.p2;
+@@
+
+... when != x@p1
+(
+x@p2 == NULL
+|
+x@p2 != NULL
+)
+
+@fix depends on !s@
+position r.p1,r.p2;
+expression x,E;
+statement S1,S2;
+@@
+
+(
+- if ((x@p2 != NULL) || ...)
+  S1
+|
+- if ((x@p2 == NULL) && ...) S1
+|
+- BUG_ON(x@p2 == NULL);
+)
+// </smpl>
+
+Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+
