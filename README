@@ -397,7 +397,7 @@ oddpe/oddpe.cocci -  adjust inconsistent IS_ERR and PTR_ERR
 
 of_noput/of_noput.cocci -  Add missing of_node_put
 
-offset/offset.cocci -  drivers/s390: Use offsetof
+offset/offset.cocci -  Use offsetof
 
 ofiomap/of_iomap-iounmap.cocci -  Add missing iounmap
 

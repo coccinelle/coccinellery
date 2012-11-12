@@ -5850,7 +5850,7 @@ of_noput/of_noput.cocci -  Add missing of_node_put
 	// </smpl>
 	
 
-offset/offset.cocci -  drivers/s390: Use offsetof
+offset/offset.cocci -  Use offsetof
 
 	Send to:
 	schwidefsky@de.ibm.com, heiko.carstens@de.ibm.com, viro@ftp.linux.org.uk, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
