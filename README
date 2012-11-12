@@ -69,7 +69,7 @@ bits2/notand.cocci -  Correct use of ! and &
 
 block_nil/retsall.cocci -  use BLOCK_NIL
 
-bo/bo.cocci -  trivial: use BUG_ON
+bo/bo.cocci -  use BUG_ON
 
 bond/short_timeout.cocci -  Description not available
 

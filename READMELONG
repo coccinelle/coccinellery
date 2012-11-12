@@ -913,7 +913,7 @@ block_nil/retsall.cocci -  use BLOCK_NIL
 	// </smpl>
 	
 
-bo/bo.cocci -  trivial: use BUG_ON
+bo/bo.cocci -  use BUG_ON
 
 	Use BUG_ON(x) rather than if(x) BUG();
 	
