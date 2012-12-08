@@ -175,15 +175,15 @@ x = (T1)alloc@p1(a,...)
 y = x;
 ... when != y = e
     when != &y
-free@p2(...,(T2)y,...);
+free@p2(...,(T2)\(x\|y\),...);
 ... when != x
     when != y
-second_free@p3(...,(T3)y,...);
+second_free@p3(...,(T3)\(x\|y\),...);
 |
 y = x;
 ... when != y = e
     when != &y
-free@p2(...,(T2)y,...);
+free@p2(...,(T2)\(x\|y\),...);
 |
 free@p2(...,(T2)x,...);
 ... when != x
@@ -293,15 +293,15 @@ x = (T1)alloc@p1(&pdev->dev,args)
 y = x;
 ... when != y = e
     when != &y
-free@p2(...,(T2)y,...);
+free@p2(...,(T2)\(x\|y\),...);
 ... when != x
     when != y
-second_free@p3(...,(T3)y,...);
+second_free@p3(...,(T3)\(x\|y\),...);
 |
 y = x;
 ... when != y = e
     when != &y
-free@p2(...,(T2)y,...);
+free@p2(...,(T2)\(x\|y\),...);
 |
 free@p2(...,(T2)x,...);
 ... when != x
@@ -403,7 +403,7 @@ alloc@p1(x,args)
 y = x;
 ... when != y = e
     when != &y
-free@p2(y,...);
+free@p2(\(x\|y\),...);
 |
 free@p2(x,...)
 )
@@ -630,7 +630,7 @@ alloc@p1(x,args)
 y = x;
 ... when != y = e
     when != &y
-free@p2(y,...);
+free@p2(\(x\|y\),...);
 |
 free@p2(x,...)
 )
