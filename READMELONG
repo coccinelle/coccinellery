@@ -8178,6 +8178,12 @@ ulfe/ulfe.cocci -  use list_for_each_entry
 	// </smpl>
 	
 
+undevm/undevm.cocci -  kfree etc should not be used with devm functions
+
+	
+	Using kfree with devm_kzalloc will cause a double free, and likewise for
+	the other devm functions.
+
 unsf/unsf.cocci -  Fix return value from an unsigned function
 
 	The function has an unsigned return type, but returns a negative constant
@@ -8284,6 +8290,24 @@ unused_err/unused_err.cocci -  Use available error codes
 	* return ...;
 	)
 	}
+	// </smpl>
+	
+
+unused_var_kfree/unused_var_kfree.cocci -  Remove two unused variables and two useless calls to kfree
+
+	old_class_name, and new_class_name are never used. This patch remove the
+	declaration and calls to kfree.
+	
+	The semantic match that finds this problem is as follows:
+	(http://coccinelle.lip6.fr/)
+	
+	// <smpl>
+	@r1 forall@
+	type T; identifier i;
+	@@
+	* T *i = NULL;
+	  ... when != i
+	* kfree(i);
 	// </smpl>
 	
 

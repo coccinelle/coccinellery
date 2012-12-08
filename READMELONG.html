@@ -8171,6 +8171,12 @@
 	// </smpl>
 	
 </pre>
+<A HREF=undevm/undevm.cocci>undevm/undevm.cocci</A>  -  kfree etc should not be used with devm functions
+<pre>
+	
+	Using kfree with devm_kzalloc will cause a double free, and likewise for
+	the other devm functions.
+</pre>
 <A HREF=unsf/unsf.cocci>unsf/unsf.cocci</A>  -  Fix return value from an unsigned function
 <pre>
 	The function has an unsigned return type, but returns a negative constant
@@ -8277,6 +8283,24 @@
 	* return ...;
 	)
 	}
+	// </smpl>
+	
+</pre>
+<A HREF=unused_var_kfree/unused_var_kfree.cocci>unused_var_kfree/unused_var_kfree.cocci</A>  -  Remove two unused variables and two useless calls to kfree
+<pre>
+	old_class_name, and new_class_name are never used. This patch remove the
+	declaration and calls to kfree.
+	
+	The semantic match that finds this problem is as follows:
+	(http://coccinelle.lip6.fr/)
+	
+	// <smpl>
+	@r1 forall@
+	type T; identifier i;
+	@@
+	* T *i = NULL;
+	  ... when != i
+	* kfree(i);
 	// </smpl>
 	
 </pre>

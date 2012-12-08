@@ -549,6 +549,8 @@ ubifs/category2a_kthread_create.cocci -  Use an IS_ERR test rather than a NULL t
 
 ulfe/ulfe.cocci -  use list_for_each_entry
 
+undevm/undevm.cocci -  kfree etc should not be used with devm functions
+
 unsf/unsf.cocci -  Fix return value from an unsigned function
 
 unsf/unsf_ret0.cocci -  Fix return value from an unsigned function
@@ -556,6 +558,8 @@ unsf/unsf_ret0.cocci -  Fix return value from an unsigned function
 unused/unused.cocci -  remove unused variable
 
 unused_err/unused_err.cocci -  Use available error codes
+
+unused_var_kfree/unused_var_kfree.cocci -  Remove two unused variables and two useless calls to kfree
 
 urb2/urb2.cocci -  Delete unnecessary call to usb_kill_urb
 
