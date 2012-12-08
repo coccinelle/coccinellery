@@ -1,3 +1,13 @@
+//
+// Remove two unused variables and two useless calls to kfree
+//
+// Copyright: 2012 - LIP6/INRIA
+// Licensed under GPLv2 or any later version.
+// URL: http://coccinelle.lip6.fr/
+// URL: https://github.com/coccinelle
+// Author: Peter Senna Tschudin <peter.senna@gmail.com>
+//
+
 @r1@
 type T;
 identifier i;
