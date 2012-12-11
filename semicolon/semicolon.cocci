@@ -1,12 +1,12 @@
 //
-// removes unnecessary semicolon
+//  Remove unnecessary semicolon
 //
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
+// Target:  Linux, Generic
+// Copyright:  Copyright: 2012 - LIP6/INRIA
+// License:  Licensed under GPLv2 or any later version.
 // Author: Peter Senna Tschudin <peter.senna@gmail.com>
-//
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
 
 @r_case@
 position p;
