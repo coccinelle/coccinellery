@@ -1,12 +1,12 @@
 //
-// Move a dereference below a NULL test
+//  Move a dereference below a NULL test
 //
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
+// Target:  Linux, Generic
+// Copyright:  Copyright: 2012 - LIP6/INRIA
+// License:  Licensed under GPLv2 or any later version.
 // Author: Julia Lawall <Julia.Lawall@lip6.fr>
-//
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
 
 @disable is_null@
 identifier f;
