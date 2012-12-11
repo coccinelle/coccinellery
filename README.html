@@ -1,5 +1,71 @@
 <!DOCTYPE html><html><head><title>Coccinelle Semantic Patch Repository</title></head><body><center><h2>Coccinelle Semantic Patch Repository</h2></center><p>About Coccinelle: <a href=http://coccinelle.lip6.fr/>http://coccinelle.lip6.fr/</a><br>Mailing list: <a href=mailto:cocci@systeme.lip6.fr>cocci@systeme.lip6.fr</a> - <a href=https://systeme.lip6.fr/mailman/listinfo/cocci>https://systeme.lip6.fr/mailman/listinfo/cocci</a><p>
 <A HREF=READMELONG.html>Long index</A><P>
+<P>
+<HR>
+Target: Generic
+<P>
+<A HREF=arref/arref.cocci>arref/arref.cocci</A>  -  Adjust array index
+<p>
+<A HREF=badand/badand.cocci>badand/badand.cocci</A>  -  Convert && to ||
+<p>
+<A HREF=badkm2/badkm2.cocci>badkm2/badkm2.cocci</A>  -  Ensure a consistent return value in error case
+<p>
+<A HREF=bitcall/bitcall.cocci>bitcall/bitcall.cocci</A>  -  convert & to &&
+<p>
+<A HREF=da/da.cocci>da/da.cocci</A>  -  Correct double assignment
+<p>
+<A HREF=devname/devname.cocci>devname/devname.cocci</A>  -  Eliminate NULL dereference
+<p>
+<A HREF=double_call/dc.cocci>double_call/dc.cocci</A>  -  Eliminate useless code
+<p>
+<A HREF=double_null/double_null.cocci>double_null/double_null.cocci</A>  -  Correct NULL test
+<p>
+<A HREF=doubleinit/doubleinit.cocci>doubleinit/doubleinit.cocci</A>  -  Remove duplicate structure field initialization
+<p>
+<A HREF=doubletest_high/doubletest_highconfidence.cocci>doubletest_high/doubletest_highconfidence.cocci</A>  -  Adjust double test
+<p>
+<A HREF=drop_continue/cont.cocci>drop_continue/cont.cocci</A>  -  Drop unnecessary continue
+<p>
+<A HREF=if-semicolon/if-semicolon.cocci>if-semicolon/if-semicolon.cocci</A>  -  Detect semicolon after if
+<p>
+<A HREF=ifseqerr/ifseqerr.cocci>ifseqerr/ifseqerr.cocci</A>  -  Remove unnecessary error check
+<p>
+<A HREF=isnullo/isnull.cocci>isnullo/isnull.cocci</A>  -  Keep pointer to resource so it can be freed
+<p>
+<A HREF=kfree_after/kfree_after.cocci>kfree_after/kfree_after.cocci</A>  -  Adjust error handling code
+<p>
+<A HREF=mini_null3/mini_null_ref3.cocci>mini_null3/mini_null_ref3.cocci</A>  -  Move a dereference below a NULL test
+<p>
+<A HREF=mini_null_ref_aug14/mini_null_ref.cocci>mini_null_ref_aug14/mini_null_ref.cocci</A>  -  Remove potential NULL dereferences
+<p>
+<A HREF=notnull/notnull.cocci>notnull/notnull.cocci</A>  -  Remove redundant test
+<p>
+<A HREF=notnull/notnull2.cocci>notnull/notnull2.cocci</A>  -  Correct redundant test
+<p>
+<A HREF=semicolon/semicolon.cocci>semicolon/semicolon.cocci</A>  -  Remove unnecessary semicolon
+<p>
+<A HREF=signed/signed.cocci>signed/signed.cocci</A>  -  Use unsigned for loop index
+<p>
+<A HREF=sizeof/sizeof_sizeof.cocci>sizeof/sizeof_sizeof.cocci</A>  -  Eliminate double sizeof
+<p>
+<A HREF=sz/sz.cocci>sz/sz.cocci</A>  -  Correct code taking the size of a pointer
+<p>
+<A HREF=sz3/sz3.cocci>sz3/sz3.cocci</A>  -  Take size of pointed value, not pointer
+<p>
+<A HREF=unsf/unsf.cocci>unsf/unsf.cocci</A>  -  Fix return value from an unsigned function
+<p>
+<A HREF=unsf/unsf_ret0.cocci>unsf/unsf_ret0.cocci</A>  -  Fix return value from an unsigned function
+<p>
+<A HREF=unused_err/unused_err.cocci>unused_err/unused_err.cocci</A>  -  Use available error codes
+<p>
+<A HREF=write2/write2.cocci>write2/write2.cocci</A>  -  delete double assignment
+<p>
+<A HREF=xand/xand.cocci>xand/xand.cocci</A>  -  Detect duplicated test
+<p>
+<P>
+<HR>
+Target: Linux
+<P>
 <A HREF=9p/category2a_p9_client_walk.cocci>9p/category2a_p9_client_walk.cocci</A>  -  Use an IS_ERR test rather than a NULL test
 <p>
 <A HREF=9p/p9_client_walk.cocci>9p/p9_client_walk.cocci</A>  -  Use an IS_ERR test rather than a NULL test
@@ -8,9 +74,9 @@
 <p>
 <A HREF=acl/patch.cocci>acl/patch.cocci</A>  -  Add missing call to posix_acl_release
 <p>
-<A HREF=acpi/category2b_back_device_reg.cocci>acpi/category2b_back_device_reg.cocci</A>  -  dereference without an error test
+<A HREF=acpi/category2b_back_device_reg.cocci>acpi/category2b_back_device_reg.cocci</A>  -  Dereference without an error test
 <p>
-<A HREF=acpid/acpi.cocci>acpid/acpi.cocci</A>  -  Description not available
+<A HREF=acpid/acpi.cocci>acpid/acpi.cocci</A>  -  Drop uses of acpi_driver_data
 <p>
 <A HREF=after_netif/after_netif.cocci>after_netif/after_netif.cocci</A>  -  Fix use of skb after netif_rx
 <p>
@@ -20,37 +86,37 @@
 <p>
 <A HREF=alloc_cast/alloc_cast.cocci>alloc_cast/alloc_cast.cocci</A>  -  Drop memory allocation cast
 <p>
-<A HREF=alloc_domain/easykmret.cocci>alloc_domain/easykmret.cocci</A>  -  add missing free_domain_mem
+<A HREF=alloc_domain/easykmret.cocci>alloc_domain/easykmret.cocci</A>  -  Add missing free_domain_mem
 <p>
-<A HREF=alloc_etherdev/alloc.cocci>alloc_etherdev/alloc.cocci</A>  -  adjust error handling
+<A HREF=alloc_etherdev/alloc.cocci>alloc_etherdev/alloc.cocci</A>  -  Adjust error handling after call to alloc_etherdev()
 <p>
 <A HREF=alloc_tty/alloc_tty.cocci>alloc_tty/alloc_tty.cocci</A>  -  add missing put_tty_driver
 <p>
-<A HREF=allocs/a2.cocci>allocs/a2.cocci</A>  -  add missing fput
+<A HREF=allocs/a2.cocci>allocs/a2.cocci</A>  -  Add missing fput
 <p>
-<A HREF=arraysize/array.cocci>arraysize/array.cocci</A>  -  use ARRAY_SIZE
+<A HREF=arraysize/array.cocci>arraysize/array.cocci</A>  -  Use ARRAY_SIZE
 <p>
-<A HREF=arref/arref.cocci>arref/arref.cocci</A>  -  adjust array index
+<A HREF=arref/arref.cocci>arref/arref.cocci</A>  -  Adjust array index
 <p>
 <A HREF=asprintf/asprintf.cocci>asprintf/asprintf.cocci</A>  -  Use kasprintf
 <p>
-<A HREF=atm/atm.cocci>atm/atm.cocci</A>  -  Description not available
+<A HREF=atm/atm.cocci>atm/atm.cocci</A>  -  add missing atm_dev_put
 <p>
 <A HREF=auth/auth.cocci>auth/auth.cocci</A>  -  Adjust error handling code involving auth_domain_put
 <p>
 <A HREF=badand/badand.cocci>badand/badand.cocci</A>  -  Convert && to ||
 <p>
-<A HREF=badftest/badftest.cocci>badftest/badftest.cocci</A>  -  Description not available
+<A HREF=badftest/badftest.cocci>badftest/badftest.cocci</A>  -  Correct NULL test
 <p>
-<A HREF=badkm/badkm.cocci>badkm/badkm.cocci</A>  -  initialize return variable with error code
+<A HREF=badkm/badkm.cocci>badkm/badkm.cocci</A>  -  Initialize return variable with error code
 <p>
-<A HREF=badkm2/badkm2.cocci>badkm2/badkm2.cocci</A>  -  ensure a consistent return value in error case
+<A HREF=badkm2/badkm2.cocci>badkm2/badkm2.cocci</A>  -  Ensure a consistent return value in error case
 <p>
 <A HREF=badktest/badktest.cocci>badktest/badktest.cocci</A>  -  Correct NULL test
 <p>
 <A HREF=badmsg/badmsg.cocci>badmsg/badmsg.cocci</A>  -  Return -ENOMEM on memory allocation failure
 <p>
-<A HREF=badmsg3/badmsg3.cocci>badmsg3/badmsg3.cocci</A>  -  Description not available
+<A HREF=badmsg3/badmsg3.cocci>badmsg3/badmsg3.cocci</A>  -  Correct return value on error handling
 <p>
 <A HREF=badty/badty.cocci>badty/badty.cocci</A>  -  Correct the size argument to kzalloc
 <p>
@@ -64,7 +130,7 @@
 <p>
 <A HREF=bo/bo.cocci>bo/bo.cocci</A>  -  use BUG_ON
 <p>
-<A HREF=bond/short_timeout.cocci>bond/short_timeout.cocci</A>  -  Description not available
+<A HREF=bond/short_timeout.cocci>bond/short_timeout.cocci</A>  -  Adjust constant name
 <p>
 <A HREF=bootmem/bootmem.cocci>bootmem/bootmem.cocci</A>  -  Eliminate NULL test and memset after alloc_bootmem
 <p>
@@ -76,7 +142,7 @@
 <p>
 <A HREF=bugon/newbugon.cocci>bugon/newbugon.cocci</A>  -  Use BUG_ON
 <p>
-<A HREF=cache/cache.cocci>cache/cache.cocci</A>  -  Description not available
+<A HREF=cache/cache.cocci>cache/cache.cocci</A>  -  Use kmem_cache_free
 <p>
 <A HREF=call_kern1/call_kern1.cocci>call_kern1/call_kern1.cocci</A>  -  Use GFP_ATOMIC when a lock is held
 <p>
@@ -84,11 +150,11 @@
 <p>
 <A HREF=capi/capi.cocci>capi/capi.cocci</A>  -  Adjust error handling code involving capi_ctr_put
 <p>
-<A HREF=clkput/clkput.cocci>clkput/clkput.cocci</A>  -  add missing clk_put
+<A HREF=clkput/clkput.cocci>clkput/clkput.cocci</A>  -  Add missing clk_put
 <p>
 <A HREF=consts/consts.cocci>consts/consts.cocci</A>  -  use the constant InterlaceMode
 <p>
-<A HREF=countptr/countptr.cocci>countptr/countptr.cocci</A>  -  remove exceptional & on function name
+<A HREF=countptr/countptr.cocci>countptr/countptr.cocci</A>  -  Remove exceptional & on function name
 <p>
 <A HREF=cpu/cpu.cocci>cpu/cpu.cocci</A>  -  Adjust error handling code involving cpufreq_cpu_put
 <p>
@@ -98,57 +164,57 @@
 <p>
 <A HREF=cris/mutex2.cocci>cris/mutex2.cocci</A>  -  Use mutex_unlock rather than spin_unlock
 <p>
-<A HREF=crypto/crypto.cocci>crypto/crypto.cocci</A>  -  add NULL test around call to crypto_free_hash
+<A HREF=crypto/crypto.cocci>crypto/crypto.cocci</A>  -  Add NULL test around call to crypto_free_hash
 <p>
 <A HREF=cstptr/cstptr.cocci>cstptr/cstptr.cocci</A>  -  Move call to PTR_ERR after reassignment
 <p>
-<A HREF=ctu/ctu.cocci>ctu/ctu.cocci</A>  -  initialize all fields
+<A HREF=ctu/ctu.cocci>ctu/ctu.cocci</A>  -  Initialize all fields
 <p>
-<A HREF=da/da.cocci>da/da.cocci</A>  -  correct double assignment
+<A HREF=da/da.cocci>da/da.cocci</A>  -  Correct double assignment
 <p>
-<A HREF=dall/dall.cocci>dall/dall.cocci</A>  -  use devm_ functions consistently
+<A HREF=dall/dall.cocci>dall/dall.cocci</A>  -  Use devm_ functions consistently
 <p>
 <A HREF=dangling/dangling.cocci>dangling/dangling.cocci</A>  -  Remove potential for use after free
 <p>
 <A HREF=depspin/sl.cocci>depspin/sl.cocci</A>  -  Use DEFINE_SPINLOCK
 <p>
-<A HREF=derefnull/isnull.cocci>derefnull/isnull.cocci</A>  -  remove null dereference and unnecessary test
+<A HREF=derefnull/isnull.cocci>derefnull/isnull.cocci</A>  -  Detect null dereference and unnecessary test
 <p>
-<A HREF=devm2/devm2i.cocci>devm2/devm2i.cocci</A>  -  use devm_ functions
+<A HREF=devm2/devm2i.cocci>devm2/devm2i.cocci</A>  -  Use devm_ functions
 <p>
 <A HREF=devm2a/devm2i.cocci>devm2a/devm2i.cocci</A>  -  use devm_ functions
 <p>
-<A HREF=devm2b/devm2i.cocci>devm2b/devm2i.cocci</A>  -  use devm_ functions
+<A HREF=devm2b/devm2i.cocci>devm2b/devm2i.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_0729/devm2i.cocci>devm2i_0729/devm2i.cocci</A>  -  use devm_ functions
+<A HREF=devm2i_0729/devm2i.cocci>devm2i_0729/devm2i.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_0729/request_and_ioremap.cocci>devm2i_0729/request_and_ioremap.cocci</A>  -  use devm_ functions
+<A HREF=devm2i_0729/request_and_ioremap.cocci>devm2i_0729/request_and_ioremap.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_0730/devm2i.cocci>devm2i_0730/devm2i.cocci</A>  -  use devm_ functions
+<A HREF=devm2i_0730/devm2i.cocci>devm2i_0730/devm2i.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_0730/request_and_ioremap.cocci>devm2i_0730/request_and_ioremap.cocci</A>  -  use devm_ functions
+<A HREF=devm2i_0730/request_and_ioremap.cocci>devm2i_0730/request_and_ioremap.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_0731/devm2i.cocci>devm2i_0731/devm2i.cocci</A>  -  use devm_ functions
+<A HREF=devm2i_0731/devm2i.cocci>devm2i_0731/devm2i.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_0731/request_and_ioremap.cocci>devm2i_0731/request_and_ioremap.cocci</A>  -  use devm_ functions
+<A HREF=devm2i_0731/request_and_ioremap.cocci>devm2i_0731/request_and_ioremap.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_aug25/devm2i.cocci>devm2i_aug25/devm2i.cocci</A>  -  ibm_iic: use devm_ functions
+<A HREF=devm2i_aug25/devm2i.cocci>devm2i_aug25/devm2i.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm2i_aug25/request_and_ioremap.cocci>devm2i_aug25/request_and_ioremap.cocci</A>  -  ibm_iic: use devm_ functions
+<A HREF=devm2i_aug25/request_and_ioremap.cocci>devm2i_aug25/request_and_ioremap.cocci</A>  -  Use devm_ functions
 <p>
-<A HREF=devm4/devm4.cocci>devm4/devm4.cocci</A>  -  drop iounmap for devm_ allocated data
+<A HREF=devm4/devm4.cocci>devm4/devm4.cocci</A>  -  Drop iounmap for devm_ allocated data
 <p>
-<A HREF=devm6/devm6.cocci>devm6/devm6.cocci</A>  -  use devm_request_and_ioremap
+<A HREF=devm6/devm6.cocci>devm6/devm6.cocci</A>  -  Use devm_request_and_ioremap
 <p>
-<A HREF=devname/devname.cocci>devname/devname.cocci</A>  -  eliminate NULL dereference
+<A HREF=devname/devname.cocci>devname/devname.cocci</A>  -  Eliminate NULL dereference
 <p>
 <A HREF=diou/diou.cocci>diou/diou.cocci</A>  -  drop kfree of devm_kzalloc's data
 <p>
-<A HREF=diou2/diou.cocci>diou2/diou.cocci</A>  -  drop devm_kfree of devm_kzalloc'd data
+<A HREF=diou2/diou.cocci>diou2/diou.cocci</A>  -  Drop devm_kfree of devm_kzalloc'd data
 <p>
-<A HREF=diou3/devm3.cocci>diou3/devm3.cocci</A>  -  some devm_ cleanups
+<A HREF=diou3/devm3.cocci>diou3/devm3.cocci</A>  -  Some devm_ cleanups
 <p>
-<A HREF=dma/set_dma_mode_1.cocci>dma/set_dma_mode_1.cocci</A>  -  Description not available
+<A HREF=dma/set_dma_mode_1.cocci>dma/set_dma_mode_1.cocci</A>  -  Avoid using magic number in set_dma_mode
 <p>
 <A HREF=double_call/dc.cocci>double_call/dc.cocci</A>  -  Eliminate useless code
 <p>
@@ -156,29 +222,29 @@
 <p>
 <A HREF=double_null/double_null.cocci>double_null/double_null.cocci</A>  -  Correct NULL test
 <p>
-<A HREF=double_test/double_test.cocci>double_test/double_test.cocci</A>  -  introduce missing initialization
+<A HREF=double_test/double_test.cocci>double_test/double_test.cocci</A>  -  Introduce missing initialization
 <p>
 <A HREF=doublefree/frees.cocci>doublefree/frees.cocci</A>  -  Eliminate double kfree
 <p>
-<A HREF=doubleinit/doubleinit.cocci>doubleinit/doubleinit.cocci</A>  -  remove duplicate structure field initialization
+<A HREF=doubleinit/doubleinit.cocci>doubleinit/doubleinit.cocci</A>  -  Remove duplicate structure field initialization
 <p>
-<A HREF=doublermr/doublermr.cocci>doublermr/doublermr.cocci</A>  -  Description not available
+<A HREF=doublermr/doublermr.cocci>doublermr/doublermr.cocci</A>  -  Improve error handling
 <p>
 <A HREF=doubletest/doubletest.cocci>doubletest/doubletest.cocci</A>  -  Remove double test
 <p>
-<A HREF=doubletest_high/doubletest_highconfidence.cocci>doubletest_high/doubletest_highconfidence.cocci</A>  -  adjust double test
+<A HREF=doubletest_high/doubletest_highconfidence.cocci>doubletest_high/doubletest_highconfidence.cocci</A>  -  Adjust double test
 <p>
 <A HREF=drop_continue/cont.cocci>drop_continue/cont.cocci</A>  -  Drop unnecessary continue
 <p>
-<A HREF=drvdata/drvdata.cocci>drvdata/drvdata.cocci</A>  -  use dev_set_drvdata
+<A HREF=drvdata/drvdata.cocci>drvdata/drvdata.cocci</A>  -  Use dev_set_drvdata
 <p>
-<A HREF=dst/dst.cocci>dst/dst.cocci</A>  -  Description not available
+<A HREF=dst/dst.cocci>dst/dst.cocci</A>  -  Use dst_type field instead of type_flags
 <p>
 <A HREF=enter/enter.cocci>enter/enter.cocci</A>  -  Convert func_enter to func_exit
 <p>
-<A HREF=epd/epd.cocci>epd/epd.cocci</A>  -  use USB API functions rather than constants
+<A HREF=epd/epd.cocci>epd/epd.cocci</A>  -  Use USB API functions rather than constants
 <p>
-<A HREF=epd/mini.cocci>epd/mini.cocci</A>  -  use USB API functions rather than constants
+<A HREF=epd/mini.cocci>epd/mini.cocci</A>  -  Use USB API functions rather than constants
 <p>
 <A HREF=epdneg/epdneg.cocci>epdneg/epdneg.cocci</A>  -  Use negated usb_endpoint_xfer_control, etc
 <p>
@@ -186,7 +252,7 @@
 <p>
 <A HREF=extra_put/extra_put.cocci>extra_put/extra_put.cocci</A>  -  Drop unneeded of_node_put
 <p>
-<A HREF=fbrelease/metapatch.cocci>fbrelease/metapatch.cocci</A>  -  eliminate double free
+<A HREF=fbrelease/metapatch.cocci>fbrelease/metapatch.cocci</A>  -  Eliminate double free
 <p>
 <A HREF=fbrelease/patch.cocci>fbrelease/patch.cocci</A>  -  eliminate double free
 <p>
@@ -204,27 +270,25 @@
 <p>
 <A HREF=gmc/gmc.cocci>gmc/gmc.cocci</A>  -  Avoid call to genlmsg_cancel
 <p>
-<A HREF=handle/handle.cocci>handle/handle.cocci</A>  -  Description not available
+<A HREF=handle/handle.cocci>handle/handle.cocci</A>  -  Adjust error handling code
 <p>
-<A HREF=hrtimer/hrtimer.cocci>hrtimer/hrtimer.cocci</A>  -  use function hrtimer_is_queued
+<A HREF=hrtimer/hrtimer.cocci>hrtimer/hrtimer.cocci</A>  -  Use function hrtimer_is_queued
 <p>
-<A HREF=i2c_msg/i2c_msg.cocci>i2c_msg/i2c_msg.cocci</A>  -  use macros for i2c_msg initialization
+<A HREF=i2c_msg/i2c_msg.cocci>i2c_msg/i2c_msg.cocci</A>  -  Use macros for i2c_msg initialization
 <p>
 <A HREF=i915/sp1517.cocci>i915/sp1517.cocci</A>  -  Add missing error handling code
 <p>
 <A HREF=ie2/ie2.cocci>ie2/ie2.cocci</A>  -  Convert IS_ERR result to PTR_ERR
 <p>
-<A HREF=if-semicolon/if-semicolon.cocci>if-semicolon/if-semicolon.cocci</A>  -  Description not available
+<A HREF=if-semicolon/if-semicolon.cocci>if-semicolon/if-semicolon.cocci</A>  -  Detect semicolon after if
 <p>
 <A HREF=ifcol/ifcol.cocci>ifcol/ifcol.cocci</A>  -  Adjust confusing if indentation
 <p>
-<A HREF=iff/iff.cocci>iff/iff.cocci</A>  -  fix error return code
+<A HREF=iff/iff.cocci>iff/iff.cocci</A>  -  Fix error return code
 <p>
 <A HREF=ifseqerr/ifseqerr.cocci>ifseqerr/ifseqerr.cocci</A>  -  Remove unnecessary error check
 <p>
 <A HREF=incon/incon3.cocci>incon/incon3.cocci</A>  -  eliminate possible double free
-<p>
-<A HREF=inconsistent/inconsistent1.cocci>inconsistent/inconsistent1.cocci</A>  -  Description not available
 <p>
 <A HREF=infiniband/category2a_ib_create_send_mad.cocci>infiniband/category2a_ib_create_send_mad.cocci</A>  -  Use a NULL test rather than an IS_ERR test
 <p>
@@ -236,35 +300,35 @@
 <p>
 <A HREF=input/sp2506.cocci>input/sp2506.cocci</A>  -  Correct call to input_free_device
 <p>
-<A HREF=iom/devm2i.cocci>iom/devm2i.cocci</A>  -  add missing iounmap
+<A HREF=iom/devm2i.cocci>iom/devm2i.cocci</A>  -  Add missing iounmap
 <p>
-<A HREF=iom/iom.cocci>iom/iom.cocci</A>  -  add missing iounmap
+<A HREF=iom/iom.cocci>iom/iom.cocci</A>  -  Add missing iounmap
 <p>
-<A HREF=iounmap/ioremap_check.cocci>iounmap/ioremap_check.cocci</A>  -  Added a missing iounmap
+<A HREF=iounmap/ioremap_check.cocci>iounmap/ioremap_check.cocci</A>  -  Add missing iounmap
 <p>
-<A HREF=is_static/is_static.cocci>is_static/is_static.cocci</A>  -  Description not available
+<A HREF=is_static/is_static.cocci>is_static/is_static.cocci</A>  -  Make some structures static
 <p>
-<A HREF=iserr/patch1.cocci>iserr/patch1.cocci</A>  -  simplify error handling
+<A HREF=iserr/patch1.cocci>iserr/patch1.cocci</A>  -  Test for IS_ERR rather than 0
 <p>
-<A HREF=iserr/patch2.cocci>iserr/patch2.cocci</A>  -  simplify error handling
+<A HREF=iserr/patch2.cocci>iserr/patch2.cocci</A>  -  Test for IS_ERR rather than 0
 <p>
-<A HREF=iserr/patch3.cocci>iserr/patch3.cocci</A>  -  simplify error handling
+<A HREF=iserr/patch3.cocci>iserr/patch3.cocci</A>  -  Test for IS_ERR rather than 0
 <p>
-<A HREF=iserr/patch45.cocci>iserr/patch45.cocci</A>  -  simplify error handling
+<A HREF=iserr/patch45.cocci>iserr/patch45.cocci</A>  -  Test for IS_ERR rather than 0
 <p>
-<A HREF=iserr/send_ct.cocci>iserr/send_ct.cocci</A>  -  simplify error handling
+<A HREF=iserr/send_ct.cocci>iserr/send_ct.cocci</A>  -  Simplify error handling
 <p>
-<A HREF=iserr_cata/category2a.cocci>iserr_cata/category2a.cocci</A>  -  correct error-handling code
+<A HREF=iserr_cata/category2a.cocci>iserr_cata/category2a.cocci</A>  -  Correct error-handling code
 <p>
-<A HREF=iserr_ref/iserr_mini.cocci>iserr_ref/iserr_mini.cocci</A>  -  correct an error check
+<A HREF=iserr_ref/iserr_mini.cocci>iserr_ref/iserr_mini.cocci</A>  -  Correct an error check
 <p>
-<A HREF=iserr_ref/iserr_ref.cocci>iserr_ref/iserr_ref.cocci</A>  -  correct an error check
+<A HREF=iserr_ref/iserr_ref.cocci>iserr_ref/iserr_ref.cocci</A>  -  Correct an error check
 <p>
-<A HREF=iserreq/ise2.cocci>iserreq/ise2.cocci</A>  -  Description not available
+<A HREF=iserreq/ise2.cocci>iserreq/ise2.cocci</A>  -  use PTR_ERR to get error code
 <p>
-<A HREF=isnull_oct/isnull.cocci>isnull_oct/isnull.cocci</A>  -  eliminate a null pointer dereference
+<A HREF=isnull_oct/isnull.cocci>isnull_oct/isnull.cocci</A>  -  Eliminate a null pointer dereference
 <p>
-<A HREF=isnullo/isnull.cocci>isnullo/isnull.cocci</A>  -  keep pointer to resource so it can be freed
+<A HREF=isnullo/isnull.cocci>isnullo/isnull.cocci</A>  -  Keep pointer to resource so it can be freed
 <p>
 <A HREF=itnull/itnull.cocci>itnull/itnull.cocci</A>  -  Drop unnecessary null test
 <p>
@@ -272,7 +336,7 @@
 <p>
 <A HREF=jiffies/jiffies.cocci>jiffies/jiffies.cocci</A>  -  Use time_before, time_before_eq, etc
 <p>
-<A HREF=k-zc-alloc/kzalloc.cocci>k-zc-alloc/kzalloc.cocci</A>  -  Description not available
+<A HREF=k-zc-alloc/kzalloc.cocci>k-zc-alloc/kzalloc.cocci</A>  -  Transform some kzalloc calls to kcalloc
 <p>
 <A HREF=kasp/kasp.cocci>kasp/kasp.cocci</A>  -  Eliminate kstrdup memory leak
 <p>
@@ -280,27 +344,27 @@
 <p>
 <A HREF=kc/kc.cocci>kc/kc.cocci</A>  -  Use kzalloc for allocating only one thing
 <p>
-<A HREF=kfree3/kmalloc.cocci>kfree3/kmalloc.cocci</A>  -  introduce missing kfree
+<A HREF=kfree3/kmalloc.cocci>kfree3/kmalloc.cocci</A>  -  Introduce missing kfree
 <p>
-<A HREF=kfree3/kmalloc8a.cocci>kfree3/kmalloc8a.cocci</A>  -  introduce missing kfree
+<A HREF=kfree3/kmalloc8a.cocci>kfree3/kmalloc8a.cocci</A>  -  Introduce missing kfree
 <p>
-<A HREF=kfree_after/kfree_after.cocci>kfree_after/kfree_after.cocci</A>  -  adjust error handling code
+<A HREF=kfree_after/kfree_after.cocci>kfree_after/kfree_after.cocci</A>  -  Adjust error handling code
 <p>
-<A HREF=kfree_after2/kfree_after.cocci>kfree_after2/kfree_after.cocci</A>  -  remove unneeded kfree
+<A HREF=kfree_after2/kfree_after.cocci>kfree_after2/kfree_after.cocci</A>  -  Remove unneeded kfree
 <p>
 <A HREF=kfree_skb/skbfree.cocci>kfree_skb/skbfree.cocci</A>  -  Convert kfree/kfree_skb to dev_kfree_skb_irq
 <p>
-<A HREF=kfrees/kfree.cocci>kfrees/kfree.cocci</A>  -  introduce missing kfree
+<A HREF=kfrees/kfree.cocci>kfrees/kfree.cocci</A>  -  Introduce missing kfree
 <p>
-<A HREF=kmalloc9/kmalloc9.cocci>kmalloc9/kmalloc9.cocci</A>  -  add missing kfree
+<A HREF=kmalloc9/kmalloc9.cocci>kmalloc9/kmalloc9.cocci</A>  -  Add missing kfree
 <p>
-<A HREF=kmc1/kmc1.cocci>kmc1/kmc1.cocci</A>  -  free kmem_cache_zalloc'd data using kmem_cache_free
+<A HREF=kmc1/kmc1.cocci>kmc1/kmc1.cocci</A>  -  Free kmem_cache_zalloc'd data using kmem_cache_free
 <p>
 <A HREF=kmc1a/kmc1.cocci>kmc1a/kmc1.cocci</A>  -  eliminate NULL pointer dereference
 <p>
 <A HREF=kmtest/kmtest.cocci>kmtest/kmtest.cocci</A>  -  Add kmalloc NULL tests
 <p>
-<A HREF=kstr/kstr.cocci>kstr/kstr.cocci</A>  -  use kstrtoul, etc
+<A HREF=kstr/kstr.cocci>kstr/kstr.cocci</A>  -  Use kstrtoul, etc
 <p>
 <A HREF=kstrdup/kstrdup.cocci>kstrdup/kstrdup.cocci</A>  -  Use kstrdup
 <p>
@@ -308,11 +372,11 @@
 <p>
 <A HREF=lenull/lenull.cocci>lenull/lenull.cocci</A>  -  Drop NULL test on list_entry result
 <p>
-<A HREF=leq/leq.cocci>leq/leq.cocci</A>  -  Description not available
+<A HREF=leq/leq.cocci>leq/leq.cocci</A>  -  Use ERR_PTR/IS_ERR
 <p>
-<A HREF=lfee/lfee.cocci>lfee/lfee.cocci</A>  -  remove invalid reference to list iterator variable
+<A HREF=lfee/lfee.cocci>lfee/lfee.cocci</A>  -  Remove invalid reference to list iterator variable
 <p>
-<A HREF=list_entry/rcu2.cocci>list_entry/rcu2.cocci</A>  -  Description not available
+<A HREF=list_entry/rcu2.cocci>list_entry/rcu2.cocci</A>  -  Use list_for_each_entry instead of list_for_each
 <p>
 <A HREF=list_entry_update/list_entry_update.cocci>list_entry_update/list_entry_update.cocci</A>  -  Eliminate update of list_for_each_entry loop cursor
 <p>
@@ -322,25 +386,23 @@
 <p>
 <A HREF=lock/o_lock_inconsistent.cocci>lock/o_lock_inconsistent.cocci</A>  -  Unlock the lock that was locked
 <p>
-<A HREF=lock_flags/flags.cocci>lock_flags/flags.cocci</A>  -  convert nested spin_lock_irqsave to spin_lock
-<p>
-<A HREF=lock_flags/flags1.cocci>lock_flags/flags1.cocci</A>  -  convert nested spin_lock_irqsave to spin_lock
+<A HREF=lock_flags/flags1.cocci>lock_flags/flags1.cocci</A>  -  Convert nested spin_lock_irqsave to spin_lock
 <p>
 <A HREF=map_destroy/map_destroy.cocci>map_destroy/map_destroy.cocci</A>  -  avoid calling map_destroy on NULL
 <p>
-<A HREF=markbusy/usb_mark_last_busy.cocci>markbusy/usb_mark_last_busy.cocci</A>  -  Description not available
+<A HREF=markbusy/usb_mark_last_busy.cocci>markbusy/usb_mark_last_busy.cocci</A>  -  Use usb_mark_last_busy
 <p>
 <A HREF=mdiobus_unregister/mdiobus_unregister.cocci>mdiobus_unregister/mdiobus_unregister.cocci</A>  -  Call mdiobus_unregister before mdiobus_free
 <p>
 <A HREF=mem2/mem2.cocci>mem2/mem2.cocci</A>  -  drop redundant memset
 <p>
-<A HREF=memdup/memdup.cocci>memdup/memdup.cocci</A>  -  Use kmemdup
+<A HREF=memdup/memdup.cocci>memdup/memdup.cocci</A>  -  Use kmemdup instead of allocate and memcpy
 <p>
 <A HREF=memdup_user/memdup_user.cocci>memdup_user/memdup_user.cocci</A>  -  Use memdup_user
 <p>
-<A HREF=memuser/memuser.cocci>memuser/memuser.cocci</A>  -  add missing kfree
+<A HREF=memuser/memuser.cocci>memuser/memuser.cocci</A>  -  Add missing kfree
 <p>
-<A HREF=mesh/mesh.cocci>mesh/mesh.cocci</A>  -  correct the argument to __mesh_table_free
+<A HREF=mesh/mesh.cocci>mesh/mesh.cocci</A>  -  Correct the argument to __mesh_table_free
 <p>
 <A HREF=mini_lock/mini_lock.cocci>mini_lock/mini_lock.cocci</A>  -  Add missing spin_unlock
 <p>
@@ -372,15 +434,15 @@
 <p>
 <A HREF=mutex/mut.cocci>mutex/mut.cocci</A>  -  Release mutex in error handling code
 <p>
-<A HREF=mutex2/mutex2.cocci>mutex2/mutex2.cocci</A>  -  Description not available
+<A HREF=mutex2/mutex2.cocci>mutex2/mutex2.cocci</A>  -  Call mutex_unlock in error handling code
 <p>
-<A HREF=noderef/noderef.cocci>noderef/noderef.cocci</A>  -  correct size computation
+<A HREF=noderef/noderef.cocci>noderef/noderef.cocci</A>  -  Correct size computation
 <p>
 <A HREF=noderef2/noderef2.cocci>noderef2/noderef2.cocci</A>  -  Correct size given to memset
 <p>
 <A HREF=notnull/notnull.cocci>notnull/notnull.cocci</A>  -  Remove redundant test
 <p>
-<A HREF=notnull/notnull2.cocci>notnull/notnull2.cocci</A>  -  Remove redundant test
+<A HREF=notnull/notnull2.cocci>notnull/notnull2.cocci</A>  -  Correct redundant test
 <p>
 <A HREF=null_ref/null_ref.cocci>null_ref/null_ref.cocci</A>  -  Move dereference after NULL test
 <p>
@@ -394,7 +456,7 @@
 <p>
 <A HREF=ofiomap/of_iomap-iounmap.cocci>ofiomap/of_iomap-iounmap.cocci</A>  -  Add missing iounmap
 <p>
-<A HREF=ofnametype/ofname1.cocci>ofnametype/ofname1.cocci</A>  -  add missing of_node_put
+<A HREF=ofnametype/ofname1.cocci>ofnametype/ofname1.cocci</A>  -  Add missing of_node_put
 <p>
 <A HREF=ofnametype/oftype1.cocci>ofnametype/oftype1.cocci</A>  -  add missing of_node_put
 <p>
@@ -408,7 +470,7 @@
 <p>
 <A HREF=ofnodeget4/ofnodeget4.cocci>ofnodeget4/ofnodeget4.cocci</A>  -  Add of_node_put to avoid memory leak
 <p>
-<A HREF=ofredef/ofredef.cocci>ofredef/ofredef.cocci</A>  -  add missing of_node_put
+<A HREF=ofredef/ofredef.cocci>ofredef/ofredef.cocci</A>  -  Add missing of_node_put
 <p>
 <A HREF=osdi_isnull/osdi_isnull.cocci>osdi_isnull/osdi_isnull.cocci</A>  -  Eliminate a NULL pointer dereference
 <p>
@@ -418,13 +480,13 @@
 <p>
 <A HREF=parport/sp8188.cocci>parport/sp8188.cocci</A>  -  Put gotten port value
 <p>
-<A HREF=parse_phandle/parse_phandle.cocci>parse_phandle/parse_phandle.cocci</A>  -  add missing of_node_put
+<A HREF=parse_phandle/parse_phandle.cocci>parse_phandle/parse_phandle.cocci</A>  -  Add missing of_node_put
 <p>
 <A HREF=pci_add_put/pci_noputm.cocci>pci_add_put/pci_noputm.cocci</A>  -  Add missing pci_dev_put
 <p>
-<A HREF=pci_drop_put/pci_get.cocci>pci_drop_put/pci_get.cocci</A>  -  Description not available
+<A HREF=pci_drop_put/pci_get.cocci>pci_drop_put/pci_get.cocci</A>  -  Drop unnecessary pci_dev_put
 <p>
-<A HREF=pciom/pciom3.cocci>pciom/pciom3.cocci</A>  -  exchange pci_iounmaps
+<A HREF=pciom/pciom3.cocci>pciom/pciom3.cocci</A>  -  Exchange pci_iounmaps
 <p>
 <A HREF=pd/pd.cocci>pd/pd.cocci</A>  -  Invert calls to platform_device_put and platform_device_del
 <p>
@@ -432,21 +494,21 @@
 <p>
 <A HREF=pointless_err/pointless_err.cocci>pointless_err/pointless_err.cocci</A>  -  Use ERR_CAST
 <p>
-<A HREF=prepare2/prepare2.cocci>prepare2/prepare2.cocci</A>  -  mv64xxx: use clk_prepare_enable and clk_disable_unprepare
+<A HREF=prepare2/prepare2.cocci>prepare2/prepare2.cocci</A>  -  use clk_prepare_enable and clk_disable_unprepare
 <p>
 <A HREF=ptr/ptr.cocci>ptr/ptr.cocci</A>  -  Correct error handling code
 <p>
-<A HREF=put_after/put_after.cocci>put_after/put_after.cocci</A>  -  add missing of_node_put
+<A HREF=put_after/put_after.cocci>put_after/put_after.cocci</A>  -  Add missing of_node_put
 <p>
-<A HREF=put_deref/patch.cocci>put_deref/patch.cocci</A>  -  move of_node_put
+<A HREF=put_deref/patch.cocci>put_deref/patch.cocci</A>  -  Move of_node_put
 <p>
-<A HREF=putty/putty.cocci>putty/putty.cocci</A>  -  avoid calling put_tty_driver on NULL
+<A HREF=putty/putty.cocci>putty/putty.cocci</A>  -  Avoid calling put_tty_driver on NULL
 <p>
-<A HREF=rcu/rcu.cocci>rcu/rcu.cocci</A>  -  call rcu_read_unlock in default case
+<A HREF=rcu/rcu.cocci>rcu/rcu.cocci</A>  -  Call rcu_read_unlock in default case
 <p>
 <A HREF=reiserfs/category2a_open_xa_dir.cocci>reiserfs/category2a_open_xa_dir.cocci</A>  -  Use an IS_ERR test rather than a NULL test
 <p>
-<A HREF=remap_bar/remap_bar.cocci>remap_bar/remap_bar.cocci</A>  -  reorder error handling code to include iounmap
+<A HREF=remap_bar/remap_bar.cocci>remap_bar/remap_bar.cocci</A>  -  Reorder error handling code to include iounmap
 <p>
 <A HREF=remove/remove.cocci>remove/remove.cocci</A>  -  Drop return value from platform_driver remove functions
 <p>
@@ -464,13 +526,13 @@
 <p>
 <A HREF=resource_size/resource_size.cocci>resource_size/resource_size.cocci</A>  -  Use resource_size
 <p>
-<A HREF=ret3/ret3.cocci>ret3/ret3.cocci</A>  -  fix error return code
+<A HREF=ret3/ret3.cocci>ret3/ret3.cocci</A>  -  Fix error return code
 <p>
-<A HREF=ret4/ret4.cocci>ret4/ret4.cocci</A>  -  fix error return code
+<A HREF=ret4/ret4.cocci>ret4/ret4.cocci</A>  -  Fix error return code
 <p>
-<A HREF=retalloc/retalloc.cocci>retalloc/retalloc.cocci</A>  -  fix error return code
+<A HREF=retalloc/retalloc.cocci>retalloc/retalloc.cocci</A>  -  Fix error return code
 <p>
-<A HREF=rirqp/rirqp.cocci>rirqp/rirqp.cocci</A>  -  ensure arguments to request_irq and free_irq are compatible
+<A HREF=rirqp/rirqp.cocci>rirqp/rirqp.cocci</A>  -  Ensure arguments to request_irq and free_irq are compatible
 <p>
 <A HREF=round/round.cocci>round/round.cocci</A>  -  Use DIV_ROUND_UP
 <p>
@@ -490,15 +552,13 @@
 <p>
 <A HREF=s390/s390.cocci>s390/s390.cocci</A>  -  Use an IS_ERR test rather than a NULL test
 <p>
-<A HREF=samba_free/samba.cocci>samba_free/samba.cocci</A>  -  Description not available
-<p>
-<A HREF=semicolon/semicolon.cocci>semicolon/semicolon.cocci</A>  -  removes unnecessary semicolon
+<A HREF=semicolon/semicolon.cocci>semicolon/semicolon.cocci</A>  -  Remove unnecessary semicolon
 <p>
 <A HREF=serial_core/serial_core.cocci>serial_core/serial_core.cocci</A>  -  Use UPIO_MEM rather than SERIAL_IO_MEM
 <p>
-<A HREF=signed/signed.cocci>signed/signed.cocci</A>  -  use unsigned for loop index
+<A HREF=signed/signed.cocci>signed/signed.cocci</A>  -  Use unsigned for loop index
 <p>
-<A HREF=simple_kzalloc/simple_kzalloc1.cocci>simple_kzalloc/simple_kzalloc1.cocci</A>  -  Use kzalloc
+<A HREF=simple_kzalloc/simple_kzalloc1.cocci>simple_kzalloc/simple_kzalloc1.cocci</A>  -  Use kzalloc instead of kmalloc and memset
 <p>
 <A HREF=sin_family/sin_family.cocci>sin_family/sin_family.cocci</A>  -  Use AF_INET for sin_family field
 <p>
@@ -512,43 +572,43 @@
 <p>
 <A HREF=sockfd/patch.cocci>sockfd/patch.cocci</A>  -  Use sockfd_put
 <p>
-<A HREF=stest/stest.cocci>stest/stest.cocci</A>  -  Description not available
+<A HREF=stest/stest.cocci>stest/stest.cocci</A>  -  Put NULL test before dereference
 <p>
-<A HREF=strsize/strsizeof.cocci>strsize/strsizeof.cocci</A>  -  convert strncmp to strcmp
+<A HREF=strsize/strsizeof.cocci>strsize/strsizeof.cocci</A>  -  Convert strncmp to strcmp
 <p>
-<A HREF=strtoul/simple.cocci>strtoul/simple.cocci</A>  -  change simple_strtol to simple_strtoul
+<A HREF=strtoul/simple.cocci>strtoul/simple.cocci</A>  -  Change simple_strtol to simple_strtoul
 <p>
 <A HREF=sz/sz.cocci>sz/sz.cocci</A>  -  Correct code taking the size of a pointer
 <p>
-<A HREF=sz3/sz3.cocci>sz3/sz3.cocci</A>  -  take size of pointed value, not pointer
+<A HREF=sz3/sz3.cocci>sz3/sz3.cocci</A>  -  Take size of pointed value, not pointer
 <p>
 <A HREF=tipc/tipc.cocci>tipc/tipc.cocci</A>  -  Use tipc_port_unlock
 <p>
 <A HREF=tty_port/sp10730.cocci>tty_port/sp10730.cocci</A>  -  Put correct tty value
 <p>
-<A HREF=typedef/handle.cocci>typedef/handle.cocci</A>  -  Description not available
+<A HREF=typedef/handle.cocci>typedef/handle.cocci</A>  -  Transform typedef HANDLE into void *
 <p>
-<A HREF=typedef/hv/device_object/DEVICE_OBJECT.cocci>typedef/hv/device_object/DEVICE_OBJECT.cocci</A>  -  Staging: hv: Transform PDEVICE_OBJECT and DEVICE_OBJECT typedefs into their corresponding structs
+<A HREF=typedef/hv/device_object/DEVICE_OBJECT.cocci>typedef/hv/device_object/DEVICE_OBJECT.cocci</A>  -  Transform PDEVICE_OBJECT and DEVICE_OBJECT typedefs into their corresponding structs
 <p>
-<A HREF=typedef/hv/driver_object/DRIVER_OBJECT.cocci>typedef/hv/driver_object/DRIVER_OBJECT.cocci</A>  -  Staging: hv: Remove typedef DRIVER_OBJECT and PDRIVER_OBJECT
+<A HREF=typedef/hv/driver_object/DRIVER_OBJECT.cocci>typedef/hv/driver_object/DRIVER_OBJECT.cocci</A>  -  Remove typedef DRIVER_OBJECT and PDRIVER_OBJECT
 <p>
-<A HREF=typedef/hv/netvsc/NETVSC_PACKET.cocci>typedef/hv/netvsc/NETVSC_PACKET.cocci</A>  -  Staging: hv: Remove typedef NETVSC_PACKET and PNETVSC_PACKET
+<A HREF=typedef/hv/netvsc/NETVSC_PACKET.cocci>typedef/hv/netvsc/NETVSC_PACKET.cocci</A>  -  Remove typedef NETVSC_PACKET and PNETVSC_PACKET
 <p>
-<A HREF=typedef/hv/storvsc/STORVSC_REQUEST.cocci>typedef/hv/storvsc/STORVSC_REQUEST.cocci</A>  -  Staging: hv: Remove typedef STORVSC_REQUEST and PSTORVSC_REQUEST
+<A HREF=typedef/hv/storvsc/STORVSC_REQUEST.cocci>typedef/hv/storvsc/STORVSC_REQUEST.cocci</A>  -  Remove typedef STORVSC_REQUEST and PSTORVSC_REQUEST
 <p>
 <A HREF=ubi/category2b_add_volume.cocci>ubi/category2b_add_volume.cocci</A>  -  Bad IS_ERR test
 <p>
 <A HREF=ubifs/category2a_kthread_create.cocci>ubifs/category2a_kthread_create.cocci</A>  -  Use an IS_ERR test rather than a NULL test
 <p>
-<A HREF=ulfe/ulfe.cocci>ulfe/ulfe.cocci</A>  -  use list_for_each_entry
+<A HREF=ulfe/ulfe.cocci>ulfe/ulfe.cocci</A>  -  Use list_for_each_entry
 <p>
-<A HREF=undevm/undevm.cocci>undevm/undevm.cocci</A>  -  kfree etc should not be used with devm functions
+<A HREF=undevm/undevm.cocci>undevm/undevm.cocci</A>  -  Kfree etc should not be used with devm functions
 <p>
 <A HREF=unsf/unsf.cocci>unsf/unsf.cocci</A>  -  Fix return value from an unsigned function
 <p>
 <A HREF=unsf/unsf_ret0.cocci>unsf/unsf_ret0.cocci</A>  -  Fix return value from an unsigned function
 <p>
-<A HREF=unused/unused.cocci>unused/unused.cocci</A>  -  remove unused variable
+<A HREF=unused/unused.cocci>unused/unused.cocci</A>  -  Remove unused variable
 <p>
 <A HREF=unused_err/unused_err.cocci>unused_err/unused_err.cocci</A>  -  Use available error codes
 <p>
@@ -556,7 +616,7 @@
 <p>
 <A HREF=urb2/urb2.cocci>urb2/urb2.cocci</A>  -  Delete unnecessary call to usb_kill_urb
 <p>
-<A HREF=urb8/urb8.cocci>urb8/urb8.cocci</A>  -  Description not available
+<A HREF=urb8/urb8.cocci>urb8/urb8.cocci</A>  -  Introduce missing usb_free_urb
 <p>
 <A HREF=usb/category2a_back_device_reg.cocci>usb/category2a_back_device_reg.cocci</A>  -  Use an IS_ERR test rather than a NULL test
 <p>
@@ -572,30 +632,34 @@
 <p>
 <A HREF=usefreed/bad_kfree.cocci>usefreed/bad_kfree.cocci</A>  -  Correct use after free
 <p>
-<A HREF=usefreed/usefreed.cocci>usefreed/usefreed.cocci</A>  -  Correct use after free
-<p>
 <A HREF=uselesskfree/uselesskfree.cocci>uselesskfree/uselesskfree.cocci</A>  -  Remove useless kfree
 <p>
 <A HREF=video/patch.cocci>video/patch.cocci</A>  -  Use video_device_release rather than kfree
 <p>
 <A HREF=videobuf_dvb_get_frontend_return_null/videobuf_dvb_get_frontend_return_null.cocci>videobuf_dvb_get_frontend_return_null/videobuf_dvb_get_frontend_return_null.cocci</A>  -  Test if videobuf_dvb_get_frontend return NULL
 <p>
-<A HREF=warn/warn.cocci>warn/warn.cocci</A>  -  use WARN
+<A HREF=warn/warn.cocci>warn/warn.cocci</A>  -  Use WARN
 <p>
-<A HREF=warn2/warn2.cocci>warn2/warn2.cocci</A>  -  drop if around WARN_ON
+<A HREF=warn2/warn2.cocci>warn2/warn2.cocci</A>  -  Drop if around WARN_ON
 <p>
 <A HREF=write2/write2.cocci>write2/write2.cocci</A>  -  delete double assignment
 <p>
-<A HREF=wrongtest/wrongtest.cocci>wrongtest/wrongtest.cocci</A>  -  test the just-initialized value
+<A HREF=wrongtest/wrongtest.cocci>wrongtest/wrongtest.cocci</A>  -  Test the just-initialized value
 <p>
 <A HREF=x25/patch.cocci>x25/patch.cocci</A>  -  Add missing x25_neigh_put
 <p>
-<A HREF=xand/xand.cocci>xand/xand.cocci</A>  -  Description not available
+<A HREF=xand/xand.cocci>xand/xand.cocci</A>  -  Detect duplicated test
 <p>
 <A HREF=xfrm/category2a_xfrm_bundle_create.cocci>xfrm/category2a_xfrm_bundle_create.cocci</A>  -  Use an IS_ERR test rather than a NULL test
 <p>
-<A HREF=zercst/zercst.cocci>zercst/zercst.cocci</A>  -  adjust suspicious bit operation
+<A HREF=zercst/zercst.cocci>zercst/zercst.cocci</A>  -  Adjust suspicious bit operation
 <p>
-<A HREF=zero/rezero.cocci>zero/rezero.cocci</A>  -  Description not available
+<A HREF=zero/rezero.cocci>zero/rezero.cocci</A>  -  Possible problem with V4L2_TUNER_MODE_MONO
+<p>
+<P>
+<HR>
+Target: Samba
+<P>
+<A HREF=samba_free/samba.cocci>samba_free/samba.cocci</A>  -  Add missing calls to talloc_free
 <p>
 </body></html>
