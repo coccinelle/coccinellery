@@ -1,7 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Convert release_resource to release_region/release_mem_region
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Request_region should be used with release_region, not release_resource.
 
 The result of request_mem_region is no longer stored.  Instead the field
@@ -9,23 +11,4 @@ ioarea is used to store a pointer to the resource structure that contains
 the start address.  This is the information that is needed later in
 nuc900_i2c_remove to release the region.  The field ioarea is also printed
 in some debugging code.
-
-The semantic match that finds this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression x,E;
-@@
-(
-*x = request_region(...)
-|
-*x = request_mem_region(...)
-)
-... when != release_region(x)
-    when != x = E
-* release_resource(x);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

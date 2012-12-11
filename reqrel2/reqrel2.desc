@@ -1,23 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Use release_mem_region after request_mem_region
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 The memory allocated using request_mem_region should be released using
 release_mem_region, not release_region.
-
-The semantic patch that fixes part of this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression E1,E2,E3;
-@@
-
-request_mem_region(E1,E2,E3)
-...
-?- release_region(E1,E2)
-+ release_mem_region(E1,E2)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

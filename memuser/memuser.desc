@@ -1,32 +1,9 @@
-coccinellery-short = add missing kfree
+coccinellery-target = Linux
+coccinellery-short = Add missing kfree
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 The label fail frees dev->buf, but kbuf hasn't yet been stored there at
 this point.
-
-A simplified version of the semantic match that finds this problem is as
-follows: (http://coccinelle.lip6.fr/)
-
-// <smpl>
-@exists@
-local idexpression x;
-statement S;
-expression E;
-expression *ptr != NULL;
-@@
-
-x = memdup_user(...);
-...
-if (IS_ERR(x)) S
-... when != x
-    when != x = E
-(
- return \(0\|<+...x...+>\|ptr\);
-|
-*return ...;
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

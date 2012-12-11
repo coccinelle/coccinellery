@@ -1,41 +1,7 @@
-coccinellery-short = adjust error handling
+coccinellery-target = Linux
+coccinellery-short = Adjust error handling after call to alloc_etherdev()
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
 
-From: Julia Lawall <Julia.Lawall@lip6.fr>
-
-The just preceding error case does a lot of error handling, so it seems
-like this one should as well.
-
-The semantic match that found the problem is:
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@@
-expression E,E1,E2;
-@@
-
-E = alloc_etherdev(...)
-... when != E = E1
-if (...) { ... free_netdev(E); ... return ...; }
-... when != E = E2
-(
-  if (...)
-   {
-   ... when != free_netdev(E);
-   return dev; }
-|
-* if (...)
-   {
-   ... when != free_netdev(E);
-   return ...; }
-|
-register_netdev(E)
-)
-
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
-
+Detect possible error handling code related to alloc_etherdev().

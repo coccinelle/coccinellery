@@ -1,31 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Drop unnecessary of_node_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 for_each_node_by_name only exits when its first argument is NULL, and a
 subsequent call to of_node_put on that argument is unnecessary.
-
-The semantic patch that makes this change is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-iterator name for_each_node_by_name;
-expression np,E;
-identifier l;
-@@
-
-for_each_node_by_name(np,...) {
-  ... when != break;
-      when != goto l;
-}
-... when != np = E
-- of_node_put(np);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

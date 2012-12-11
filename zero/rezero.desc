@@ -1,5 +1,27 @@
-coccinellery-short = Description not available
+coccinellery-target = Linux
+coccinellery-short = Possible problem with V4L2_TUNER_MODE_MONO
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Author name not available
-Description not available
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
+The file drivers/media/video/tvaudio.c contains the following code:
+
+(starting at line 1257 in a recent linux-next)
+
+                if (mode & V4L2_TUNER_MODE_MONO)
+                        s1 |= TDA8425_S1_STEREO_MONO;
+                if (mode & V4L2_TUNER_MODE_STEREO)
+                        s1 |= TDA8425_S1_STEREO_SPATIAL;
+
+(starting at line 1856 in a recent linux-next)
+
+        if (mode & V4L2_TUNER_MODE_MONO)
+                vt->rxsubchans |= V4L2_TUNER_SUB_MONO;
+        if (mode & V4L2_TUNER_MODE_STEREO)
+                vt->rxsubchans |= V4L2_TUNER_SUB_STEREO;
+
+The only possible value of V4L2_TUNER_MODE_MONO, however, seems to be 0, as
+defined in include/linux/videodev2.h, and thus the first test in each case
+is never true.  Is this what is intended, or should the tests be expressed
+in another way?
+

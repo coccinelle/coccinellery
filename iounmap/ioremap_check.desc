@@ -1,47 +1,9 @@
-coccinellery-short = Added a missing iounmap
+coccinellery-target = Linux
+coccinellery-short = Add missing iounmap
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 An extra error handling label is needed for the case where the ioremap has
 succeeded.
-
-The problem was detected using the following semantic match
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@@
-type T,T1,T2;
-identifier E;
-statement S;
-expression x1,x2;
-constant C;
-int ret;
-@@
-
-  T E;
-  ...
-* E = ioremap(...);
-  if (E == NULL) S
-  ... when != iounmap(E)
-      when != if (E != NULL) { ... iounmap(E); ...}
-      when != x1 = (T1)E
-  if (...) {
-    ... when != iounmap(E)
-        when != if (E != NULL) { ... iounmap(E); ...}
-        when != x2 = (T2)E
-(
-*   return;
-|
-*   return C;
-|
-*   return ret;
-)
-  }
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

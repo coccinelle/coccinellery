@@ -1,27 +1,8 @@
-coccinellery-short = test the just-initialized value
+coccinellery-target = Linux
+coccinellery-short = Test the just-initialized value
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Test the just-initialized value rather than some other one.
-
-The semantic match that finds this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@r@
-identifier x,y,f!={PTR_ERR,ERR_PTR,ERR_CAST};
-statement S;
-@@
-
-x = f(...);
-(
-if (\(x == NULL\|IS_ERR(x)\)) S
-|
-*if (\(y == NULL\|IS_ERR(y)\))
- { ... when != x
-   return ...; }
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

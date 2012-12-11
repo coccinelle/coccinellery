@@ -1,21 +1,8 @@
-coccinellery-short = drop devm_kfree of devm_kzalloc'd data
+coccinellery-target = Linux
+coccinellery-short = Drop devm_kfree of devm_kzalloc'd data
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 devm_kfree should not have to be explicitly used.
-
-The semantic patch that fixes this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression x,d;
-@@
-
-x = devm_kzalloc(...)
-...
-?-devm_kfree(d,x);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

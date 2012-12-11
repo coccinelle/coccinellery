@@ -1,37 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Eliminate use after free
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 The error value is saved in a new local variable err before freeing the
 containing structure.
-
-A simplified version of the semantic match that finds this problem is as
-follows: (http://coccinelle.lip6.fr/)
-
-// <smpl>
-@free@
-expression E;
-position p;
-@@
-kfree@p(E)
-
-@@
-expression free.E, subE<=free.E, E1;
-position free.p;
-@@
-
-  kfree@p(E)
-  ...
-(
-  subE = E1
-|
-* E
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

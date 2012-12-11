@@ -1,46 +1,9 @@
-coccinellery-short = fix error return code
+coccinellery-target = Linux
+coccinellery-short = Fix error return code
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Convert a possibly 0 error return code to a negative one, as returned
 elsewhere in the function.
-
-The return variable, error, is previously initialized to -EINVAL, but a
-comment suggests that that value is intended for an earlier condition.
-Here the code is changed to just return the value returned by uprobe_mmap.
-
-The semantic match that finds this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@exists@
-local idexpression ret;
-constant C;
-expression e1,e2;
-identifier l;
-@@
-
-* ret = -C;
-  ...
-* if (...)
- {
-  ... when any
-* if (ret)
-    { ...
-*     return ret;
-    }
-  ... when any
-      when forall
-      when != return ...;
-      when != goto l;
- }
-... when any
-    when != ret = e1
-* if (...)
-  { ... when != ret = e2
-*   return ret;
-  }
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

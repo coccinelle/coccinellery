@@ -1,32 +1,10 @@
+coccinellery-target = Linux
 coccinellery-short = Eliminate double free
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 The few lines below the kfree of hdr_buf may go to the label err_free which
 will also free hdr_buf.  The most straightforward solution seems to be to
 just move the kfree of hdr_buf after these gotos.
-
-A simplified version of the semantic match that finds this problem is as
-follows: (http://coccinelle.lip6.fr/)
-
-// <smpl>
-@r@
-identifier E;
-expression E1;
-iterator I;
-statement S;
-@@
-
-*kfree(E);
-... when != E = E1
-    when != I(E,...) S
-    when != &E
-*kfree(E);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

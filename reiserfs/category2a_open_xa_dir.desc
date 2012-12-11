@@ -1,33 +1,11 @@
+coccinellery-target = Linux
 coccinellery-short = Use an IS_ERR test rather than a NULL test
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julien Brunel <brunel@diku.dk>
 coccinellery-author1 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julien Brunel <brunel@diku.dk>
 
 In case of error, the function open_xa_dir returns an ERR pointer,
 but never returns a NULL pointer. So a NULL test that comes after an
 IS_ERR test should be deleted.
-
-The semantic match that finds this problem is as follows:
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@match_bad_null_test@
-expression x, E;
-statement S1,S2;
-@@
-x = open_xa_dir(...)
-... when != x = E
-(
-*  if (x == NULL && ...) S1 else S2
-|
-*  if (x == NULL || ...) S1 else S2
-)
-// </smpl>
-
-Signed-off-by:  Julien Brunel <brunel@diku.dk>
-Signed-off-by:  Julia Lawall <Julia.Lawall@lip6.fr>
 

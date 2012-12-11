@@ -1,36 +1,9 @@
-coccinellery-short = change simple_strtol to simple_strtoul
+coccinellery-target = Linux
+coccinellery-short = Change simple_strtol to simple_strtoul
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 Since bridge is unsigned, it would seem better to use simple_strtoul that
 simple_strtol.
-
-A simplified version of the semantic patch that makes this change is as
-follows: (http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@r2@
-long e;
-position p;
-@@
-
-e = simple_strtol@p(...)
-
-@@
-position p != r2.p;
-type T;
-T e;
-@@
-
-e = 
-- simple_strtol@p
-+ simple_strtoul
-  (...)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

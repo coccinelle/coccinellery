@@ -1,55 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = Add calls to cpufreq_cpu_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-drivers/cpufreq/cpufreq.c
-
-
-Send to:
-davej@codemonkey.org.uk, cpufreq@lists.linux.org.uk, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-Subject: [PATCH] drivers/cpufreq: Add calls to cpufreq_cpu_put
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 A call to cpufreq_cpu_get should be matched by a call to cpufreq_cpu_put.
 
-
-The problem was fixed using the following semantic patch.
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@@
-type T;
-identifier E;
-expression E1, E2;
-int ret;
-statement S;
-@@
-
-  T E;
-  ... when any
-(
-  E = cpufreq_cpu_get(...);
-  if (E == NULL) S
-|
-  if ((E = cpufreq_cpu_get(...)) == NULL) S
-)
-  ... when != E2 = E
-      when strict
-(
-  cpufreq_cpu_put(E);
-|
-  E1 = E;
-|
-+ cpufreq_cpu_put(E);
-  return;
-|
-+ cpufreq_cpu_put(E);
-  return ret;
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

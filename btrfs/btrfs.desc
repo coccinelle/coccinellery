@@ -1,36 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = Add missing btrfs_free_path
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Btrfs_alloc_path should be matched with btrfs_free_path in error-handling code.
-
-A simplified version of the semantic match that finds this problem is as
-follows: (http://coccinelle.lip6.fr/)
-
-// <smpl>
-@r exists@
-local idexpression struct btrfs_path * x;
-expression ra,rb;
-position p1,p2;
-@@
-
-x = btrfs_alloc_path@p1(...)
-...  when != btrfs_free_path(x,...)
-     when != if (...) { ... btrfs_free_path(x,...) ...}
-     when != x = ra
-if(...) { ... when != x = rb
-     when forall
-     when != btrfs_free_path(x,...)
- \(return <+...x...+>; \| return@p2...; \) }
-
-@script:python@
-p1 << r.p1;
-p2 << r.p2;
-@@
-
-cocci.print_main(\"alloc\",p1)
-cocci.print_secs(\"return\",p2)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

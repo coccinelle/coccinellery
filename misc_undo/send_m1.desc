@@ -1,64 +1,10 @@
+coccinellery-target = Linux
 coccinellery-short = Add missing snd_card_free
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 The function snd_mixart_create creates a link between mgr and card that
 allows snd_mixart_free to free card as well.  But if snd_mixart_create
 fails, then the link has not been created and card has to be freed explicitly.
-
-
-The semantic match that finds the problem is as follows:
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@r exists@
-local idexpression x;
-statement S,S1;
-position p1,p2,p3;
-expression E,E1;
-type T,T1;
-expression *ptr != NULL;
-@@
-
-(
- if ((x@p1 = snd_card_new(...)) == NULL) S
-|
- x@p1 = snd_card_new(...);
-)
- ... when != snd_card_free(...,(T)x,...)
-     when != if (...) { <+... snd_card_free(...,(T)x,...) ...+> }
-     when != true x == NULL || ...
-     when != x = E
-     when != E = (T)x
-     when any
-(
- if (x == NULL || ...) S1
-|
- if@p2 (...) {
-  ... when != snd_card_free(...,(T1)x,...)
-      when != if (...) { <+... snd_card_free(...,(T1)x,...) ...+> }
-      when != x = E1
-      when != E1 = (T1)x
-(
-  return \(0\|<+...x...+>\|ptr\);
-|
-  return@p3 ...;
-)
-}
-)
-
-@ script:python @
-p1 << r.p1;
-p3 << r.p3;
-@@
-
-print \"* file: %s snd_card_new: %s return: %s\" % (p1[0].file,p1[0].line,p3[0].line)
-
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

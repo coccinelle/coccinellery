@@ -1,3 +1,4 @@
+coccinellery-target = Linux
 coccinellery-short = Remove two unused variables and two useless calls to kfree
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.

@@ -1,19 +1,8 @@
-coccinellery-short = drop if around WARN_ON
+coccinellery-target = Linux
+coccinellery-short = Drop if around WARN_ON
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Just use WARN_ON rather than an if containing only WARN_ON(1).
-
-A simplified version of the semantic patch that makes this transformation
-is as follows: (http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression e;
-@@
-- if (e) WARN_ON(1);
-+ WARN_ON(e);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

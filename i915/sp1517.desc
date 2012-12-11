@@ -1,38 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Add missing error handling code
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 The cleanup code at the end of the function should also be carried out when
 the function only partly completes its work.
-
-A simplified version of the semantic match that finds this problem is:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@r exists@
-local idexpression struct page ** x;
-expression ra,rr;
-position p1,p2;
-@@
-
-x = drm_malloc_ab@p1(...)
-...  when != x = rr
-     when != drm_free_large(x,...)
-     when != if (...) { ... drm_free_large(x,...) ...}
-if(...) { ... when != x = ra
-     when forall
-     when != drm_free_large(x,...)
- \(return <+...x...+>; \| return@p2...; \) }
-
-@script:python@
-p1 << r.p1;
-p2 << r.p2;
-@@
-
-cocci.print_main(\"drm_malloc_ab\",p1)
-cocci.print_secs(\"return\",p2)
-
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

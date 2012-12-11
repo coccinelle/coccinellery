@@ -1,36 +1,11 @@
-coccinellery-short = reorder error handling code to include iounmap
+coccinellery-target = Linux
+coccinellery-short = Reorder error handling code to include iounmap
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 The out_msi_disable label should be before cleanup_nomem to additionally
 benefit from the call to iounmap.  Subsequent gotos are adjusted to go to
 out_msi_disable instead of cleanup_nomem, which now follows it.  This is
 safe because pci_disable_msi does nothing if pci_enable_msi was not called.
-
-A simplified version of the semantic match that finds this problem is as
-follows: (http://coccinelle.lip6.fr/)
-
-// <smpl>
-@r@
-expression e1,e2;
-statement S;
-@@
-
-e1 = pci_ioremap_bar(...);
-... when != e1 = e2
-    when != iounmap(e1)
-    when any
-(
- if (<+...e1...+>) S
-|
- if(...) { ... return 0; }
-|
- if (...) { ... when != iounmap(e1)
-                when != if (...) { ... iounmap(e1) ... }
-* return ...;
- } else S
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

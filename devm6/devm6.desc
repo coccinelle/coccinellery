@@ -1,42 +1,9 @@
-coccinellery-short = use devm_request_and_ioremap
+coccinellery-target = Linux
+coccinellery-short = Use devm_request_and_ioremap
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Reimplement a call to devm_request_mem_region followed by a call to ioremap
 or ioremap_nocache by a call to devm_request_and_ioremap.
-
-The semantic patch that makes this transformation is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@nm@
-expression myname;
-identifier i;
-@@
-
-struct platform_driver i = { .driver = { .name = myname } };
-
-@@
-expression dev,res,size;
-expression nm.myname;
-@@
-
--if (!devm_request_mem_region(dev, res->start, size,
--                              \(res->name\|dev_name(dev)\|myname\))) {
--   ...
--   return ...;
--}
-... when != res->start
-(
--devm_ioremap(dev,res->start,size)
-+devm_request_and_ioremap(dev,res)
-|
--devm_ioremap_nocache(dev,res->start,size)
-+devm_request_and_ioremap(dev,res)
-)
-... when any
-    when != res->start
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

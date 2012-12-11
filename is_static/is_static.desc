@@ -1,5 +1,11 @@
-coccinellery-short = Description not available
+coccinellery-target = Linux
+coccinellery-short = Make some structures static
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Author name not available
-Description not available
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
+Checks that the declaration is not inside a function definition, that the
+defined variable is not exported using EXPORTED_SYMBOL, etc, and that the
+defined variable does not occur in any other file.  If these conditions
+hold, static is added before the declaration.
+

@@ -1,18 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = Add missing x25_neigh_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-net/x25/x25_forward.c
-
-
-Send to:
-eis@baty.hanse.de, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-Subject: [PATCH] net/x25: Add missing x25_neigh_put
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 The function x25_get_neigh increments a reference count.  At the point of
 the second goto out, the result of calling x25_get_neigh is only stored in
@@ -20,39 +10,3 @@ a local variable, and thus no one outside the function will be able to
 decrease the reference count.  Thus, x25_neigh_put should be called before
 the return in this case.
 
-
-The problem was found using the following semantic match.
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-
-@@
-type T,T1,T2;
-identifier E;
-statement S;
-expression x1,x2,x3;
-int ret;
-@@
-
-  T E;
-  ...
-* if ((E = x25_get_neigh(...)) == NULL)
-  S
-  ... when != x25_neigh_put(...,(T1)E,...)
-      when != if (E != NULL) { ... x25_neigh_put(...,(T1)E,...); ...}
-      when != x1 = (T1)E
-      when != E = x3;
-      when any
-  if (...) {
-    ... when != x25_neigh_put(...,(T2)E,...)
-        when != if (E != NULL) { ... x25_neigh_put(...,(T2)E,...); ...}
-        when != x2 = (T2)E
-(
-*   return;
-|
-*   return ret;
-)
-  }
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

@@ -1,26 +1,10 @@
+coccinellery-target = Linux
 coccinellery-short = Avoid leaving freed data in a list
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-b may be added to a list, but is not removed before being freed in the case
-of an error.  This is done in the corresponding deallocation function, so
-the code here has been changed to follow that.
 
-The sematic match that finds this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression E,E1,E2;
-identifier l;
-@@
-
-*list_add(&E->l,E1);
-... when != E1
-    when != list_del(&E->l)
-    when != list_del_init(&E->l)
-    when != E = E2
-*kfree(E);// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+The list_for_each_entry loop can fail, in which case the list element is
+not removed from the list.  Since this list is not accessed by the loop, 
+the addition of &data->list into the list is just moved after the loop.
 

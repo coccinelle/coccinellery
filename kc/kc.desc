@@ -1,24 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = Use kzalloc for allocating only one thing
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 Use kzalloc rather than kcalloc(1,...)
-
-The semantic patch that makes this change is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-@@
-
-- kcalloc(1,
-+ kzalloc(
-          ...)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

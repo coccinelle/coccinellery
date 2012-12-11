@@ -1,41 +1,10 @@
+coccinellery-target = Linux
 coccinellery-short = Eliminate memory leak
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 __ip_vs_service_get and __ip_vs_svc_fwm_get increment a reference count, so
 that reference count should be decremented before leaving the function in an
 error case.
-
-A simplified version of the semantic match that finds this problem is:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@r exists@
-local idexpression x;
-expression E;
-identifier f1;
-iterator I;
-@@
-
-x = __ip_vs_service_get(...);
-<... when != x
-     when != true (x == NULL || ...)
-     when != if (...) { <+...x...+> }
-     when != I (...) { <+...x...+> }
-(
- x == NULL
-|
- x == E
-|
- x->f1
-)
-...>
-* return ...;
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

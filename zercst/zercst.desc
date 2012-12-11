@@ -1,10 +1,8 @@
-coccinellery-short = adjust suspicious bit operation
+coccinellery-target = Linux
+coccinellery-short = Adjust suspicious bit operation
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 IRQF_TRIGGER_HIGH is 0x00000004, so it seems that & was intended rather than |.
-
-This problem was found using Coccinelle (http://coccinelle.lip6.fr/).
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

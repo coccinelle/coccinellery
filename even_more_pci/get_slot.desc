@@ -1,17 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = Add missing pci_dev_get
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-drivers/char/agp/amd64-agp.c
-
-Send to:
-airlied@linux.ie, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-Subject: [PATCH 1/2] drivers/char/agp: Add missing pci_dev_get
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 pci_get_slot does a pci_dev_get, so pci_dev_put needs to be called in an
 error case.
@@ -19,42 +10,3 @@ error case.
 In the first three cases, it might also be possible to move the call to
 pci_get_slot downwards below the error handling code.
 
-The problem was fixed using the following semantic patch.
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@@
-local idexpression *n;
-statement S1,S2;
-expression E,E1;
-expression *ptr != NULL;
-type T,T1;
-@@
-
-(
-if (!(n = pci_get_slot(...))) S1
-|
-n = pci_get_slot(...)
-)
-<... when != pci_dev_put(n)
-    when != if (...) { <+... pci_dev_put(n) ...+> }
-    when != true !n  || ...
-    when != n = (T)E
-    when != E = n
-if (!n || ...) S2
-...>
-(
-  return \(0\|<+...n...+>\|ptr\);
-|
-+ pci_dev_put(n);
-return ...;
-|
-pci_dev_put(n);
-|
-n = (T1)E1
-|
-E1 = n
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

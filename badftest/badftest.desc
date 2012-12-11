@@ -1,5 +1,8 @@
-coccinellery-short = Description not available
+coccinellery-target = Linux
+coccinellery-short = Correct NULL test
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Author name not available
-Description not available
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
+Test the just-allocated value for NULL rather than some other value.
+

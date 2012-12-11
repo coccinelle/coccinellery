@@ -1,34 +1,9 @@
-coccinellery-short = initialize return variable with error code
+coccinellery-target = Linux
+coccinellery-short = Initialize return variable with error code
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Typically, the return value desired for the failure of a memory allocation
 is -ENOMEM.  In this case, the return value is undesirably 0.
-
-The semantic match that finds this problem is:
-(http://coccinelle.lip6.fr/)
-
-//<smpl>
-@@
-identifier ret,f;
-expression E,E1,x;
-@@
-
-(
-ret = f(...);
-if (ret != 0) { ... when forall
-  return ...; }
-|
-ret = 0
-)
-... when != ret = E
-    when any
-x = \(kmalloc\|kzalloc\|kcalloc\)(...);
-*if(x == NULL) {
- ... when != ret = E1
-* return ret;
-}
-//</smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

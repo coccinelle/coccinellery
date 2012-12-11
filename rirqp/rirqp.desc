@@ -1,10 +1,10 @@
-coccinellery-short = ensure arguments to request_irq and free_irq are compatible
+coccinellery-target = Linux
+coccinellery-short = Ensure arguments to request_irq and free_irq are compatible
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Convert calls to free_irq so that the second argument is the same as the
 last argument of the corresponding call to request_irq.  Without this
 property, free_irq does nothing.
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

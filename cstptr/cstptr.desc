@@ -1,25 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = Move call to PTR_ERR after reassignment
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 PTR_ERR should be called before its argument is cleared.
-
-The semantic match that finds this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression e,e1;
-constant c;
-@@
-
-*e = c
-... when != e = e1
-    when != &e
-    when != true IS_ERR(e)
-*PTR_ERR(e)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
-Reported-by: Josh Triplett <josh@joshtriplett.org>
 

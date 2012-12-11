@@ -1,7 +1,9 @@
-coccinellery-short = some devm_ cleanups
+coccinellery-target = Linux
+coccinellery-short = Some devm_ cleanups
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 devm free functions should not have to be explicitly used.
 
 The only thing left that is useful in the function mpc5121_nfc_free is the
@@ -14,26 +16,4 @@ Use devm_request_and_ioremap in place of devm_request_mem_region and
 devm_ioremap.
 
 Use devm_clk_get.
-
-A semantic match that finds the first problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-@@
-
-(
-* devm_kfree(...);
-|
-* devm_free_irq(...);
-|
-* devm_iounmap(...);
-|
-* devm_release_region(...);
-|
-* devm_release_mem_region(...);
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

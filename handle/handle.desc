@@ -1,5 +1,11 @@
-coccinellery-short = Description not available
+coccinellery-target = Linux
+coccinellery-short = Adjust error handling code
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Author name not available
-Description not available
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
+In this code, it is possible to tell statically whether usblp will be NULL
+in the error handling code.
+
+Another option would have been to put a label directly on the return.
+

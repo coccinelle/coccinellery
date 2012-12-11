@@ -1,37 +1,10 @@
+coccinellery-target = Linux
 coccinellery-short = Use ERR_CAST
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 Use ERR_CAST(x) rather than ERR_PTR(PTR_ERR(x)).  The former makes more
 clear what is the purpose of the operation, which otherwise looks like a
 no-op.
-
-The semantic patch that makes this change is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-type T;
-T x;
-identifier f;
-@@
-
-T f (...) { <+...
-- ERR_PTR(PTR_ERR(x))
-+ x
- ...+> }
-
-@@
-expression x;
-@@
-
-- ERR_PTR(PTR_ERR(x))
-+ ERR_CAST(x)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

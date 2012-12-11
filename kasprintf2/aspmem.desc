@@ -1,7 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Use kstrdup
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Rewrite the initialization of a dev field.  In the original code, in each
 case there was a kmalloc followed by a memcpy, as illustrated by the
 semantic patch below.  In the case that the provided string was the empty
@@ -20,28 +22,4 @@ string and the associated variable declaration are also deleted.
 The patch also drops err, changes the return value to retval, which in each
 file was already initialized elsewhere to an error code, and initializes
 retval to -ENOMEM when kstrdup fails.
-
-The semantic patch that motivated this transformation is:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression a,flag,len;
-expression arg,e1,e2;
-statement S;
-@@
-
-  len = strlen(arg)
-  ... when != len = e1
-      when != arg = e2
-  a =
--  \(kmalloc\|kzalloc\)(len+1,flag)
-+  kstrdup(arg,flag)
-  <... when != a
-  if (a == NULL || ...) S
-  ...>
-- memcpy(a,arg,len+1);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

@@ -1,32 +1,8 @@
+coccinellery-target = Linux, Generic
 coccinellery-short = Drop unnecessary continue
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-Send to:
-tony.luck@intel.com, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-Subject: [PATCH 1/4] arch/ia64: Drop unnecessary continue
-
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 Continue is not needed at the bottom of a loop.
 
-The semantic patch implementing this change is as follows:
-
-@@
-statement S;
-@@
-
-for (...;...;...) {
-  ...
-  if (...)
-- {
-    S
--   continue;
-- }
-}
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

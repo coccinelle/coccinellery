@@ -1,31 +1,10 @@
+coccinellery-target = Linux
 coccinellery-short = Eliminate use after free
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 __sa1111_remove always frees its argument, so the subsequent reference to
 sachip->saved_state represents a use after free.  __sa1111_remove does not
 appear to use the saved_state field, so the patch simply frees it first.
-
-A simplified version of the semantic patch that finds this problem is as
-follows: (http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression E,E2;
-@@
-
-__sa1111_remove(E)
-...
-(
-  E = E2
-|
-* E
-)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

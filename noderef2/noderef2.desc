@@ -1,27 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = Correct size given to memset
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 Memset should be given the size of the structure, not the size of the pointer.
-
-The semantic patch that makes this change is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-type T;
-T *x;
-expression E;
-@@
-
-memset(x, E, sizeof(
-+ *
- x))
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

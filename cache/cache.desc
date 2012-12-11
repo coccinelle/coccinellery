@@ -1,5 +1,9 @@
-coccinellery-short = Description not available
+coccinellery-target = Linux
+coccinellery-short = Use kmem_cache_free
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Author name not available
-Description not available
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
+Free memory allocated using kmem_cache_zalloc using kmem_cache_free rather
+than kfree.
+

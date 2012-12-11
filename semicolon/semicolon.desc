@@ -1,10 +1,8 @@
-coccinellery-short = removes unnecessary semicolon
+coccinellery-target = Linux, Generic
+coccinellery-short = Remove unnecessary semicolon
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Peter Senna Tschudin <peter.senna@gmail.com>
-removes unnecessary semicolon
 
-Found by Coccinelle: http://coccinelle.lip6.fr/
-
-Signed-off-by: Peter Senna Tschudin <peter.senna@gmail.com>
+Removes unnecessary semicolon
 

@@ -1,43 +1,10 @@
+coccinellery-target = Linux
 coccinellery-short = Add missing of_node_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-Send to:
-olof@lixom.net, paulus@samba.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-Subject: [PATCH] arch/powerpc: Add missing of_node_put
-
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 There should be an of_node_put when breaking out of a loop that iterates
 over calls to of_find_all_nodes, as this function does an of_node_get on
 the value it returns.
 
-This was fixed using the following semantic patch.
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@@
-type T;
-identifier d;
-expression e;
-@@
-
-T *d;
-...
-for (d = NULL; (d = of_find_all_nodes(d)) != NULL; )
- {... when != of_node_put(d)
-      when != e = d
-(
-   return d;
-|
-+  of_node_put(d);
-?  return ...;
-)
-...}
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

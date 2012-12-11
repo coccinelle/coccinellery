@@ -1,7 +1,9 @@
-coccinellery-short = use devm_ functions
+coccinellery-target = Linux
+coccinellery-short = Use devm_ functions
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 The various devm_ functions allocate memory that is released when a driver
 detaches.  This patch uses devm_kzalloc, devm_request_irq, etc. for data
 that is allocated in the probe function of a platform device and is only
@@ -9,6 +11,4 @@ freed in the remove function.
 
 This patch changes the semantics in the case of exynos_hdmi.c, in that in
 the original code, there was no free of drm_hdmi_ctx in the remove function.
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

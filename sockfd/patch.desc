@@ -1,38 +1,11 @@
+coccinellery-target = Linux
 coccinellery-short = Use sockfd_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-net/bluetooth/bnep/sock.c
-net/bluetooth/cmtp/sock.c
-net/bluetooth/hidp/sock.c
-
-Send to:
-marcel@holtmann.org, maxk@qualcomm.com, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-Subject: [PATCH] /net/bluetooth: Use sockfd_put
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 The function sockfd_lookup uses fget on the value that is stored in the
 file field of the returned structure, so fput should ultimately be applied
 to this value.  This can be done directly, but it seems better to use the
 sockfd specific macro sockfd_put, which does the same thing.
 
-
-The problem was fixed using the following semantic patch.
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@@
-expression s;
-@@
-
-   s = sockfd_lookup(...)
-   ...
-+  sockfd_put(s);
-?- fput(s->file);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

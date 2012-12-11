@@ -1,41 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Add missing pci_dev_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-Send to:
-gregkh@suse.de, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-Subject: [PATCH 3/5] drivers/pci/pci-sysfs.c: Add missing pci_dev_put
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 There should be a pci_dev_put when breaking out of a loop that iterates
 over calls to pci_get_device and similar functions.
 
-This was fixed using the following semantic patch.
-
-// <smpl>
-@@
-identifier d;
-type T;
-expression e;
-iterator for_each_pci_dev;
-@@
-
-T *d;
-...
-for_each_pci_dev(d)
-  {... when != pci_dev_put(d)
-       when != e = d
-(
-   return d;
-|
-+  pci_dev_put(d);
-?  return ...;
-)
-...}
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

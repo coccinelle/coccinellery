@@ -1,25 +1,9 @@
-coccinellery-short = take size of pointed value, not pointer
+coccinellery-target = Linux, Generic
+coccinellery-short = Take size of pointed value, not pointer
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Sizeof a pointer-typed expression returns the size of the pointer, not that
 of the pointed data.
-
-The semantic patch that fixes this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression *e;
-type T;
-identifier f;
-@@
-
-f(...,(T)e,...,
--sizeof(e)
-+sizeof(*e)
-,...)
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

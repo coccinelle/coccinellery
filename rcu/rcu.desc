@@ -1,32 +1,8 @@
-coccinellery-short = call rcu_read_unlock in default case
+coccinellery-target = Linux
+coccinellery-short = Call rcu_read_unlock in default case
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 Adjust the default case so that it benefits from the call to rcu_read_unlock.
-
-The semantic match that finds this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@rcu@
-position p1;
-@@
-
-rcu_read_lock@p1();
-...
-rcu_read_unlock();
-
-@@
-position rcu.p1;
-@@
-
-*rcu_read_lock@p1();
-... when != rcu_read_unlock();
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

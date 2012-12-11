@@ -1,10 +1,8 @@
-coccinellery-short = use USB API functions rather than constants
+coccinellery-target = Linux
+coccinellery-short = Use USB API functions rather than constants
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 This set of patches introduces calls to the following set of functions:
 
@@ -28,34 +26,4 @@ USB_ENDPOINT_XFER_BULK
 USB_ENDPOINT_XFER_CONTROL
 USB_ENDPOINT_XFER_INT
 USB_ENDPOINT_XFER_ISOC
-
-An extract of the semantic patch that makes these changes is as follows:
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@r1@ struct usb_endpoint_descriptor *epd; @@
-
-- ((epd->bmAttributes & \(USB_ENDPOINT_XFERTYPE_MASK\|3\)) ==
-- \(USB_ENDPOINT_XFER_CONTROL\|0\))
-+ usb_endpoint_xfer_control(epd)
-
-@r5@ struct usb_endpoint_descriptor *epd; @@
-
-- ((epd->bEndpointAddress & \(USB_ENDPOINT_DIR_MASK\|0x80\)) ==
--  \(USB_DIR_IN\|0x80\))
-+ usb_endpoint_dir_in(epd)
-
-@inc@
-@@
-
-#include <linux/usb.h>
-
-@depends on !inc && (r1||r5)@
-@@
-
-+ #include <linux/usb.h>
-  #include <linux/usb/...>
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

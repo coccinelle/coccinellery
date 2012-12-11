@@ -1,21 +1,8 @@
+coccinellery-target = Linux
 coccinellery-short = drop kfree of devm_kzalloc's data
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
 Using kfree to free data allocated with devm_kzalloc causes double frees.
-
-The semantic patch that fixes this problem is as follows:
-(http://coccinelle.lip6.fr/)
-
-// <smpl>
-@@
-expression x;
-@@
-
-x = devm_kzalloc(...)
-...
-?-kfree(x);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 

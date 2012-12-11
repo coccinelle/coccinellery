@@ -1,67 +1,9 @@
+coccinellery-target = Linux
 coccinellery-short = Eliminate double kfree
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-jbarnes@virtuousgeek.org, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
-
-
-Subject: [PATCH 1/2] Eliminate double kfree
-
-------------------------------------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 The destination of goto error also does a kfree(g_iommus), so it is not
 correct to do one here.
 
-This was found using the following semantic match.
-(http://www.emn.fr/x-info/coccinelle/)
-
-// <smpl>
-@r1@
-expression E;
-position p1,p2;
-@@
-
-kfree@p1(E);
-...
-kfree@p2(E);
-
-@subexps@
-expression E1;
-position r1.p1,p;
-@@
-
-kfree@p1(<+... E1@p ...+>);
-
-@recollect@
-position subexps.p;
-expression E1;
-@@
-
-E1@p
-
-@doublekfree@
-position r1.p1,r1.p2;
-expression recollect.E1,E2,E;
-position p;
-statement S;
-@@
-
-kfree@p1(E);
-<+... E1@p=E2 ...+> // the actual semantic match contains other assignments
-kfree@p2(E);
-
-@notdoublekfree@
-position r1.p1,r1.p2;
-position any doublekfree.p;
-expression E,E1,E2;
-@@
-
-* kfree@p1(E);
-... when != E1@p
-    when != E1@p = E2 // needed to match a variable decl
-* kfree@p2(E);
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>

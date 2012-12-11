@@ -1,40 +1,9 @@
+coccinellery-target = Linux, Generic
 coccinellery-short = Move a dereference below a NULL test
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-----------------------------
-
-From: Julia Lawall <Julia.Lawall@lip6.fr>
 
 If the NULL test is necessary, then the dereference should be moved below
 the NULL test.
-
-The semantic patch that makes this change is as follows:
-(http://www.emn.fr/x-info/coccinelle/).
-
-// <smpl>
-@disable is_null@
-identifier f;
-expression E;
-identifier fld;
-statement S;
-@@
-
-+ if (E == NULL) S
-  f(...,E->fld,...);
-- if (E == NULL) S
-
-@@
-identifier f;
-expression E;
-identifier fld;
-statement S;
-@@
-
-+ if (!E) S
-  f(...,E->fld,...);
-- if (!E) S
-// </smpl>
-
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
 
