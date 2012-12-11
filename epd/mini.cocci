@@ -1,12 +1,12 @@
 //
-// use USB API functions rather than constants
+//  Use USB API functions rather than constants
 //
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
+// Target:  Linux
+// Copyright:  Copyright: 2012 - LIP6/INRIA
+// License:  Licensed under GPLv2 or any later version.
 // Author: Julia Lawall <Julia.Lawall@lip6.fr>
-//
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
 
 To: gregkh@suse.de, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
 
@@ -15,7 +15,7 @@ Subject: [PATCH 1/22] : use USB API functions rather than constants
 
 ----------------------------
 
-From: Julia Lawall <Julia.Lawall@lip6.fr>
+From: Julia Lawall <julia@diku.dk>
 
 This set of patches introduces calls to the following set of functions:
 
@@ -68,6 +68,6 @@ An extract of the semantic patch that makes this change is as follows:
   #include <linux/usb/...>
 // </smpl>
 
-Signed-off-by: Julia Lawall <Julia.Lawall@lip6.fr>
+Signed-off-by: Julia Lawall <julia@diku.dk>
 
 ---
