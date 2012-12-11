@@ -1,0 +1,8 @@
+coccinellery-target = Linux
+coccinellery-short = kfree etc should not be used with devm functions
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
+Using kfree with devm_kzalloc will cause a double free, and likewise for
+the other devm functions.
