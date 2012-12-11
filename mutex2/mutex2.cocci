@@ -1,12 +1,12 @@
 //
-// Description not available
+//  Call mutex_unlock in error handling code
 //
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
-// Author: Author name not available
-//
+// Target:  Linux
+// Copyright:  Copyright: 2012 - LIP6/INRIA
+// License:  Licensed under GPLv2 or any later version.
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
 
 @rcu exists@
 position p1;
