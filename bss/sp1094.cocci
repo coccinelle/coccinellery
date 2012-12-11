@@ -1,12 +1,12 @@
 //
-// Add missing call to cfg80211_put_bss
+//  Add missing call to cfg80211_put_bss
 //
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
+// Target:  Linux
+// Copyright:  Copyright: 2012 - LIP6/INRIA
+// License:  Licensed under GPLv2 or any later version.
 // Author: Julia Lawall <Julia.Lawall@lip6.fr>
-//
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
 
 @rule1094 exists@
 local idexpression struct cfg80211_bss * x;
