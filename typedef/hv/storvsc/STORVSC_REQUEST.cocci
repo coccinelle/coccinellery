@@ -1,12 +1,12 @@
 //
-// Staging: hv: Remove typedef STORVSC_REQUEST and PSTORVSC_REQUEST
+//  Remove typedef STORVSC_REQUEST and PSTORVSC_REQUEST
 //
-// Copyright: 2012 - LIP6/INRIA
-// Licensed under GPLv2 or any later version.
-// URL: http://coccinelle.lip6.fr/
-// URL: https://github.com/coccinelle
+// Target:  Linux
+// Copyright:  Copyright: 2012 - LIP6/INRIA
+// License:  Licensed under GPLv2 or any later version.
 // Author: Nicolas Palix <npalix@diku.dk>
-//
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
 
 @rm_STORVSC_REQUEST@
 @@
