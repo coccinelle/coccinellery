@@ -3,8 +3,6 @@ coccinellery-short = Remove typedef DRIVER_OBJECT and PDRIVER_OBJECT
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Nicolas Palix <npalix@diku.dk>
-
 typedef DRIVER_OBJECT and PDRIVER_OBJECT are removed and their usages
 are replace by the use of struct hv_driver and struct hv_driver *
 respectively.
-
