@@ -3,7 +3,5 @@ coccinellery-short = Use time_before, time_before_eq, etc
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The functions time_before, time_before_eq, time_after, and time_after_eq
 are more robust for comparing jiffies against other values.
-
