@@ -3,7 +3,5 @@ coccinellery-short = failure test for null rather than negative integer
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 dev_get_platdata returns a pointer, so the failure value would be NULL
 rather than a negative integer.
-
