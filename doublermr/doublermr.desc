@@ -3,7 +3,5 @@ coccinellery-short = Improve error handling
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 This code had an error handling goto to the wrong place, a misplaced
 release_mem_region, and a duplicated release_mem_region.
-
