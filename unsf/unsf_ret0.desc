@@ -3,10 +3,8 @@ coccinellery-short = Fix return value from an unsigned function
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The function has an unsigned return type, but returns a negative constant
 to indicate an error condition.  Another error condition in the same
 function is indicated by returning 0, and indeed the only call to the
 function checks for 0 to detect errors, so the return of a negative value
 it converted to a return of 0.
-
