@@ -3,8 +3,6 @@ coccinellery-short = Drop unneeded of_node_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 After using for_each_node_by_name, there is no need for of_node_put unless
 there was a break in the loop body, as for_each_node_by_name does a
 of_node_put on each of the elements it returns.
-
