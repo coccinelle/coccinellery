@@ -3,6 +3,4 @@ coccinellery-short = Use kzalloc instead of kmalloc and memset
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Use kzalloc rather than the combination of kmalloc and memset.
-
