@@ -3,9 +3,7 @@ coccinellery-short = Use offsetof
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 In the patch cc154ac64aa8d3396b187f64cef01ce67f433324, Al Viro observed
 that the proper way to compute the distance between two structure fields is
 to use offsetof() or a cast to a pointer to character.  The same change can
 be applied to a few more files.
-
