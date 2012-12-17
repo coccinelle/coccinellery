@@ -3,7 +3,5 @@ coccinellery-short = Eliminate useless code
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The variable client is initialized twice to the same (side effect-free)
 expression.  Drop one initialization.
-
