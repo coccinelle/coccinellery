@@ -3,7 +3,6 @@ coccinellery-short = Use kstrdup
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Rewrite the initialization of a dev field.  In the original code, in each
 case there was a kmalloc followed by a memcpy, as illustrated by the
 semantic patch below.  In the case that the provided string was the empty
@@ -12,14 +11,11 @@ causing a memory leak.  Finally, there was no provision for returning
 -ENOMEM in case of failure of the memory allocation.  Indeed, the return
 value in an error case was err, a variable that was never initialized to
 anything other than 0.
-
 The following patch rewrites the above code to first select a string based
 on various conditions, and then to copy it into a newly allocated memory
 region, using kstrdup.  This decreases subtantially the code size
 and removes the memory leak.  The instruction for getting the length of the
 string and the associated variable declaration are also deleted.
-
 The patch also drops err, changes the return value to retval, which in each
 file was already initialized elsewhere to an error code, and initializes
 retval to -ENOMEM when kstrdup fails.
-
