@@ -3,7 +3,5 @@ coccinellery-short = Correct code taking the size of a pointer
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 sizeof(share_id) is just the size of the pointer.  On the other hand,
 block->share_id is an array, so its size seems more appropriate.
-
