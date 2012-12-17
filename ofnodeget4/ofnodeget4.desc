@@ -3,8 +3,6 @@ coccinellery-short = Add of_node_put to avoid memory leak
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 In this case, a device_node structure is stored in another structure that
 is then freed without first decrementing the reference count of the
 device_node structure.
-
