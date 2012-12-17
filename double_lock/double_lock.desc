@@ -3,7 +3,5 @@ coccinellery-short = Eliminate a double lock
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The path around the loop ends with the lock held, so the call to mutex_lock
 is moved before the beginning of the loop.
-
