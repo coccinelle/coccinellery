@@ -3,7 +3,5 @@ coccinellery-short = Use devm_request_and_ioremap
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Reimplement a call to devm_request_mem_region followed by a call to ioremap
 or ioremap_nocache by a call to devm_request_and_ioremap.
-
