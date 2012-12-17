@@ -3,7 +3,5 @@ coccinellery-short = Eliminate update of list_for_each_entry loop cursor
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 list_for_each_entry uses its first argument to move from one element to the
 next, so modifying it can break the iteration.
-
