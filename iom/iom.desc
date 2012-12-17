@@ -3,7 +3,5 @@ coccinellery-short = Add missing iounmap
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Add missing iounmap in error handling code, in a case where the function
 already preforms iounmap on some other execution path.
-
