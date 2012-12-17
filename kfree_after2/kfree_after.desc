@@ -3,7 +3,5 @@ coccinellery-short = Remove unneeded kfree
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The label outnodev is only used when kzalloc has not yet taken place or has
 failed, so there is no need for the call for kfree under this label.
-
