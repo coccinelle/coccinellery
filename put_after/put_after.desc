@@ -3,7 +3,5 @@ coccinellery-short = Add missing of_node_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 dma_channel_np has been accessed at this point, so decrease its reference
 count before leaving the function.
-
