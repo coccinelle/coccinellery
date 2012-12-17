@@ -3,6 +3,4 @@ coccinellery-short = Add missing free_domain_mem
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Add missing free_domain_mem on failure path after alloc_domain.
-
