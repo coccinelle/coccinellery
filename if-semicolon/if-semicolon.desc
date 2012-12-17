@@ -3,8 +3,6 @@ coccinellery-short = Detect semicolon after if
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Peter Senna Tschudin <peter.senna@gmail.com>
-
 Detect a semicolon after if(...) that is preventing the error check to
 work correctly. Removing this semicolon will change the code behavior,
 but this is intended.
-
