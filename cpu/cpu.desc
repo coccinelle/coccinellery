@@ -3,7 +3,5 @@ coccinellery-short = Adjust error handling code involving cpufreq_cpu_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 After calling cpufreq_cpu_get, error handling code should call
 cpufreq_cpu_put.
-
