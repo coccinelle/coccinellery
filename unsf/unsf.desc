@@ -3,7 +3,5 @@ coccinellery-short = Fix return value from an unsigned function
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The function has an unsigned return type, but returns a negative constant
 to indicate an error condition.  
-
