@@ -3,8 +3,6 @@ coccinellery-short = Introduce missing initialization
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The result of one call to a function is tested, and then at the second call
 to the same function, the previous result, and not the current result, is
 tested again.
-
