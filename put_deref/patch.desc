@@ -3,7 +3,5 @@ coccinellery-short = Move of_node_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 It seems better to dereference master before decrementing the reference
 count rather than afterwards.
-
