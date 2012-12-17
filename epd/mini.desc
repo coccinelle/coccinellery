@@ -3,9 +3,7 @@ coccinellery-short = Use USB API functions rather than constants
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 This set of patches introduces calls to the following set of functions:
-
 usb_endpoint_dir_in(epd)
 usb_endpoint_dir_out(epd)
 usb_endpoint_is_bulk_in(epd)
@@ -18,12 +16,9 @@ usb_endpoint_xfer_bulk(epd)
 usb_endpoint_xfer_control(epd)
 usb_endpoint_xfer_int(epd)
 usb_endpoint_xfer_isoc(epd)
-
 In some cases, introducing one of these functions is not possible, and it
 just replaces an explicit integer value by one of the following constants:
-
 USB_ENDPOINT_XFER_BULK
 USB_ENDPOINT_XFER_CONTROL
 USB_ENDPOINT_XFER_INT
 USB_ENDPOINT_XFER_ISOC
-
