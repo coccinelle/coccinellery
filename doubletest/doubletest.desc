@@ -3,7 +3,5 @@ coccinellery-short = Remove double test
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The current code tests the gpio_vid0 field twice.  Test the gpio_vid1
 fields in place of the second gpio_vid0 test.
-
