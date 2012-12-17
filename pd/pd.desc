@@ -5,7 +5,5 @@ coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Platform_device_del should be called before platform_device_put, as
 platform_device_put can delete the structure.
-
 Additionally, improve the error handling code for the call to ioremap, so
 that it calls platform_device_put.
-
