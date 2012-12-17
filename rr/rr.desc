@@ -3,10 +3,7 @@ coccinellery-short = Correct use of request_region/request_mem_region
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 request_region should be used with release_region, not request_mem_region.
-
 Geert Uytterhoeven pointed out that in the case of drivers/video/gbefb.c,
 the problem is actually the other way around; request_mem_region should be
 used instead of request_region.
-
