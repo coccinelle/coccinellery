@@ -3,7 +3,5 @@ coccinellery-short = Eliminate double sizeof
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Taking sizeof the result of sizeof is quite strange and does not seem to be
 what is wanted here.
-
