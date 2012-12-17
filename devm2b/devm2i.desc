@@ -3,15 +3,11 @@ coccinellery-short = Use devm_ functions
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The various devm_ functions allocate memory that is released when a driver
 detaches.  This patch uses these functions for data that is allocated in
 the probe function of a platform device and is only freed in the remove
 function.
-
 By using devm_ioremap, it also removes a potential memory leak, because
 there was no call to iounmap in the probe function.
-
 The call to platform_get_resource was moved just to make it closer to the
 place where its result it used.
-
