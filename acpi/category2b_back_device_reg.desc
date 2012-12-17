@@ -4,7 +4,5 @@ coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julien Brunel <brunel@diku.dk>
 coccinellery-author1 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 After a variable is assigned the result of backlight_device_register, an error
 test should be performed before a dereference. 
-
