@@ -1,9 +1,0 @@
-coccinellery-target = Samba
-coccinellery-short = Add missing calls to talloc_free
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
-There seem to be a number of places in the samba code where calls to
-talloc_free are omitted.  This patch fixes some cases.
-

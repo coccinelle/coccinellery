@@ -1,9 +1,0 @@
-coccinellery-target = Linux
-coccinellery-short = Convert nested spin_lock_irqsave to spin_lock
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-If spin_lock_irqsave is called twice in a row with the same second
-argument, the interrupt state at the point of the second call overwrites
-the value saved by the first call.  Indeed, the second call does not need
-to save the interrupt state, so it is changed to a simple spin_lock.
