@@ -3,6 +3,4 @@ coccinellery-short = Add missing btrfs_free_path
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Btrfs_alloc_path should be matched with btrfs_free_path in error-handling code.
-
