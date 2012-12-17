@@ -3,7 +3,5 @@ coccinellery-short = Remove redundant test
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 vpage is checked not to be NULL just after it is initialized at the
 beginning of each loop iteration.
-
