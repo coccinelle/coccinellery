@@ -3,12 +3,9 @@ coccinellery-short = Remove unnecessary error check
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 This code does not call deinit_card(card); in an error case, as done in
 other error-handling code in the same function.  But actually, the called
 function init_sram can only return 0, so there is no need for the error
 check at all.
-
 init_sram is also given a void return type, and its single return statement
 at the end of the function is dropped.
-
