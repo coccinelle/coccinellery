@@ -3,9 +3,7 @@ coccinellery-short = Use tipc_port_unlock
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The file net/tipc/port.c takes a lock using the function tipc_port_lock and
 then releases the lock sometimes using tipc_port_unlock and sometimes using
 spin_unlock_bh(p_ptr->publ.lock).  tipc_port_unlock simply does the
 spin_unlock_bh, but it seems cleaner to use it everywhere.
-
