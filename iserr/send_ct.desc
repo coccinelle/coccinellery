@@ -3,10 +3,8 @@ coccinellery-short = Simplify error handling
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 nf_conntrack_alloc cannot return NULL, so there is no need to check for
 NULL before using the value.  I have also removed the initialization of ct
 to NULL in nf_conntrack_alloc, since the value is never used, and since
 perhaps it might lead one to think that return ct at the end might return
 NULL. This semantic patch detect candidates for the changes.
-
