@@ -3,10 +3,8 @@ coccinellery-short = Remove invalid reference to list iterator variable
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 If list_for_each_entry, etc complete a traversal of the list, the iterator
 variable ends up pointing to an address at an offset from the list head,
 and not a meaningful structure.  Thus this value should not be used after
 the end of the iterator.  Replace c->dev by dev, which is the value that
 c->dev has been compared to.
-
