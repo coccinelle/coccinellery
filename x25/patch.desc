@@ -3,10 +3,8 @@ coccinellery-short = Add missing x25_neigh_put
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The function x25_get_neigh increments a reference count.  At the point of
 the second goto out, the result of calling x25_get_neigh is only stored in
 a local variable, and thus no one outside the function will be able to
 decrease the reference count.  Thus, x25_neigh_put should be called before
 the return in this case.
-
