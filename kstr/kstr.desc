@@ -3,6 +3,4 @@ coccinellery-short = Use kstrtoul, etc
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Use kstrtoul, etc instead of the now deprecated strict_strtoul, etc.
-
