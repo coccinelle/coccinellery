@@ -3,9 +3,7 @@ coccinellery-short = Add of_node_put to avoid memory leak
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 This function is implemented as though the function of_get_next_child does
 not increment the reference count of its result, but actually it does.
 Thus the patch adds of_node_put in error handling code and drops a call to
 of_node_get.
-
