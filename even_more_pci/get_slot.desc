@@ -3,10 +3,7 @@ coccinellery-short = Add missing pci_dev_get
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 pci_get_slot does a pci_dev_get, so pci_dev_put needs to be called in an
 error case.
-
 In the first three cases, it might also be possible to move the call to
 pci_get_slot downwards below the error handling code.
-
