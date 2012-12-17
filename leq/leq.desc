@@ -3,6 +3,4 @@ coccinellery-short = Use ERR_PTR/IS_ERR
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Use ERR_PTR and IS_ERR rather than mixing integers and pointers.
-
