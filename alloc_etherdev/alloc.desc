@@ -3,5 +3,4 @@ coccinellery-short = Adjust error handling after call to alloc_etherdev()
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Detect possible error handling code related to alloc_etherdev().
