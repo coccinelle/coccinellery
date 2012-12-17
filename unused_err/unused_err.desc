@@ -3,7 +3,5 @@ coccinellery-short = Use available error codes
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Error codes are stored in err, but the return value is always 0.  Return
 err instead.
-
