@@ -3,9 +3,7 @@ coccinellery-short = Eliminate NULL test and memset after alloc_bootmem
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 As noted by Akinobu Mita in patch b1fceac2b9e04d278316b2faddf276015fc06e3b,
 alloc_bootmem and related functions never return NULL and always return a
 zeroed region of memory.  Thus a NULL test or memset after calls to these
 functions is unnecessary.
-
