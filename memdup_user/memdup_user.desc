@@ -3,7 +3,5 @@ coccinellery-short = Use memdup_user
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Use memdup_user when user data is immediately copied into the
 allocated region.
-
