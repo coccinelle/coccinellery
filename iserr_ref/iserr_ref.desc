@@ -3,8 +3,5 @@ coccinellery-short = Correct an error check
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 rtc is clearly does not satisfy IS_ERR at the point where it is tested, so
 I have changed the test to consider the just initialized rtc->rtc_dev.
-
-
