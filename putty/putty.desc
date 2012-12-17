@@ -3,11 +3,9 @@ coccinellery-short = Avoid calling put_tty_driver on NULL
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 put_tty_driver calls tty_driver_kref_put on its argument, and then
 tty_driver_kref_put calls kref_put on the address of a field of this
 argument.  kref_put checks for NULL, but in this case the field is likely
 to have some offset and so the result of taking its address will not be
 NULL.  Labels are added to be able to skip over the call to put_tty_driver
 when the argument will be NULL.
-
