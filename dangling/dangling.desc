@@ -3,7 +3,6 @@ coccinellery-short = Remove potential for use after free
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 In each function, the value apcm is stored in the private_data field of
 runtime.  At the same time the function ct_atc_pcm_free_substream is stored
 in the private_free field of the same structure.  ct_atc_pcm_free_substream
@@ -18,7 +17,5 @@ the end of the function, past any possible free of apcm.  This is safe
 because the previous calls to snd_pcm_hw_constraint_integer and
 snd_pcm_hw_constraint_minmax, which take runtime as an argument, do not
 refer to either of these fields.
-
 In each function, there is one error case where apcm needs to be freed, and
 a call to kfree is added.
-
