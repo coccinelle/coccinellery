@@ -3,8 +3,6 @@ coccinellery-short = Put gotten port value
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 parport_find_number calls parport_get_port on its result, so there should
 be a corresponding call to parport_put_port before dropping the reference.
 Similar code is found in the function register_device in the same file.
-
