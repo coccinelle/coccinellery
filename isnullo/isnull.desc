@@ -3,12 +3,8 @@ coccinellery-short = Keep pointer to resource so it can be freed
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Add a new variable for storing resources accessed subsequent to the one
 accessed using request_mem_region, so the one accessed using
 request_mem_region can be released if needed.
-
 The resource variable names are also changed to be more descriptive.
-
 This code is also missing some calls to iounmap.
-
