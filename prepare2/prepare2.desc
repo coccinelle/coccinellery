@@ -3,8 +3,6 @@ coccinellery-short = use clk_prepare_enable and clk_disable_unprepare
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Clk_prepare_enable and clk_disable_unprepare combine clk_prepare and
 clk_enable, and clk_disable and clk_unprepare.  They make the code more
 concise, and ensure that clk_unprepare is called when clk_enable fails.
-
