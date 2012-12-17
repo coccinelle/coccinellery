@@ -3,6 +3,4 @@ coccinellery-short = Transform some kzalloc calls to kcalloc
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Nicolas Palix <npalix@diku.dk>
-
 Transform some kzalloc calls to kcalloc in staging/hv
-
