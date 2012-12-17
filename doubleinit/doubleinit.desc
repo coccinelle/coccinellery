@@ -3,8 +3,6 @@ coccinellery-short = Remove duplicate structure field initialization
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The definition of uml_netdev_ops has initializations of a local function
 and eth_mac_addr for its ndo_set_mac_address field.  This change uses only
 the local function.
-
