@@ -4,10 +4,8 @@ coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julien Brunel <brunel@diku.dk>
 coccinellery-author1 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The test (ssc != NULL) can only be reached if the call to the function
 ssc_request, the result of which ssc is assigned, succeeds. Moreover,
 two statements assign NULL to ssc just before a return, which is useless
 since it is a local variable. So, we suggest to delete the test and
 the two assignments.
-
