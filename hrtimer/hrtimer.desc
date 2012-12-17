@@ -3,7 +3,5 @@ coccinellery-short = Use function hrtimer_is_queued
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Use the hrtimer_is_queued function rather than an explicit bit-and for
 testing timer->state, as done elsewhere.
-
