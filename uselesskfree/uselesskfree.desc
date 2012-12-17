@@ -3,6 +3,4 @@ coccinellery-short = Remove useless kfree
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Peter Senna Tschudin <peter.senna@gmail.com>
-
 Remove useless kfree() and clean up code related to the removal.
-
