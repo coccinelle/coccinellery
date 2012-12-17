@@ -3,8 +3,6 @@ coccinellery-short = Test for IS_ERR rather than 0
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The function gfs2_inode_lookup always returns either a valid pointer or a
 value made with ERR_PTR, so its result should be tested with IS_ERR, not
 with a test for 0. This semantic patch detect candidates for the change.
-
