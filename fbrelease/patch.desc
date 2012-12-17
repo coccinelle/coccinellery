@@ -3,7 +3,6 @@ coccinellery-short = eliminate double free
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The function framebuffer_release just calls kfree, so calling kfree
 subsequently on the same argument represents a double free.  The
 comments with the definition of framebuffer_release
@@ -11,4 +10,3 @@ in drivers/video/fbsysfs.c suggest that a more elaborate definition of this
 function is planned, such that the splitting up of framebuffer_release and
 kfree as done in the second instance might someday make sense, but it does
 not make sense now. 
-
