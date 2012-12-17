@@ -3,9 +3,7 @@ coccinellery-short = Reorder error handling code to include iounmap
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The out_msi_disable label should be before cleanup_nomem to additionally
 benefit from the call to iounmap.  Subsequent gotos are adjusted to go to
 out_msi_disable instead of cleanup_nomem, which now follows it.  This is
 safe because pci_disable_msi does nothing if pci_enable_msi was not called.
-
