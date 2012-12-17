@@ -3,6 +3,4 @@ coccinellery-short = Correct double assignment
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The double assignment is meant to be a bit-or to combine two values.
-
