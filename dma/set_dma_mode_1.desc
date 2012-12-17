@@ -3,8 +3,6 @@ coccinellery-short = Avoid using magic number in set_dma_mode
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The constant DMA_RX_MODE is defined to be 0x14 in the local include file
 cs89x0.h.  Since a constant with the same name is used elsewhere with
 set_dma_mode, it seems likely that this constant could be used here.
-
