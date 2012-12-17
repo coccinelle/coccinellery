@@ -3,6 +3,4 @@ coccinellery-short = adjust inconsistent IS_ERR and PTR_ERR
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 Change the call to PTR_ERR to access the value just tested by IS_ERR.
-
