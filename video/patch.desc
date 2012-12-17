@@ -3,10 +3,8 @@ coccinellery-short = Use video_device_release rather than kfree
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
-
 The file drivers/media/video/videodev.c defines both video_device_alloc and
 video_device_release.  These are essentially just kzmalloc and kfree,
 respectively, but it seems better to use video_device_release, as done in
 the other media files, rather than kfree, in case the implementation some
 day changes.
-
