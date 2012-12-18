@@ -1,7 +1,7 @@
 //
 //  Detect semicolon after if
 //
-// Target:  Linux, Generic
+// Target: Linux, Generic
 // Copyright:  2012 - LIP6/INRIA
 // License:  Licensed under GPLv2 or any later version.
 // Author: Peter Senna Tschudin <peter.senna@gmail.com>
