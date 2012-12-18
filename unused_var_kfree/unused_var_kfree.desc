@@ -5,14 +5,3 @@ coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Peter Senna Tschudin <peter.senna@gmail.com>
 old_class_name, and new_class_name are never used. This patch remove the
 declaration and calls to kfree.
-The semantic match that finds this problem is as follows:
-(http://coccinelle.lip6.fr/)
-// <smpl>
-@r1 forall@
-type T; identifier i;
-@@
-* T *i = NULL;
-  ... when != i
-* kfree(i);
-// </smpl>
-Signed-off-by: Peter Senna Tschudin <peter.senna@gmail.com>
