@@ -1507,17 +1507,6 @@ unused_err/unused_err.cocci -  Use available error codes
 unused_var_kfree/unused_var_kfree.cocci -  Remove two unused variables and two useless calls to kfree
 	old_class_name, and new_class_name are never used. This patch remove the
 	declaration and calls to kfree.
-	The semantic match that finds this problem is as follows:
-	(http://coccinelle.lip6.fr/)
-	// <smpl>
-	@r1 forall@
-	type T; identifier i;
-	@@
-	* T *i = NULL;
-	  ... when != i
-	* kfree(i);
-	// </smpl>
-	Signed-off-by: Peter Senna Tschudin <peter.senna@gmail.com>
 
 urb2/urb2.cocci -  Delete unnecessary call to usb_kill_urb
 	Since in each case nothing has been done with the recently allocated urb,
