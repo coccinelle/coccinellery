@@ -1,7 +1,7 @@
 //
 //  Drop uses of acpi_driver_data
 //
-// Target:  Linux
+// Target: Linux
 // Copyright:  2012 - LIP6/INRIA
 // License:  Licensed under GPLv2 or any later version.
 // Author: Julia Lawall <julia.lawall@lip6.fr>
