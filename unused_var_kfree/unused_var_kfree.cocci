@@ -1,5 +1,5 @@
 //
-//  Remove two unused variables and two useless calls to kfree
+//  Remove unused variables and useless calls to kfree
 //
 // Target:  Linux
 // Copyright:  Copyright: 2012 - LIP6/INRIA
