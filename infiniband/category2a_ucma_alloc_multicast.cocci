@@ -1,7 +1,7 @@
 //
 //  Use a NULL test rather than an IS_ERR test
 //
-// Target:  Linux
+// Target: Linux
 // Copyright:  2012 - LIP6/INRIA
 // License:  Licensed under GPLv2 or any later version.
 // Author: Julien Brunel <brunel@diku.dk>
