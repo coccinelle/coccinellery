@@ -2,7 +2,7 @@
 //  Remove typedef STORVSC_REQUEST and PSTORVSC_REQUEST
 //
 // Target:  Linux
-// Copyright:  Copyright: 2012 - LIP6/INRIA
+// Copyright:  2012 - LIP6/INRIA
 // License:  Licensed under GPLv2 or any later version.
 // Author: Nicolas Palix <npalix@diku.dk>
 // URL: http://coccinelle.lip6.fr/ 
