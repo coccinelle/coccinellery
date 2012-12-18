@@ -12,7 +12,7 @@ Contacts: http://coccinelle.lip6.fr/contact.php
 This is a gallery of semantic patches for use with Coccinelle
 (http://coccinelle.lip6.fr/). They are extracted automatically from a
 collection of semantic patches that have been used to create patches for the
-Linux Kernel and other software. The descriptions are derive from the commit
+Linux Kernel and other software. The descriptions are derived from the commit
 messages contained in those patches. There is no guarantee that the
 descriptions are correct or understandable, and no guarantee that the semantic
 patches are correct, complete, or work with the latest version of Coccinelle.
