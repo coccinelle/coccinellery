@@ -1504,7 +1504,7 @@ unused_err/unused_err.cocci -  Use available error codes
 	Error codes are stored in err, but the return value is always 0.  Return
 	err instead.
 
-unused_var_kfree/unused_var_kfree.cocci -  Remove two unused variables and two useless calls to kfree
+unused_var_kfree/unused_var_kfree.cocci -  Remove unused variables and useless calls to kfree
 	old_class_name, and new_class_name are never used. This patch remove the
 	declaration and calls to kfree.
 
