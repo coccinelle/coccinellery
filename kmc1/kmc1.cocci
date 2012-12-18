@@ -1,7 +1,7 @@
 //
 //  Free kmem_cache_zalloc'd data using kmem_cache_free
 //
-// Target:  Linux
+// Target: Linux
 // Copyright:  2012 - LIP6/INRIA
 // License:  Licensed under GPLv2 or any later version.
 // Author: Julia Lawall <Julia.Lawall@lip6.fr>
