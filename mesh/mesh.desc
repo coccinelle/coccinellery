@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Correct the argument to __mesh_table_free
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 In the function mesh_table_grow, it is the new table not the argument table

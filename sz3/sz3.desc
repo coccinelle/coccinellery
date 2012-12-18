@@ -1,6 +1,6 @@
 coccinellery-target = Linux, Generic
 coccinellery-short = Take size of pointed value, not pointer
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Sizeof a pointer-typed expression returns the size of the pointer, not that

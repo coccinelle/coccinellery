@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Transform PDEVICE_OBJECT and DEVICE_OBJECT typedefs into their corresponding structs
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Nicolas Palix <npalix@diku.dk>
 Remove typedef DEVICE_OBJECT and use a struct named hv_device instead.

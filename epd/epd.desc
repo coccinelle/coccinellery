@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Use USB API functions rather than constants
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 This set of patches introduces calls to the following set of functions:

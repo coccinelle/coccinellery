@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Drop an unneeded a NULL test
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 In each case, the NULL test is not necessary because the function is static

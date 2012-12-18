@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Adjust error handling code involving auth_domain_put
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Once clp is assigned, it never becomes NULL, so we can make a label for it

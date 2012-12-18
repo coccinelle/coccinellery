@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Use usb_mark_last_busy
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 This introduces uses of the function usb_mark_last_busy, define in 

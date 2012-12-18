@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = use devm_kzalloc and devm_clk_get
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Using devm_kzalloc and devm_clk_get simplifies the code and ensures that

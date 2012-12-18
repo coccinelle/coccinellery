@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Avoid calling put_tty_driver on NULL
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 put_tty_driver calls tty_driver_kref_put on its argument, and then

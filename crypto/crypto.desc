@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Add NULL test around call to crypto_free_hash
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 crypto_free_hash calls the function crypto_hash_tfm and then

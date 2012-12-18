@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Add missing of_node_put
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Of_get_parent and of_find_compatible_node do a of_node_get, and thus a

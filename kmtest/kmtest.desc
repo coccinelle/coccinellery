@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Add kmalloc NULL tests
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Check that the result of kmalloc/kzalloc is not NULL before dereferencing it.

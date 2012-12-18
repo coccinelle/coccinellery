@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Eliminate use after free
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The error value is saved in a new local variable err before freeing the

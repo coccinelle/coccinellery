@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Use ERR_CAST
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Use ERR_CAST(x) rather than ERR_PTR(PTR_ERR(x)).  The former makes more

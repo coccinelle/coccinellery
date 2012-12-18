@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Add local_irq_restore in error handling code
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The gotos to the labels fail_free_irq and fail_unregister only occur

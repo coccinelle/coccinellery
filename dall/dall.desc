@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Use devm_ functions consistently
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Use devm_kzalloc for all calls to kzalloc and not just the first.  Use devm

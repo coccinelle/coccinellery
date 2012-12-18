@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Correct error handling code
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 If it is reasonable to apply PTR_ERR to the result of calling clk_get, then

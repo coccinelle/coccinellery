@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Use devm_ functions
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The various devm_ functions allocate memory that is released when a driver

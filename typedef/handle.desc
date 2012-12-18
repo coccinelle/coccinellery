@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Transform typedef HANDLE into void *
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Nicolas Palix <npalix@diku.dk>
 Remove typedef HANDLE which aliases a void pointer and use void *

@@ -1,6 +1,6 @@
 coccinellery-target = Linux, Generic
 coccinellery-short = Convert && to ||
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The pattern !E && !E->fld is nonsensical.  The patch below updates this

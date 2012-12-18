@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Correct use of ! and &
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 In commit e6bafba5b4765a5a252f1b8d31cbf6d2459da337, a bug was fixed that

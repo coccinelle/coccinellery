@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Add missing pci_dev_get
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 pci_get_bus_and_slot does a pci_dev_get, so pci_dev_put needs to be called

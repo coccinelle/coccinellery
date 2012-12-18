@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Put NULL test before dereference
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 If the NULL test on block is needed, it should be before the dereference of

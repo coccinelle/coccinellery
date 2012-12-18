@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Use DIV_ROUND_UP
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The kernel.h macro DIV_ROUND_UP performs the computation (((n) + (d) - 1) /

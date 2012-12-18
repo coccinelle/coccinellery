@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Drop NULL test on list_entry result
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 list_entry, which is an alias for container_of, cannot return NULL, as

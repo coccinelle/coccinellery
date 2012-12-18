@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Drop return value from platform_driver remove functions
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The return value of the remove function of a driver structure, and thus of

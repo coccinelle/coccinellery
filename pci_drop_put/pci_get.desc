@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Drop unnecessary pci_dev_put
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Remove an unnecessary pci_dev_put.  pci_dev_put is called implicitly by the

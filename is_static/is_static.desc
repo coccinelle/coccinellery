@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Make some structures static
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Checks that the declaration is not inside a function definition, that the

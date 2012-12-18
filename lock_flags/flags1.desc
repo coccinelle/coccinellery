@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Convert nested spin_lock_irqsave to spin_lock
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 If spin_lock_irqsave is called twice in a row with the same second

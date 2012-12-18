@@ -1,6 +1,6 @@
 coccinellery-target = Linux, Generic
 coccinellery-short = Remove unnecessary error check
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-copyright = 2012 - LIP6/INRIA
 coccinellery-license = Licensed under GPLv2 or any later version.
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 This code does not call deinit_card(card); in an error case, as done in
