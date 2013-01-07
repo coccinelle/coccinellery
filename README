@@ -677,6 +677,16 @@ fields/field.cocci -  Use FIELD_SIZEOF
 	Robert P.J. Day proposed to use the macro FIELD_SIZEOF in replace of code
 	that matches its definition.
 
+free_irq/free_irq.cocci -  Not available
+coccinellery-short = Not available
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Not available
+
+Not available
+
+	
+
 frfr/frfr.cocci -  Eliminate double free
 	The few lines below the kfree of hdr_buf may go to the label err_free which
 	will also free hdr_buf.  The most straightforward solution seems to be to
