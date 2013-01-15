@@ -677,15 +677,11 @@ fields/field.cocci -  Use FIELD_SIZEOF
 	Robert P.J. Day proposed to use the macro FIELD_SIZEOF in replace of code
 	that matches its definition.
 
-free_irq/free_irq.cocci -  Not available
-coccinellery-short = Not available
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Not available
-
-Not available
-
-	
+free_irq/free_irq.cocci -  Reposition free_irq to avoid access to invalid data
+	The data referenced by an interrupt handler should not be freed before the
+	interrupt is ended.  The handler is pxa_camera_irq.  This handler may call
+	pxa_dma_start_channels, which references the channels that are freed on the
+	lines before the call to free_irq.
 
 frfr/frfr.cocci -  Eliminate double free
 	The few lines below the kfree of hdr_buf may go to the label err_free which
