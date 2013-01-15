@@ -1,1 +1,7 @@
-coccinellery-target = Not available\ncoccinellery-short = Not available\ncoccinellery-copyright = Copyright: 2012 - LIP6/INRIA\ncoccinellery-license = Licensed under GPLv2 or any later version.\ncoccinellery-author0 = Not available\n\nNot available\n
+coccinellery-target = Linux
+coccinellery-short = Use clk API instead of direct dereferences
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+A struct clk value is intended to be an abstract pointer, so it should be
+manipulated using the various API functions.
