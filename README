@@ -345,6 +345,10 @@ capi/capi.cocci -  Adjust error handling code involving capi_ctr_put
 	After calling capi_ctr_get, error handling code should call
 	capi_ctr_put.
 
+clkderef/clkderef.cocci -  Use clk API instead of direct dereferences
+	A struct clk value is intended to be an abstract pointer, so it should be
+	manipulated using the various API functions.
+
 clkput/clkput.cocci -  Add missing clk_put
 	Reorder the labels at the end of the function to correspond to the order in
 	which the resources are allocated.
