@@ -1,1 +1,9 @@
-coccinellery-target = Not available\ncoccinellery-short = Not available\ncoccinellery-copyright = Copyright: 2012 - LIP6/INRIA\ncoccinellery-license = Licensed under GPLv2 or any later version.\ncoccinellery-author0 = Not available\n\nNot available\n
+coccinellery-target = Linux
+coccinellery-short = Adjust duplicate test
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Delete successive tests to the same location.  In this case intc_node has
+already been tested for being NULL, and calling of_find_node_by_name will
+not make it NULL.  On the other hand, of_find_node_by_name can return NULL
+on failure.
