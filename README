@@ -644,15 +644,9 @@ epdneg/epdneg.cocci -  Use negated usb_endpoint_xfer_control, etc
 	to !usb_endpoint_dir_out, and vice versa, to better correspond to the
 	intent of the original code.
 
-errcast/errcast.cocci -  Not available
-coccinellery-short = Not available
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Not available
-
-Not available
-
-	
+errcast/errcast.cocci -  use ERR_CAST
+	ERR_CAST is more concise than PTR_ERR followed by ERR_PTR.  Using it
+	also occasionally removes the need for an err variable.
 
 even_more_pci/get_slot.cocci -  Add missing pci_dev_get
 	pci_get_slot does a pci_dev_get, so pci_dev_put needs to be called in an
@@ -1338,6 +1332,12 @@ ret4/ret4.cocci -  Fix error return code
 retalloc/retalloc.cocci -  Fix error return code
 	Convert a 0 error return code to a negative one, as returned elsewhere in the
 	function.
+
+retest/retest.cocci -  Adjust duplicate test
+	Delete successive tests to the same location.  In this case intc_node has
+	already been tested for being NULL, and calling of_find_node_by_name will
+	not make it NULL.  On the other hand, of_find_node_by_name can return NULL
+	on failure.
 
 rirqp/rirqp.cocci -  Ensure arguments to request_irq and free_irq are compatible
 	Convert calls to free_irq so that the second argument is the same as the
