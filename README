@@ -22,6 +22,9 @@ propose new semantic patches to add to the gallery, please make a pull request
 (https://help.github.com/articles/fork-a-repo) via Github to Coccinellery
 repository (https://github.com/coccinelle/coccinellery).
 
+The semantic patches are licensed under the permissive ISC license. More info at 
+LICENSE file or http://www.isc.org/software/license.
+
 
 ----------------------------------------------------------------------
 Target: Generic
