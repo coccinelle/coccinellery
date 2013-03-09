@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Avoid using magic number in set_dma_mode
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The constant DMA_RX_MODE is defined to be 0x14 in the local include file
 cs89x0.h.  Since a constant with the same name is used elsewhere with

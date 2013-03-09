@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use macros for i2c_msg initialization
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Introduce use of I2c_MSG_READ/WRITE/OP, for readability.
 In the second i2c_msg structure, a length expressed as an explicit constant

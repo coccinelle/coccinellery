@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use kstrdup
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Rewrite the initialization of a dev field.  In the original code, in each
 case there was a kmalloc followed by a memcpy, as illustrated by the

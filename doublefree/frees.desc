@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Eliminate double kfree
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The destination of goto error also does a kfree(g_iommus), so it is not
 correct to do one here.

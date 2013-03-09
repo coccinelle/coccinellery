@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Remove typedef STORVSC_REQUEST and PSTORVSC_REQUEST
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Nicolas Palix <npalix@diku.dk>
 typedef STORVSC_REQUEST and PSTORVSC_REQUEST are removed and their
 usages are replace by the use of struct hv_storvsc_request and

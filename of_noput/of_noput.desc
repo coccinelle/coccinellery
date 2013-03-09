@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Add missing of_node_put
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 There should be an of_node_put when breaking out of a loop that iterates
 over calls to of_find_all_nodes, as this function does an of_node_get on

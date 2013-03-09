@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Add missing call to cfg80211_put_bss
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 A call to cfg80211_get_bss hould be accompanied by a call to
 cfg80211_put_bss in error-handling code.

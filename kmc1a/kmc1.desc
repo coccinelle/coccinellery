@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = eliminate NULL pointer dereference
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 In this code, blkvsc_req is allocated in the cache blkdev->request_pool,
 but freed in the first case to the cache blkvsc_req->dev->request_pool.

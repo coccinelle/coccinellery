@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = eliminate possible double free
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The function __iio_add_event_config_attrs is only called once, by the
 function iio_device_register_eventset.  If the call fails,

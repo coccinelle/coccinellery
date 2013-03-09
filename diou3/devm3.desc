@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Some devm_ cleanups
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 devm free functions should not have to be explicitly used.
 The only thing left that is useful in the function mpc5121_nfc_free is the

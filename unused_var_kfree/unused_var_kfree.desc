@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Remove unused variables and useless calls to kfree
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Peter Senna Tschudin <peter.senna@gmail.com>
 old_class_name, and new_class_name are never used. This patch remove the
 declaration and calls to kfree.

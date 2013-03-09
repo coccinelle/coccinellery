@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Remove potential NULL dereference
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 If the NULL test is necessary, the initialization involving a dereference of
 the tested value should be moved after the NULL test.

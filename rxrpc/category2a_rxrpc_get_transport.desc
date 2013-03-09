@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use an IS_ERR test rather than a NULL test
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julien Brunel <brunel@diku.dk>
 coccinellery-author1 = Julia Lawall <Julia.Lawall@lip6.fr>
 In case of error, the function rxrpc_get_transport returns an ERR

@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use usb_set/get_intfdata
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Use the USB functions usb_get_intfdata and usb_set_intfdata instead of
 dev_get_drvdata and dev_set_drvdata, respectively.

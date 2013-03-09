@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Drop redundant includes of moduleparam.h
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Drop #include <linux/moduleparam.h> in files that also include #include
 <linux/module.h>.  module.h includes moduleparam.h already.

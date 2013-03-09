@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Add missing clk_put
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Reorder the labels at the end of the function to correspond to the order in
 which the resources are allocated.

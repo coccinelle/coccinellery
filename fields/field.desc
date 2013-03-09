@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use FIELD_SIZEOF
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Robert P.J. Day proposed to use the macro FIELD_SIZEOF in replace of code
 that matches its definition.

@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = eliminate double free
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The function framebuffer_release just calls kfree, so calling kfree
 subsequently on the same argument represents a double free.  The

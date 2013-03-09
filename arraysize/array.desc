@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use ARRAY_SIZE
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 ARRAY_SIZE is more concise to use when the size of an array is divided by
 the size of its type or the size of its first element.

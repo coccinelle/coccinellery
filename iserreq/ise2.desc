@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = use PTR_ERR to get error code
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 IS_ERR returns only 1 or 0.  The callsite of setup_regulators expects a
 negative integer in an error case.  Thus, PTR_ERR has to be used to extract

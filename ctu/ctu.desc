@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Initialize all fields
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The c32 structure is allocated on the stack and its idx field is not
 initialized before copying it to user level.  This patch takes the value

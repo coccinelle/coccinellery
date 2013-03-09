@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Reorder error handling code to include iounmap
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The out_msi_disable label should be before cleanup_nomem to additionally
 benefit from the call to iounmap.  Subsequent gotos are adjusted to go to

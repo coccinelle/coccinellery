@@ -1,6 +1,6 @@
 coccinellery-target = Linux
 coccinellery-short = Fix error return code
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Initialize return variable before exiting on an error path.

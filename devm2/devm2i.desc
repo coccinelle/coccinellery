@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use devm_ functions
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The various devm_ functions allocate memory that is released when a driver
 detaches.  This patch uses devm_kzalloc, devm_request_irq, etc. for data

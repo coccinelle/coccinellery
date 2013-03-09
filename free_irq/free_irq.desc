@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Reposition free_irq to avoid access to invalid data
 coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The data referenced by an interrupt handler should not be freed before the
 interrupt is ended.  The handler is pxa_camera_irq.  This handler may call

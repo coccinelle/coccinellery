@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Eliminate a NULL pointer dereference
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 In each case, the print involves dereferencing a value that is NULL or is
 near NULL.

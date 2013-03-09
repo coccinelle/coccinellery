@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Use AF_INET for sin_family field
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Elsewhere the sin_family field holds a value with a name of the form
 AF_..., so it seems reasonable to do so here as well.  Also the values of

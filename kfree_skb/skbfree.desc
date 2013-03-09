@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Convert kfree/kfree_skb to dev_kfree_skb_irq
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 When values of type struct sk_buff * are freed from within an interrupt
 handler, dev_kfree_skb_irq should be used rather than kfree or kfree_skb.

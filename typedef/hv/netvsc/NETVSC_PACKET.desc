@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Remove typedef NETVSC_PACKET and PNETVSC_PACKET
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Nicolas Palix <npalix@diku.dk>
 typedef NETVSC_PACKET and PNETVSC_PACKET are removed and their usages
 are replace by the use of struct hv_netvsc_packet and

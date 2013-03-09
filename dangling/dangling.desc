@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Remove potential for use after free
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 In each function, the value apcm is stored in the private_data field of
 runtime.  At the same time the function ct_atc_pcm_free_substream is stored

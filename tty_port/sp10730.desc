@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Put correct tty value
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The tty value that should be put is the one that was just gotten by
 tty_port_tty_get, not the one that is the argument to the enclosing

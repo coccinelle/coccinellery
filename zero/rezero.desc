@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Possible problem with V4L2_TUNER_MODE_MONO
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 The file drivers/media/video/tvaudio.c contains the following code:
 (starting at line 1257 in a recent linux-next)

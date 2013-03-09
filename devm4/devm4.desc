@@ -1,7 +1,7 @@
 coccinellery-target = Linux
 coccinellery-short = Drop iounmap for devm_ allocated data
 coccinellery-copyright = 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
 coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
 Data allocated with devm_ioremap or devm_ioremap_nocache should not be
 freed using iounmap, because doing so causes a dangling pointer, and a
