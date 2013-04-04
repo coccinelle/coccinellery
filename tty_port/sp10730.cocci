@@ -1,13 +1,3 @@
-//
-//  Put correct tty value
-//
-// Target: Linux
-// Copyright:  2012 - LIP6/INRIA
-// License:  Licensed under ISC. See LICENSE or http://www.isc.org/software/license
-// Author: Julia Lawall <Julia.Lawall@lip6.fr>
-// URL: http://coccinelle.lip6.fr/ 
-// URL: http://coccinellery.org/ 
-
 @rule10730 exists@
 local idexpression struct tty_struct * x;
 expression ra,rr;
