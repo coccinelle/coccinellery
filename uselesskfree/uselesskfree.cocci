@@ -1,3 +1,13 @@
+//
+//  Remove useless kfree
+//
+// Target: Linux
+// Copyright:  2012 - LIP6/INRIA
+// License:  Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+// Author: Peter Senna Tschudin <peter.senna@gmail.com>
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
+
 @r exists@
 position p1,p2;
 expression x;
