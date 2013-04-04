@@ -1,3 +1,13 @@
+//
+//  Move dereference after NULL test
+//
+// Target: Linux
+// Copyright:  2012 - LIP6/INRIA
+// License:  Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
+
 // Find cases where a pointer is dereferenced and then compared to NULL
 //
 // Confidence: High
