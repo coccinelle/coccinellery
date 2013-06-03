@@ -1,13 +1,3 @@
-//
-//  Drop NULL test on list_entry result
-//
-// Target: Linux
-// Copyright:  2012 - LIP6/INRIA
-// License:  Licensed under ISC. See LICENSE or http://www.isc.org/software/license
-// Author: Julia Lawall <Julia.Lawall@lip6.fr>
-// URL: http://coccinelle.lip6.fr/ 
-// URL: http://coccinellery.org/ 
-
 @r@
 expression x,E;
 statement S1,S2;
