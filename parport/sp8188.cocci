@@ -1,3 +1,13 @@
+//
+//  Put gotten port value
+//
+// Target: Linux
+// Copyright:  2012 - LIP6/INRIA
+// License:  Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+// Author: Julia Lawall <Julia.Lawall@lip6.fr>
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
+
 @rule8188 exists@
 local idexpression struct parport * x;
 expression ra,rr;
