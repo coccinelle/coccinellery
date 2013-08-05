@@ -17,13 +17,16 @@ messages contained in those patches. There is no guarantee that the
 descriptions are correct or understandable, and no guarantee that the semantic
 patches are correct, complete, or work with the latest version of Coccinelle.
 Comments and corrections may be sent to the Coccinelle mailing list:
-cocci@systeme.lip6.fr / https://systeme.lip6.fr/mailman/listinfo/cocci. To
-propose new semantic patches to add to the gallery, please make a pull request
-(https://help.github.com/articles/fork-a-repo) via Github to Coccinellery
-repository (https://github.com/coccinelle/coccinellery).
+cocci@systeme.lip6.fr / https://systeme.lip6.fr/mailman/listinfo/cocci.
 
-The semantic patches are licensed under the permissive ISC license. More info at 
-LICENSE file or http://www.isc.org/software/license.
+To propose new semantic patches to be added to the gallery, please make a pull
+request (https://help.github.com/articles/fork-a-repo) via Github to
+Coccinellery repository (https://github.com/coccinelle/coccinellery). When
+adding new semantic patches, please create a folder for you under the CONTRIB
+directory. Detailed instructions on the README file of the CONTRIB directory.
+
+The semantic patches are licensed under the permissive ISC license. More info
+at LICENSE file or http://www.isc.org/software/license.
 
 
 ----------------------------------------------------------------------
