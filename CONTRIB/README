@@ -1,0 +1,8 @@
+This directory is used for adding your semantic patches to Coccinellery.
+Create a directory for you and put all semantic patches inside your directory.
+
+For each .cocci file, please create a .desc file. There are examples of .desc
+files on the repository.
+
+If you want a new target, change the targets file on the root directory of the
+repository and fill the coccinellery-target line on the .desc file.
