@@ -1,0 +1,6 @@
+coccinellery-target = Firehose
+coccinellery-short = Correct NULL test
+coccinellery-copyright = 2012 - LIP6/INRIA
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Test the value that was just allocated rather than the previously tested one.
