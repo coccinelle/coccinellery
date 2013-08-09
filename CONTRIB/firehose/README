@@ -1,0 +1,13 @@
+The semantic patches in this folder are meant to be used for Firehose
+export.
+
+Firehose is an XML grammar whose intent is to have a common format for
+many static analysis tools.
+You can find more information about Firehose at:
+https://github.com/fedora-static-analysis/firehose
+
+In order to get a Firehose-compatible output, these patches use the
+Coccinelle module xml_firehose, which is located in python/coccilib/.
+
+If you want to use it, you have to pass the option "-D firehose " to
+spatch.
