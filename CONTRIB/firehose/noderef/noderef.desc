@@ -1,0 +1,7 @@
+coccinellery-target = Firehose
+coccinellery-short = Correct size computation
+coccinellery-copyright = 2012 - LIP6/INRIA
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+The size argument to kcalloc should be the size of desired structure,
+not the pointer to it.

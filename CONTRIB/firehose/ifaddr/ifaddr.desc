@@ -1,0 +1,8 @@
+coccinellery-target = Firehose
+coccinellery-short = Test of a variable/field address
+coccinellery-copyright = 2012 - LIP6/INRIA
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+coccinellery-author1 = Gilles Muller
+the address of a variable or field is non-zero is likely always to bo
+non-zero

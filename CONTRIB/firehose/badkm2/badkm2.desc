@@ -1,0 +1,9 @@
+coccinellery-target = Firehose
+coccinellery-short = Ensure a consistent return value in error case
+coccinellery-copyright = 2012 - LIP6/INRIA
+coccinellery-license = Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Typically, the return value desired for the failure of a function with an
+integer return value is a negative integer.  In these cases, the return
+value is sometimes a negative integer and sometimes 0, due to a subsequent
+initialization of the return variable within the loop.
