@@ -6,7 +6,8 @@ files on the repository.
 
 If you want a new target, add it to:
 1 - targets file on the root directory of the Coccinellery repository:
-	https://github.com/coccinelle/coccinellery/blob/master/targets
+	github.com/coccinelle/coccinellery/blob/master/targets
+
 2 - html template
-	https://github.com/coccinellery/coccinellery.github.com/blob/master/template/header.html
+	github.com/coccinellery/coccinellery.github.com/blob/master/template/header.html
 
