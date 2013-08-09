@@ -1654,3 +1654,59 @@ zero/rezero.cocci -  Possible problem with V4L2_TUNER_MODE_MONO
 	in another way?
 
 
+----------------------------------------------------------------------
+Target: Firehose
+
+CONTRIB/firehose/arref/arref.cocci -  Adjust array index
+	Convert array index from the loop bound to the loop index.
+
+CONTRIB/firehose/badand/badand.cocci -  Convert && to ||
+	The pattern !E && !E->fld is nonsensical.  The patch below updates this
+	according to the assumption that && should be ||.  But perhaps another
+	solution was intended.
+
+CONTRIB/firehose/badkm2/badkm2.cocci -  Ensure a consistent return value in error case
+	Typically, the return value desired for the failure of a function with an
+	integer return value is a negative integer.  In these cases, the return
+	value is sometimes a negative integer and sometimes 0, due to a subsequent
+	initialization of the return variable within the loop.
+
+CONTRIB/firehose/bitcall/bitcall.cocci -  convert & to &&
+	The use of & to obtain a conjunction that evaluates both of its arguments
+	seems unnecessarily tricky.
+
+CONTRIB/firehose/da/da.cocci -  Correct double assignment
+	The double assignment is meant to be a bit-or to combine two values.
+
+CONTRIB/firehose/double_null/double_null.cocci -  Correct NULL test
+	Test the value that was just allocated rather than the previously tested one.
+
+CONTRIB/firehose/doubleinit/doubleinit.cocci -  Remove duplicate structure field initialization
+	The definition of uml_netdev_ops has initializations of a local function
+	and eth_mac_addr for its ndo_set_mac_address field.  This change uses only
+	the local function.
+
+CONTRIB/firehose/doubletest/doubletest.cocci -  Remove double test
+	The current code tests the gpio_vid0 field twice.  Test the gpio_vid1
+	fields in place of the second gpio_vid0 test.
+
+CONTRIB/firehose/drop_continue/drop_continue.cocci -  Drop unnecessary continue
+	Continue is not needed at the bottom of a loop.
+
+CONTRIB/firehose/if-semicolon/if-semicolon.cocci -  Detect semicolon after if
+	Detect a semicolon after if(...) that is preventing the error check to
+	work correctly. Removing this semicolon will change the code behavior,
+	but this is intended.
+
+CONTRIB/firehose/ifaddr/ifaddr.cocci -  Test of a variable/field address
+	the address of a variable or field is non-zero is likely always to bo
+	non-zero
+
+CONTRIB/firehose/noderef/noderef.cocci -  Correct size computation
+	The size argument to kcalloc should be the size of desired structure,
+	not the pointer to it.
+
+CONTRIB/firehose/ret/ret.cocci -  Useless goto and return
+	Useless goto and return
+
+
