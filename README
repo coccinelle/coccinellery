@@ -931,16 +931,6 @@ kfree_skb/skbfree.cocci -  Convert kfree/kfree_skb to dev_kfree_skb_irq
 	ultimately referenced from the second argument of sdio_claim_irq, which is
 	also used as an interrupt handler.
 
-kfreeaddr/kfreeaddr.cocci -  Not available
-coccinellery-short = Not available
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Not available
-
-Not available
-
-	
-
 kfrees/kfree.cocci -  Introduce missing kfree
 	Introduce missing kfree
 
