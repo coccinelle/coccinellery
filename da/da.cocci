@@ -39,5 +39,5 @@ expression i;
 position r.p1,r.p2;
 @@
 
- i@p1 = ...;
-*i@p2 = ...;
+* i@p1 = ...;
+  i@p2 = ...;
