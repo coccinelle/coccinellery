@@ -654,6 +654,16 @@ errcast/errcast.cocci -  use ERR_CAST
 	ERR_CAST is more concise than PTR_ERR followed by ERR_PTR.  Using it
 	also occasionally removes the need for an err variable.
 
+eth64/eth.cocci -  Not available
+coccinellery-short = Not available
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Not available
+
+Not available
+
+	
+
 even_more_pci/get_slot.cocci -  Add missing pci_dev_get
 	pci_get_slot does a pci_dev_get, so pci_dev_put needs to be called in an
 	error case.
