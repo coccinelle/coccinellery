@@ -1469,6 +1469,16 @@ sz3/sz3.cocci -  Take size of pointed value, not pointer
 	Sizeof a pointer-typed expression returns the size of the pointer, not that
 	of the pointed data.
 
+testeno/testeno.cocci -  Not available
+coccinellery-short = Not available
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Not available
+
+Not available
+
+	
+
 tipc/tipc.cocci -  Use tipc_port_unlock
 	The file net/tipc/port.c takes a lock using the function tipc_port_lock and
 	then releases the lock sometimes using tipc_port_unlock and sometimes using
