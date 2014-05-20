@@ -654,15 +654,15 @@ errcast/errcast.cocci -  use ERR_CAST
 	ERR_CAST is more concise than PTR_ERR followed by ERR_PTR.  Using it
 	also occasionally removes the need for an err variable.
 
-eth64/eth.cocci -  Not available
-coccinellery-short = Not available
-coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
-coccinellery-license = Licensed under GPLv2 or any later version.
-coccinellery-author0 = Not available
-
-Not available
-
+eth64/eth.cocci -  use ether_addr_equal_64bits
 	
+	Ether_addr_equal_64bits is more efficient than ether_addr_equal, and can be
+	used when each argument is an array within a structure that contains at
+	least two bytes of data beyond the array.
+	
+	The structures involved are:
+	at76_priv defined in drivers/net/wireless/at76c50x-usb.h and
+	ieee80211_mgmt defined in include/linux/ieee80211.h
 
 even_more_pci/get_slot.cocci -  Add missing pci_dev_get
 	pci_get_slot does a pci_dev_get, so pci_dev_put needs to be called in an
