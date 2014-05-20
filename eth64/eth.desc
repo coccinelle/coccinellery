@@ -1,1 +1,13 @@
-coccinellery-target = Not available\ncoccinellery-short = Not available\ncoccinellery-copyright = Copyright: 2012 - LIP6/INRIA\ncoccinellery-license = Licensed under GPLv2 or any later version.\ncoccinellery-author0 = Not available\n\nNot available\n
+coccinellery-target = Linux
+coccinellery-short = use ether_addr_equal_64bits
+coccinellery-copyright = Copyright: 2012 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+
+Ether_addr_equal_64bits is more efficient than ether_addr_equal, and can be
+used when each argument is an array within a structure that contains at
+least two bytes of data beyond the array.
+
+The structures involved are:
+at76_priv defined in drivers/net/wireless/at76c50x-usb.h and
+ieee80211_mgmt defined in include/linux/ieee80211.h
