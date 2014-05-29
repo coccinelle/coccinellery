@@ -9,7 +9,7 @@
 // URL: http://coccinellery.org/ 
 
 @initialize:ocaml@
-
+@@
 let tbl = Hashtbl.create(100)
 
 let add_if_not_present file =

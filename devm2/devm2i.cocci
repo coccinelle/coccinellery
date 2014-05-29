@@ -30,6 +30,7 @@ struct platform_driver i@p = {
 // set up iteration
 
 @initialize:ocaml@
+@@
 
 type ret = UseReturned | UseArg | UseGet
 

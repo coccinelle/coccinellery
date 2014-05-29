@@ -32,7 +32,7 @@ struct platform_driver i@p = {
 // set up iteration
 
 @initialize:ocaml@
-
+@@
 let drop_labels = ref false
 
 type ret = UseReturned | UseReturned2 of string | UseArg | UseGet

@@ -38,7 +38,7 @@ struct platform_driver i@p = {
 // set up iteration
 
 @initialize:ocaml@
-
+@@
 let reporting = ref false
 
 type ret =
