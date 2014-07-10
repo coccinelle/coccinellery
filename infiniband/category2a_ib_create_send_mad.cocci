@@ -11,7 +11,7 @@
 
 // category 2 should only have an IS_ERR test
 
-@match disable isnt_null exists@
+@match disable isnt_null1 exists@
 expression x, E, E3;
 position p1,p2;
 statement S1, S2;
@@ -33,7 +33,7 @@ x@p1 = ib_create_send_mad(...)
   NULL != x@p2
 )
 
-@other_match disable isnt_null exists@
+@other_match disable isnt_null1 exists@
 expression match.x, E1, E2, E3;
 position p1!=match.p1,match.p2;
 statement S1, S2;
@@ -70,7 +70,7 @@ p2cole = p2[0].column_end
 print "* TODO [[view:%s::face=ovl-face1::linb=%s::colb=%s::cole=%s][%s::%s]]" % (file,p1line,p1colb,p1cole,file,p1line)
 print "[[view:%s::face=ovl-face2::linb=%s::colb=%s::cole=%s][%s: NULL test]]" % (file,p2line,p2colb,p2cole,p2line)
 
-@match1 disable isnt_null@
+@match1 disable isnt_null1@
 expression x;
 statement S1, S2;
 expression E3;
