@@ -19,7 +19,7 @@ x = backlight_device_register(...)
 
 // -----------------------------------------------------------------------
 
-@protected using "../likely.iso" @
+@protected@
 expression def0.x;
 identifier fld;
 position p,p1;
@@ -41,7 +41,7 @@ for@p1 (;(!IS_ERR(x))&&...;...) { <... x@p->fld ...> }
  sizeof(<+... x@p->fld ...+>)
 )
 
-@andprotected using "../likely.iso"@
+@andprotected@
 expression def0.x;
 identifier fld;
 position p,protected.p1;
@@ -74,7 +74,7 @@ for (...;<+... x = backlight_device_register(...) ...+>;...) S1
 x@p1 = backlight_device_register(...)
 )
 
-@unprotected using "../likely.iso" exists@
+@unprotected exists@
 expression def0.x;
 identifier fld, fld1, l;
 position p != {protected.p,andprotected.p};
