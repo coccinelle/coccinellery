@@ -1,3 +1,13 @@
+//
+//  Transform some kzalloc calls to kcalloc
+//
+// Target: Linux
+// Copyright:  2012 - LIP6/INRIA
+// License:  Licensed under ISC. See LICENSE or http://www.isc.org/software/license
+// Author: Nicolas Palix <npalix@diku.dk>
+// URL: http://coccinelle.lip6.fr/ 
+// URL: http://coccinellery.org/ 
+
 // kzalloc should be used rather than kmalloc followed by memset 0
 // kcalloc should be used rather than kzalloc of a product of values
 //
