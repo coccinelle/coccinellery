@@ -62,10 +62,12 @@ p << r.p;
 coccilib.report.print_report(p[0],"duplicated argument to && or ||")
 
 @initialize:python depends on firehose@
+@@
 coccilib.xml_firehose.import_firehose()
 analysis = coccilib.xml_firehose.Analysis(use_env_variables=True)
 
 @finalize:python depends on firehose@
+@@
 analysis.print_analysis()
 
 @script:python depends on firehose@
