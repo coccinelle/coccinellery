@@ -1,1 +1,6 @@
-coccinellery-target = Not available\ncoccinellery-short = Not available\ncoccinellery-copyright = Copyright: 2012 - LIP6/INRIA\ncoccinellery-license = Licensed under GPLv2 or any later version.\ncoccinellery-author0 = Not available\n\nNot available\n
+coccinellery-target = Linux
+coccinellery-short = delete unnecessary null test on array
+coccinellery-copyright = Copyright: 2014 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Delete NULL test on array (always false)
