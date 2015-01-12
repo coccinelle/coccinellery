@@ -231,9 +231,17 @@ allocs/a2.cocci -  Add missing fput
 	have added a goto to the end of the function where there was already such a
 	call.
 
+array_and_size/array_and_size_clean.cocci -  use ARRAY_AND_SIZE consistently
+	Because ARRAY_AND_SIZE changes the apparent arity of a function, if it is
+	used for one call to a given function, it would be better, if possible, to
+	use it for all of them.
+
 arraysize/array.cocci -  Use ARRAY_SIZE
 	ARRAY_SIZE is more concise to use when the size of an array is divided by
 	the size of its type or the size of its first element.
+
+arraytest/arraytest.cocci -  delete unnecessary null test on array
+	Delete NULL test on array (always false)
 
 arref/arref.cocci -  Adjust array index
 	Convert array index from the loop bound to the loop index.
@@ -256,6 +264,10 @@ badand/badand.cocci -  Convert && to ||
 	The pattern !E && !E->fld is nonsensical.  The patch below updates this
 	according to the assumption that && should be ||.  But perhaps another
 	solution was intended.
+
+badcheck/badcheck.cocci -  fix devm_ioremap_resource error detection code
+	devm_ioremap_resource returns an ERR_PTR value, not NULL, on failure.
+	Furthermore, the value returned by devm_ioremap_resource should be tested.
 
 badftest/badftest.cocci -  Correct NULL test
 	Test the just-allocated value for NULL rather than some other value.
