@@ -1,1 +1,8 @@
-coccinellery-target = Not available\ncoccinellery-short = Not available\ncoccinellery-copyright = Copyright: 2012 - LIP6/INRIA\ncoccinellery-license = Licensed under GPLv2 or any later version.\ncoccinellery-author0 = Not available\n\nNot available\n
+coccinellery-target = Linux
+coccinellery-short = use ARRAY_AND_SIZE consistently
+coccinellery-copyright = Copyright: 2014 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Because ARRAY_AND_SIZE changes the apparent arity of a function, if it is
+used for one call to a given function, it would be better, if possible, to
+use it for all of them.
