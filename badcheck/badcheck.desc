@@ -1,1 +1,7 @@
-coccinellery-target = Not available\ncoccinellery-short = Not available\ncoccinellery-copyright = Copyright: 2012 - LIP6/INRIA\ncoccinellery-license = Licensed under GPLv2 or any later version.\ncoccinellery-author0 = Not available\n\nNot available\n
+coccinellery-target = Linux
+coccinellery-short = fix devm_ioremap_resource error detection code
+coccinellery-copyright = Copyright: 2014 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+devm_ioremap_resource returns an ERR_PTR value, not NULL, on failure.
+Furthermore, the value returned by devm_ioremap_resource should be tested.
