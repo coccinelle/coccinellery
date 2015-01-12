@@ -1,1 +1,14 @@
-coccinellery-target = Not available\ncoccinellery-short = Not available\ncoccinellery-copyright = Copyright: 2012 - LIP6/INRIA\ncoccinellery-license = Licensed under GPLv2 or any later version.\ncoccinellery-author0 = Not available\n\nNot available\n
+coccinellery-target = Linux
+coccinellery-short = convert comma to semicolon
+coccinellery-copyright = Copyright: 2014 - LIP6/INRIA
+coccinellery-license = Licensed under GPLv2 or any later version.
+coccinellery-author0 = Julia Lawall <Julia.Lawall@lip6.fr>
+Replace a comma between expression statements by a semicolon.
+
+The rule is quite conservative in that it only finds cases where this
+pattern appears after a statement that ends with ;, to ensure that the
+expression statements do not form an if branch or loop body that would
+require adding braces.  This leads to some false negatives, some of which
+are apparent in the context code of the patch.  To have a patch that is
+entirely machine generated, these false negatives are left untouched, but
+could be fixed by other rules.
