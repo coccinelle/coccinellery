@@ -8,6 +8,9 @@
 // URL: http://coccinelle.lip6.fr/ 
 // URL: http://coccinellery.org/ 
 
+/* requires ocaml, useful/required options: --include-headers --no-includes
+ --no-show-diff */
+
 virtual after_start
 
 @initialize:ocaml@
