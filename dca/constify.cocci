@@ -8,6 +8,9 @@
 // URL: http://coccinelle.lip6.fr/ 
 // URL: http://coccinellery.org/ 
 
+/* useful options:  -D ty=$1 --include-headers --no-includes
+where $1 is the name of the structure type */
+
 @r@
 identifier x,virtual.ty;
 position p;
