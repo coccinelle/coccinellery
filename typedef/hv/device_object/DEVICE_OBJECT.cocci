@@ -1,13 +1,3 @@
-//
-//  Transform PDEVICE_OBJECT and DEVICE_OBJECT typedefs into their corresponding structs
-//
-// Target: Linux
-// Copyright:  2012 - LIP6/INRIA
-// License:  Licensed under ISC. See LICENSE or http://www.isc.org/software/license
-// Author: Nicolas Palix <npalix@diku.dk>
-// URL: http://coccinelle.lip6.fr/ 
-// URL: http://coccinellery.org/ 
-
 @rm_PDEVICE_OBJECT@
 @@
 -typedef struct _DEVICE_OBJECT *PDEVICE_OBJECT;
