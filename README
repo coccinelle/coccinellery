@@ -32,9 +32,1658 @@ at LICENSE file or http://www.isc.org/software/license.
 ----------------------------------------------------------------------
 Target: Generic
 
+arref/arref.cocci -  Adjust array index
+	Convert array index from the loop bound to the loop index.
+
+badand/badand.cocci -  Convert && to ||
+	The pattern !E && !E->fld is nonsensical.  The patch below updates this
+	according to the assumption that && should be ||.  But perhaps another
+	solution was intended.
+
+badkm2/badkm2.cocci -  Ensure a consistent return value in error case
+	Typically, the return value desired for the failure of a function with an
+	integer return value is a negative integer.  In these cases, the return
+	value is sometimes a negative integer and sometimes 0, due to a subsequent
+	initialization of the return variable within the loop.
+
+bitcall/bitcall.cocci -  convert & to &&
+	The use of & to obtain a conjunction that evaluates both of its arguments
+	seems unnecessarily tricky.
+
+da/da.cocci -  Correct double assignment
+	The double assignment is meant to be a bit-or to combine two values.
+
+devname/devname.cocci -  Eliminate NULL dereference
+	dev_name always dereferences its argument, so it should not be called if
+	the argument is NULL.  The function indeed later tests the argument for
+	being NULL.
+
+double_call/dc.cocci -  Eliminate useless code
+	The variable client is initialized twice to the same (side effect-free)
+	expression.  Drop one initialization.
+
+double_null/double_null.cocci -  Correct NULL test
+	Test the value that was just allocated rather than the previously tested one.
+
+doubleinit/doubleinit.cocci -  Remove duplicate structure field initialization
+	The definition of uml_netdev_ops has initializations of a local function
+	and eth_mac_addr for its ndo_set_mac_address field.  This change uses only
+	the local function.
+
+doubletest_high/doubletest_highconfidence.cocci -  Adjust double test
+	Rewrite a duplicated test to test the correct value
+
+drop_continue/cont.cocci -  Drop unnecessary continue
+	Continue is not needed at the bottom of a loop.
+
+if-semicolon/if-semicolon.cocci -  Detect semicolon after if
+	Detect a semicolon after if(...) that is preventing the error check to
+	work correctly. Removing this semicolon will change the code behavior,
+	but this is intended.
+
+ifseqerr/ifseqerr.cocci -  Remove unnecessary error check
+	This code does not call deinit_card(card); in an error case, as done in
+	other error-handling code in the same function.  But actually, the called
+	function init_sram can only return 0, so there is no need for the error
+	check at all.
+	init_sram is also given a void return type, and its single return statement
+	at the end of the function is dropped.
+
+isnullo/isnull.cocci -  Keep pointer to resource so it can be freed
+	Add a new variable for storing resources accessed subsequent to the one
+	accessed using request_mem_region, so the one accessed using
+	request_mem_region can be released if needed.
+	The resource variable names are also changed to be more descriptive.
+	This code is also missing some calls to iounmap.
+
+kfree_after/kfree_after.cocci -  Adjust error handling code
+	Use the error handling code at the end of the function, rather than
+	returning directly.
+
+mini_null3/mini_null_ref3.cocci -  Move a dereference below a NULL test
+	If the NULL test is necessary, then the dereference should be moved below
+	the NULL test.
+
+mini_null_ref_aug14/mini_null_ref.cocci -  Remove potential NULL dereferences
+	If the NULL test is necessary, the initialization involving a dereference of
+	the tested value should be moved after the NULL test.
+
+notnull/notnull.cocci -  Remove redundant test
+	vpage is checked not to be NULL just after it is initialized at the
+	beginning of each loop iteration.
+
+notnull/notnull2.cocci -  Correct redundant test
+	str has already been tested.  It seems that this test should be on the
+	recently returned value snr.
+
+semicolon/semicolon.cocci -  Remove unnecessary semicolon
+	Removes unnecessary semicolon
+
+signed/signed.cocci -  Use unsigned for loop index
+	A few more cases in the spirit of the patch \"Trivial: Replacement of always
+	>0 ints with unsigned ints\" submitted by Ricardo Martins <ricardo@scarybox.net>
+
+sizeof/sizeof_sizeof.cocci -  Eliminate double sizeof
+	Taking sizeof the result of sizeof is quite strange and does not seem to be
+	what is wanted here.
+
+sz/sz.cocci -  Correct code taking the size of a pointer
+	sizeof(share_id) is just the size of the pointer.  On the other hand,
+	block->share_id is an array, so its size seems more appropriate.
+
+sz3/sz3.cocci -  Take size of pointed value, not pointer
+	Sizeof a pointer-typed expression returns the size of the pointer, not that
+	of the pointed data.
+
+unsf/unsf.cocci -  Fix return value from an unsigned function
+	The function has an unsigned return type, but returns a negative constant
+	to indicate an error condition.  
+
+unsf/unsf_ret0.cocci -  Fix return value from an unsigned function
+	The function has an unsigned return type, but returns a negative constant
+	to indicate an error condition.  Another error condition in the same
+	function is indicated by returning 0, and indeed the only call to the
+	function checks for 0 to detect errors, so the return of a negative value
+	it converted to a return of 0.
+
+unused_err/unused_err.cocci -  Use available error codes
+	Error codes are stored in err, but the return value is always 0.  Return
+	err instead.
+
+write2/write2.cocci -  delete double assignment
+	Delete successive assignments to the same location.
+
+xand/xand.cocci -  Detect duplicated test
+	Look for duplicate && and || tests.
+
 
 ----------------------------------------------------------------------
 Target: Linux
+
+9p/category2a_p9_client_walk.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function p9_client_walk returns an ERR pointer,
+	but never returns a NULL pointer. So a NULL test that comes after an
+	IS_ERR test should be deleted.
+
+9p/p9_client_walk.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function p9_client_walk returns an ERR pointer,
+	but never returns a NULL pointer. So a NULL test that comes after an
+	IS_ERR test should be deleted.
+
+aaci/category2a_aaci_init_card.cocci -  Bad NULL test
+	In case of error, the function aaci_init_card returns an ERR pointer,
+	but never returns a NULL pointer. We have noticed a bad NULL test,
+	which comes after a call to this function. Rather than doing an IS_ERR
+	test, we suggest to duplicate the label out: one label for the case
+	where aaci_init_card returns a valid pointer, and another for the case
+	where aaci_init_card returns an ERR pointer.
+
+acl/patch.cocci -  Add missing call to posix_acl_release
+	posix_acl_clone does a memory allocation and sets a reference count, so
+	posix_acl_release is needed afterwards to free it.
+
+acpi/category2b_back_device_reg.cocci -  Dereference without an error test
+	After a variable is assigned the result of backlight_device_register, an error
+	test should be performed before a dereference. 
+
+acpid/acpi.cocci -  Drop uses of acpi_driver_data
+	Drop uses of acpi_driver_data
+
+after_netif/after_netif.cocci -  Fix use of skb after netif_rx
+	Recently, Wang Chen submitted a patch
+	(d30f53aeb31d453a5230f526bea592af07944564) to move a call to netif_rx(skb)
+	after a subsequent reference to skb, because netif_rx may call kfree_skb on
+	its argument.  netif_rx_ni calls netif_rx, so the same problem occurs in
+	the files below.
+	I have left the updating of dev->last_rx after the calls to netif_rx_ni
+	because it seems time dependent, but moved the other field updates before.
+
+after_netif/after_netif_modif.cocci -  Fix use of skb after netif_rx
+	Recently, Wang Chen submitted a patch
+	(d30f53aeb31d453a5230f526bea592af07944564) to move a call to netif_rx(skb)
+	after a subsequent reference to skb, because netif_rx may call kfree_skb on
+	its argument.  netif_rx_ni calls netif_rx, so the same problem occurs in
+	the files below.
+	I have left the updating of dev->last_rx after the calls to netif_rx_ni
+	because it seems time dependent, but moved the other field updates before.
+
+alloc9/kmalloc9.cocci -  Eliminate memory leak
+	__ip_vs_service_get and __ip_vs_svc_fwm_get increment a reference count, so
+	that reference count should be decremented before leaving the function in an
+	error case.
+
+alloc_cast/alloc_cast.cocci -  Drop memory allocation cast
+	Drop cast on the result of kmalloc and similar functions.
+
+alloc_domain/easykmret.cocci -  Add missing free_domain_mem
+	Add missing free_domain_mem on failure path after alloc_domain.
+
+alloc_etherdev/alloc.cocci -  Adjust error handling after call to alloc_etherdev()
+	Detect possible error handling code related to alloc_etherdev().
+
+alloc_tty/alloc_tty.cocci -  add missing put_tty_driver
+	alloc_tty_driver is called at the beginning of the function containing the
+	lines of code shown in the patch.  Thus, put_tty_driver is needed before
+	returning in the error handling code.
+
+allocs/a2.cocci -  Add missing fput
+	fget increments a reference count, so fput is needed to decrement it.  I
+	have added a goto to the end of the function where there was already such a
+	call.
+
+array_and_size/array_and_size_clean.cocci -  use ARRAY_AND_SIZE consistently
+	Because ARRAY_AND_SIZE changes the apparent arity of a function, if it is
+	used for one call to a given function, it would be better, if possible, to
+	use it for all of them.
+
+arraysize/array.cocci -  Use ARRAY_SIZE
+	ARRAY_SIZE is more concise to use when the size of an array is divided by
+	the size of its type or the size of its first element.
+
+arraytest/arraytest.cocci -  delete unnecessary null test on array
+	Delete NULL test on array (always false)
+
+arref/arref.cocci -  Adjust array index
+	Convert array index from the loop bound to the loop index.
+
+asprintf/asprintf.cocci -  Use kasprintf
+	kasprintf combines kmalloc and sprintf, and takes care of the size
+	calculation itself.
+
+atm/atm.cocci -  add missing atm_dev_put
+	The earlier call to atm_dev_lookup increases the reference count of dev,
+	so decrease it on the way out.
+
+auth/auth.cocci -  Adjust error handling code involving auth_domain_put
+	Once clp is assigned, it never becomes NULL, so we can make a label for it
+	in the error handling code.  Because the call to path_lookup follows the
+	call to auth_domain_find, its error handling code should jump to this new
+	label.
+
+badand/badand.cocci -  Convert && to ||
+	The pattern !E && !E->fld is nonsensical.  The patch below updates this
+	according to the assumption that && should be ||.  But perhaps another
+	solution was intended.
+
+badcheck/badcheck.cocci -  fix devm_ioremap_resource error detection code
+	devm_ioremap_resource returns an ERR_PTR value, not NULL, on failure.
+	Furthermore, the value returned by devm_ioremap_resource should be tested.
+
+badftest/badftest.cocci -  Correct NULL test
+	Test the just-allocated value for NULL rather than some other value.
+
+badkm/badkm.cocci -  Initialize return variable with error code
+	Typically, the return value desired for the failure of a memory allocation
+	is -ENOMEM.  In this case, the return value is undesirably 0.
+
+badkm2/badkm2.cocci -  Ensure a consistent return value in error case
+	Typically, the return value desired for the failure of a function with an
+	integer return value is a negative integer.  In these cases, the return
+	value is sometimes a negative integer and sometimes 0, due to a subsequent
+	initialization of the return variable within the loop.
+
+badktest/badktest.cocci -  Correct NULL test
+	Test the just-allocated value for NULL rather than some other value.
+
+badmsg/badmsg.cocci -  Return -ENOMEM on memory allocation failure
+	In this code, 0 is returned on memory allocation failure, even though other
+	failures return -ENOMEM or other similar values.
+
+badmsg3/badmsg3.cocci -  Correct return value on error handling
+	Correct return value on error handling
+
+badty/badty.cocci -  Correct the size argument to kzalloc
+	obj has type struct snmp_object **, not struct snmp_object *.  But indeed
+	it is not even clear why kmalloc is needed.  The memory is freed by the end
+	of the function, so the local variable of pointer type should be sufficient.
+
+bitcall/bitcall.cocci -  convert & to &&
+	The use of & to obtain a conjunction that evaluates both of its arguments
+	seems unnecessarily tricky.
+
+bits/notand.cocci -  Correct use of ! and &
+	In commit e6bafba5b4765a5a252f1b8d31cbf6d2459da337, a bug was fixed that
+	involved converting !x & y to !(x & y).  The code below shows the same
+	pattern, and thus should perhaps be fixed in the same way.
+	This is not tested and clearly changes the semantics, so it is only
+	something to consider.
+
+bits2/notand.cocci -  Correct use of ! and &
+	Correct priority problem in the use of ! and &.
+
+block_nil/retsall.cocci -  use BLOCK_NIL
+	Use BLOCK_NIL consistently rather than sometimes 0xffff and sometimes
+	BLOCK_NIL.
+
+bo/bo.cocci -  use BUG_ON
+	Use BUG_ON(x) rather than if(x) BUG();
+
+bond/short_timeout.cocci -  Adjust constant name
+	AD_SHORT_TIMEOUT and AD_STATE_LACP_ACTIVITY have the same value, but
+	AD_STATE_LACP_ACTIVITY better reflects the intended semantics.
+
+bootmem/bootmem.cocci -  Eliminate NULL test and memset after alloc_bootmem
+	As noted by Akinobu Mita in patch b1fceac2b9e04d278316b2faddf276015fc06e3b,
+	alloc_bootmem and related functions never return NULL and always return a
+	zeroed region of memory.  Thus a NULL test or memset after calls to these
+	functions is unnecessary.
+
+bootmem2/bootmem.cocci -  Eliminate NULL test and memset after alloc_bootmem
+	As noted by Akinobu Mita in patch b1fceac2b9e04d278316b2faddf276015fc06e3b,
+	alloc_bootmem and related functions never return NULL and always return a
+	zeroed region of memory.  Thus a NULL test or memset after calls to these
+	functions is unnecessary.
+
+bss/sp1094.cocci -  Add missing call to cfg80211_put_bss
+	A call to cfg80211_get_bss hould be accompanied by a call to
+	cfg80211_put_bss in error-handling code.
+
+btrfs/btrfs.cocci -  Add missing btrfs_free_path
+	Btrfs_alloc_path should be matched with btrfs_free_path in error-handling code.
+
+bugon/newbugon.cocci -  Use BUG_ON
+	if (...) BUG(); should be replaced with BUG_ON(...) when the test has no
+	side-effects to allow a definition of BUG_ON that drops the code completely.
+
+cache/cache.cocci -  Use kmem_cache_free
+	Free memory allocated using kmem_cache_zalloc using kmem_cache_free rather
+	than kfree.
+
+call_kern1/call_kern1.cocci -  Use GFP_ATOMIC when a lock is held
+	The function adpt_i2o_post_wait is called from several places, in some of
+	which, such as adpt_abort, a lock may be held.
+	The functions adpt_i2o_reparse_lct and adpt_i2o_lct_get are called from
+	several places, including adpt_rescan where a lock may be held.
+
+call_kern3/call_kern3.cocci -  Use GFP_ATOMIC when a lock is held
+	The containing function is called from several places.  At one of them, in
+	the function untag_chunk, the spin lock &entry->lock is held.
+
+capi/capi.cocci -  Adjust error handling code involving capi_ctr_put
+	After calling capi_ctr_get, error handling code should call
+	capi_ctr_put.
+
+clkderef/clkderef.cocci -  Use clk API instead of direct dereferences
+	A struct clk value is intended to be an abstract pointer, so it should be
+	manipulated using the various API functions.
+
+clkput/clkput.cocci -  Add missing clk_put
+	Reorder the labels at the end of the function to correspond to the order in
+	which the resources are allocated.
+
+comma/comma.cocci -  convert comma to semicolon
+	Replace a comma between expression statements by a semicolon.
+	
+	The rule is quite conservative in that it only finds cases where this
+	pattern appears after a statement that ends with ;, to ensure that the
+	expression statements do not form an if branch or loop body that would
+	require adding braces.  This leads to some false negatives, some of which
+	are apparent in the context code of the patch.  To have a patch that is
+	entirely machine generated, these false negatives are left untouched, but
+	could be fixed by other rules.
+
+consts/consts.cocci -  use the constant InterlaceMode
+	Use the constant InterlaceMode rather than the magic number 0x0080.
+
+countptr/countptr.cocci -  Remove exceptional & on function name
+	In this file, function names are otherwise used as pointers without &.
+
+cpu/cpu.cocci -  Adjust error handling code involving cpufreq_cpu_put
+	After calling cpufreq_cpu_get, error handling code should call
+	cpufreq_cpu_put.
+
+cpu_mask/cpu_mask.cocci -  Use set_cpus_allowed_ptr
+	Use set_cpus_allowed_ptr rather than set_cpus_allowed.
+
+cpufreq/patch.cocci -  Add calls to cpufreq_cpu_put
+	A call to cpufreq_cpu_get should be matched by a call to cpufreq_cpu_put.
+
+cris/mutex2.cocci -  Use mutex_unlock rather than spin_unlock
+	It looks at least odd to apply spin_unlock to a mutex.
+
+crypto/crypto.cocci -  Add NULL test around call to crypto_free_hash
+	crypto_free_hash calls the function crypto_hash_tfm and then
+	crypto_free_tfm on the result.  crypto_free_tfm calls crypto_destroy_tfm,
+	which tests this result for NULL and then dereferences it.  crypto_hash_tfm
+	returns &tfm->base where tfm is its argument.  base is actually the first
+	and only field of a crypto_hash-typed structure, so perhaps one can rely on
+	it to return NULL for a NULL value of tfm.  But most calls to
+	crypto_hash_tfm where the argument might be NULL don't rely on this
+	property and test for NULL explicitly.
+
+cstptr/cstptr.cocci -  Move call to PTR_ERR after reassignment
+	PTR_ERR should be called before its argument is cleared.
+
+ctu/ctu.cocci -  Initialize all fields
+	The c32 structure is allocated on the stack and its idx field is not
+	initialized before copying it to user level.  This patch takes the value
+	from the result of the ioctl, as done for the other fields.
+
+da/da.cocci -  Correct double assignment
+	The double assignment is meant to be a bit-or to combine two values.
+
+dall/dall.cocci -  Use devm_ functions consistently
+	Use devm_kzalloc for all calls to kzalloc and not just the first.  Use devm
+	functions for other allocations as well.
+	Move the call to platform_get_resource(pdev, IORESOURCE_MEM, 0) closer to
+	where its result is passed to devm_request_and_ioremap to make the lack of
+	need for a NULL test more evident.
+
+dangling/dangling.cocci -  Remove potential for use after free
+	In each function, the value apcm is stored in the private_data field of
+	runtime.  At the same time the function ct_atc_pcm_free_substream is stored
+	in the private_free field of the same structure.  ct_atc_pcm_free_substream
+	dereferences and ultimately frees the value in the private_data field.  But
+	each function can exit in an error case with apcm having been freed, in
+	which case a subsequent call to the private_free function would perform a
+	dereference after free.  On the other hand, if the private_free field is
+	not initialized, it is NULL, and not invoked (see snd_pcm_detach_substream
+	in sound/core/pcm.c).  To avoid the introduction of a dangling pointer, the
+	initializations of the private_data and private_free fields are moved to
+	the end of the function, past any possible free of apcm.  This is safe
+	because the previous calls to snd_pcm_hw_constraint_integer and
+	snd_pcm_hw_constraint_minmax, which take runtime as an argument, do not
+	refer to either of these fields.
+	In each function, there is one error case where apcm needs to be freed, and
+	a call to kfree is added.
+
+depspin/sl.cocci -  Use DEFINE_SPINLOCK
+	SPIN_LOCK_UNLOCKED is deprecated. The semantic patch makes the change
+	suggested in Documentation/spinlocks.txt
+
+derefnull/isnull.cocci -  Detect null dereference and unnecessary test
+	Detect null dereference and unnecessary test
+
+devm2/devm2i.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses devm_kzalloc, devm_request_irq, etc. for data
+	that is allocated in the probe function of a platform device and is only
+	freed in the remove function.
+	This patch changes the semantics in the case of exynos_hdmi.c, in that in
+	the original code, there was no free of drm_hdmi_ctx in the remove function.
+
+devm2a/devm2i.cocci -  use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+
+devm2b/devm2i.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+	By using devm_ioremap, it also removes a potential memory leak, because
+	there was no call to iounmap in the probe function.
+	The call to platform_get_resource was moved just to make it closer to the
+	place where its result it used.
+
+devm2i_0729/devm2i.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+	A new label name is created in one case to better reflect the contents of
+	the error-handling code.
+
+devm2i_0729/request_and_ioremap.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+	A new label name is created in one case to better reflect the contents of
+	the error-handling code.
+
+devm2i_0730/devm2i.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+
+devm2i_0730/request_and_ioremap.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+
+devm2i_0731/devm2i.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+	The call to platform_get_resource(pdev, IORESOURCE_MEM, 0) is moved closer
+	to the new call to devm_request_and_ioremap where its result is first
+	used.  devm_request_and_ioremap takes case of the NULL test on the result
+	of platform_get_resource(pdev, IORESOURCE_MEM, 0), so that is dropped.
+
+devm2i_0731/request_and_ioremap.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+	The call to platform_get_resource(pdev, IORESOURCE_MEM, 0) is moved closer
+	to the new call to devm_request_and_ioremap where its result is first
+	used.  devm_request_and_ioremap takes case of the NULL test on the result
+	of platform_get_resource(pdev, IORESOURCE_MEM, 0), so that is dropped.
+
+devm2i_aug25/devm2i.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+
+devm2i_aug25/request_and_ioremap.cocci -  Use devm_ functions
+	The various devm_ functions allocate memory that is released when a driver
+	detaches.  This patch uses these functions for data that is allocated in
+	the probe function of a platform device and is only freed in the remove
+	function.
+
+devm4/devm4.cocci -  Drop iounmap for devm_ allocated data
+	Data allocated with devm_ioremap or devm_ioremap_nocache should not be
+	freed using iounmap, because doing so causes a dangling pointer, and a
+	subsequent double free.
+
+devm6/devm6.cocci -  Use devm_request_and_ioremap
+	Reimplement a call to devm_request_mem_region followed by a call to ioremap
+	or ioremap_nocache by a call to devm_request_and_ioremap.
+
+devname/devname.cocci -  Eliminate NULL dereference
+	dev_name always dereferences its argument, so it should not be called if
+	the argument is NULL.  The function indeed later tests the argument for
+	being NULL.
+
+diou/diou.cocci -  drop kfree of devm_kzalloc's data
+	Using kfree to free data allocated with devm_kzalloc causes double frees.
+
+diou2/diou.cocci -  Drop devm_kfree of devm_kzalloc'd data
+	devm_kfree should not have to be explicitly used.
+
+diou3/devm3.cocci -  Some devm_ cleanups
+	devm free functions should not have to be explicitly used.
+	The only thing left that is useful in the function mpc5121_nfc_free is the
+	call to clk_disable, which is moved to the call sites.
+	This function also incorrectly called iounmap on devm_ioremap allocated
+	data.
+	Use devm_request_and_ioremap in place of devm_request_mem_region and
+	devm_ioremap.
+	Use devm_clk_get.
+
+dma/set_dma_mode_1.cocci -  Avoid using magic number in set_dma_mode
+	The constant DMA_RX_MODE is defined to be 0x14 in the local include file
+	cs89x0.h.  Since a constant with the same name is used elsewhere with
+	set_dma_mode, it seems likely that this constant could be used here.
+
+double_call/dc.cocci -  Eliminate useless code
+	The variable client is initialized twice to the same (side effect-free)
+	expression.  Drop one initialization.
+
+double_lock/double_lock.cocci -  Eliminate a double lock
+	The path around the loop ends with the lock held, so the call to mutex_lock
+	is moved before the beginning of the loop.
+
+double_null/double_null.cocci -  Correct NULL test
+	Test the value that was just allocated rather than the previously tested one.
+
+double_test/double_test.cocci -  Introduce missing initialization
+	The result of one call to a function is tested, and then at the second call
+	to the same function, the previous result, and not the current result, is
+	tested again.
+
+doublefree/frees.cocci -  Eliminate double kfree
+	The destination of goto error also does a kfree(g_iommus), so it is not
+	correct to do one here.
+
+doubleinit/doubleinit.cocci -  Remove duplicate structure field initialization
+	The definition of uml_netdev_ops has initializations of a local function
+	and eth_mac_addr for its ndo_set_mac_address field.  This change uses only
+	the local function.
+
+doublermr/doublermr.cocci -  Improve error handling
+	This code had an error handling goto to the wrong place, a misplaced
+	release_mem_region, and a duplicated release_mem_region.
+
+doubletest/doubletest.cocci -  Remove double test
+	The current code tests the gpio_vid0 field twice.  Test the gpio_vid1
+	fields in place of the second gpio_vid0 test.
+
+doubletest_high/doubletest_highconfidence.cocci -  Adjust double test
+	Rewrite a duplicated test to test the correct value
+
+drop_continue/cont.cocci -  Drop unnecessary continue
+	Continue is not needed at the bottom of a loop.
+
+drvdata/drvdata.cocci -  Use dev_set_drvdata
+	Eliminate direct accesses to the driver_data field.
+
+dst/dst.cocci -  Use dst_type field instead of type_flags
+	It seems from other code that it is the dst_type field rather than the
+	type_flags field that contains values of the form DST_TYPE_IS...
+	The type_flags field contains values of the form DST_TYPE_HAS...
+
+enter/enter.cocci -  Convert func_enter to func_exit
+	Convert calls to func_enter on leaving a function to func_exit.
+
+epd/epd.cocci -  Use USB API functions rather than constants
+	This set of patches introduces calls to the following set of functions:
+	usb_endpoint_dir_in(epd)
+	usb_endpoint_dir_out(epd)
+	usb_endpoint_is_bulk_in(epd)
+	usb_endpoint_is_bulk_out(epd)
+	usb_endpoint_is_int_in(epd)
+	usb_endpoint_is_int_out(epd)
+	usb_endpoint_num(epd)
+	usb_endpoint_type(epd)
+	usb_endpoint_xfer_bulk(epd)
+	usb_endpoint_xfer_control(epd)
+	usb_endpoint_xfer_int(epd)
+	usb_endpoint_xfer_isoc(epd)
+	In some cases, introducing one of these functions is not possible, and it
+	just replaces an explicit integer value by one of the following constants:
+	USB_ENDPOINT_XFER_BULK
+	USB_ENDPOINT_XFER_CONTROL
+	USB_ENDPOINT_XFER_INT
+	USB_ENDPOINT_XFER_ISOC
+
+epd/mini.cocci -  Use USB API functions rather than constants
+	This set of patches introduces calls to the following set of functions:
+	usb_endpoint_dir_in(epd)
+	usb_endpoint_dir_out(epd)
+	usb_endpoint_is_bulk_in(epd)
+	usb_endpoint_is_bulk_out(epd)
+	usb_endpoint_is_int_in(epd)
+	usb_endpoint_is_int_out(epd)
+	usb_endpoint_num(epd)
+	usb_endpoint_type(epd)
+	usb_endpoint_xfer_bulk(epd)
+	usb_endpoint_xfer_control(epd)
+	usb_endpoint_xfer_int(epd)
+	usb_endpoint_xfer_isoc(epd)
+	In some cases, introducing one of these functions is not possible, and it
+	just replaces an explicit integer value by one of the following constants:
+	USB_ENDPOINT_XFER_BULK
+	USB_ENDPOINT_XFER_CONTROL
+	USB_ENDPOINT_XFER_INT
+	USB_ENDPOINT_XFER_ISOC
+
+epdneg/epdneg.cocci -  Use negated usb_endpoint_xfer_control, etc
+	This patch extends 42a6e66f1e40a930d093c33ba0bb9d8d8e4555ed by using
+	usb_endpoint_xfer_control, usb_endpoint_xfer_isoc, usb_endpoint_xfer_bulk,
+	and usb_endpoint_xfer_int in the negated case as well.
+	This patch also rewrites some calls to usb_endpoint_dir_in as negated calls
+	to !usb_endpoint_dir_out, and vice versa, to better correspond to the
+	intent of the original code.
+
+errcast/errcast.cocci -  use ERR_CAST
+	ERR_CAST is more concise than PTR_ERR followed by ERR_PTR.  Using it
+	also occasionally removes the need for an err variable.
+
+eth64/eth.cocci -  use ether_addr_equal_64bits
+	
+	Ether_addr_equal_64bits is more efficient than ether_addr_equal, and can be
+	used when each argument is an array within a structure that contains at
+	least two bytes of data beyond the array.
+	
+	The structures involved are:
+	at76_priv defined in drivers/net/wireless/at76c50x-usb.h and
+	ieee80211_mgmt defined in include/linux/ieee80211.h
+
+even_more_pci/get_slot.cocci -  Add missing pci_dev_get
+	pci_get_slot does a pci_dev_get, so pci_dev_put needs to be called in an
+	error case.
+	In the first three cases, it might also be possible to move the call to
+	pci_get_slot downwards below the error handling code.
+
+extra_put/extra_put.cocci -  Drop unneeded of_node_put
+	After using for_each_node_by_name, there is no need for of_node_put unless
+	there was a break in the loop body, as for_each_node_by_name does a
+	of_node_put on each of the elements it returns.
+
+fbrelease/metapatch.cocci -  Eliminate double free
+	The function framebuffer_release just calls kfree, so calling kfree
+	subsequently on the same argument represents a double free.  The
+	comments with the definition of framebuffer_release
+	in drivers/video/fbsysfs.c suggest that a more elaborate definition of this
+	function is planned, such that the splitting up of framebuffer_release and
+	kfree as done in the second instance might someday make sense, but it does
+	not make sense now. 
+
+fbrelease/patch.cocci -  eliminate double free
+	The function framebuffer_release just calls kfree, so calling kfree
+	subsequently on the same argument represents a double free.  The
+	comments with the definition of framebuffer_release
+	in drivers/video/fbsysfs.c suggest that a more elaborate definition of this
+	function is planned, such that the splitting up of framebuffer_release and
+	kfree as done in the second instance might someday make sense, but it does
+	not make sense now. 
+
+fen/fen.cocci -  Drop unnecessary of_node_put
+	for_each_node_by_name only exits when its first argument is NULL, and a
+	subsequent call to of_node_put on that argument is unnecessary.
+
+fields/field.cocci -  Use FIELD_SIZEOF
+	Robert P.J. Day proposed to use the macro FIELD_SIZEOF in replace of code
+	that matches its definition.
+
+free_irq/free_irq.cocci -  Reposition free_irq to avoid access to invalid data
+	The data referenced by an interrupt handler should not be freed before the
+	interrupt is ended.  The handler is pxa_camera_irq.  This handler may call
+	pxa_dma_start_channels, which references the channels that are freed on the
+	lines before the call to free_irq.
+
+frfr/frfr.cocci -  Eliminate double free
+	The few lines below the kfree of hdr_buf may go to the label err_free which
+	will also free hdr_buf.  The most straightforward solution seems to be to
+	just move the kfree of hdr_buf after these gotos.
+
+fuse/fuse.cocci -  Add missing fuse_request_alloc
+	The error handling code for the second call to fuse_request_alloc should
+	include freeing the result of the first one.
+
+gdth/gdth.cocci -  Add missing call to gdth_ioctl_free
+	Add missing call to gdth_ioctl_free before aborting.
+
+gfs2/category2a_gfs2_inode_lookup.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function gfs2_inode_lookup returns an
+	ERR pointer, but never returns a NULL pointer. So a NULL test that
+	necessarily comes after an IS_ERR test should be deleted, and a NULL
+	test that may come after a call to this function should be
+	strengthened by an IS_ERR test.
+
+gmc/gmc.cocci -  Avoid call to genlmsg_cancel
+	genlmsg_cancel subtracts some constants from its second argument before
+	calling nlmsg_cancel.  nlmsg_cancel then calls nlmsg_trim on the same
+	arguments.  nlmsg_trim tests for NULL before doing any computation, but a
+	NULL second argument to genlmsg_cancel is no longer NULL due to the initial
+	subtraction.  Nothing else happens in this execution, so the call to
+	genlmsg_cancel is simply unnecessary in this case.
+
+handle/handle.cocci -  Adjust error handling code
+	In this code, it is possible to tell statically whether usblp will be NULL
+	in the error handling code.
+	Another option would have been to put a label directly on the return.
+
+hrtimer/hrtimer.cocci -  Use function hrtimer_is_queued
+	Use the hrtimer_is_queued function rather than an explicit bit-and for
+	testing timer->state, as done elsewhere.
+
+i2c_msg/i2c_msg.cocci -  Use macros for i2c_msg initialization
+	Introduce use of I2c_MSG_READ/WRITE/OP, for readability.
+	In the second i2c_msg structure, a length expressed as an explicit constant
+	is also re-expressed as the size of the buffer, reg.
+
+i915/sp1517.cocci -  Add missing error handling code
+	The cleanup code at the end of the function should also be carried out when
+	the function only partly completes its work.
+
+ie2/ie2.cocci -  Convert IS_ERR result to PTR_ERR
+	This code elsewhere returns a negative constant to an indicate an error,
+	while IS_ERR returns the result of a >= operation.
+
+if-semicolon/if-semicolon.cocci -  Detect semicolon after if
+	Detect a semicolon after if(...) that is preventing the error check to
+	work correctly. Removing this semicolon will change the code behavior,
+	but this is intended.
+
+ifcol/ifcol.cocci -  Adjust confusing if indentation
+	Outdent the code following the if.
+
+iff/iff.cocci -  Fix error return code
+	Convert a possibly 0 error return code to a negative one, as returned
+	elsewhere in the function.
+
+ifseqerr/ifseqerr.cocci -  Remove unnecessary error check
+	This code does not call deinit_card(card); in an error case, as done in
+	other error-handling code in the same function.  But actually, the called
+	function init_sram can only return 0, so there is no need for the error
+	check at all.
+	init_sram is also given a void return type, and its single return statement
+	at the end of the function is dropped.
+
+incon/incon3.cocci -  eliminate possible double free
+	The function __iio_add_event_config_attrs is only called once, by the
+	function iio_device_register_eventset.  If the call fails,
+	iio_device_register_eventset calls __iio_remove_event_config_attrs.  There
+	is thus no need for __iio_add_event_config_attrs to also call
+	__iio_remove_event_config_attrs on failure.
+
+infiniband/category2a_ib_create_send_mad.cocci -  Use a NULL test rather than an IS_ERR test
+	In case of error, the function ib_create_send_mad returns an ERR pointer,
+	but never returns a NULL pointer. So after a call to this function,
+	a NULL test should be replaced by an IS_ERR test.
+
+infiniband/category2a_ucma_alloc_multicast.cocci -  Use a NULL test rather than an IS_ERR test
+	In case of error, the function ucma_alloc_multicast returns a NULL
+	pointer, but never returns an ERR pointer. So after a call to this
+	function, an IS_ERR test should be replaced by a NULL test.
+
+input/sp2486.cocci -  Correct call to input_free_device
+	Correct call to input_free_device
+
+input/sp2495.cocci -  Correct call to input_free_device
+	Correct call to input_free_device
+
+input/sp2506.cocci -  Correct call to input_free_device
+	Correct call to input_free_device
+
+iom/devm2i.cocci -  Add missing iounmap
+	Add missing iounmap in error handling code, in a case where the function
+	already preforms iounmap on some other execution path.
+
+iom/iom.cocci -  Add missing iounmap
+	Add missing iounmap in error handling code, in a case where the function
+	already preforms iounmap on some other execution path.
+
+iounmap/ioremap_check.cocci -  Add missing iounmap
+	An extra error handling label is needed for the case where the ioremap has
+	succeeded.
+
+is_static/is_static.cocci -  Make some structures static
+	Checks that the declaration is not inside a function definition, that the
+	defined variable is not exported using EXPORTED_SYMBOL, etc, and that the
+	defined variable does not occur in any other file.  If these conditions
+	hold, static is added before the declaration.
+
+iserr/patch1.cocci -  Test for IS_ERR rather than 0
+	The function gfs2_inode_lookup always returns either a valid pointer or a
+	value made with ERR_PTR, so its result should be tested with IS_ERR, not
+	with a test for 0. This semantic patch detect candidates for the change.
+
+iserr/patch2.cocci -  Test for IS_ERR rather than 0
+	The function ocfs2_start_trans always returns either a valid pointer or a
+	value made with ERR_PTR, so its result should be tested with IS_ERR, not
+	with a test for 0. This semantic patch detect candidates for the changes.
+
+iserr/patch3.cocci -  Test for IS_ERR rather than 0
+	The function rdma_create_id always returns either a valid pointer or a
+	value made with ERR_PTR, so its result should be tested with IS_ERR, not
+	with a test for 0. This semantic patch detect candidates for the change.
+
+iserr/patch45.cocci -  Test for IS_ERR rather than 0
+	The function thermal_cooling_device_register always returns either a valid
+	pointer or a value made with ERR_PTR, so a test for non-zero on the result
+	will always succeed. This semantic patch detect candidates for the change.
+
+iserr/send_ct.cocci -  Simplify error handling
+	nf_conntrack_alloc cannot return NULL, so there is no need to check for
+	NULL before using the value.  I have also removed the initialization of ct
+	to NULL in nf_conntrack_alloc, since the value is never used, and since
+	perhaps it might lead one to think that return ct at the end might return
+	NULL. This semantic patch detect candidates for the changes.
+
+iserr_cata/category2a.cocci -  Correct error-handling code
+	The function returns an ERR_PTR value in an error case instead of NULL.
+	Thus the test that file is not NULL is always true.
+
+iserr_ref/iserr_mini.cocci -  Correct an error check
+	rtc is clearly does not satisfy IS_ERR at the point where it is tested, so
+	I have changed the test to consider the just initialized rtc->rtc_dev.
+
+iserr_ref/iserr_ref.cocci -  Correct an error check
+	rtc is clearly does not satisfy IS_ERR at the point where it is tested, so
+	I have changed the test to consider the just initialized rtc->rtc_dev.
+
+iserreq/ise2.cocci -  use PTR_ERR to get error code
+	IS_ERR returns only 1 or 0.  The callsite of setup_regulators expects a
+	negative integer in an error case.  Thus, PTR_ERR has to be used to extract
+	it.
+
+isnull_oct/isnull.cocci -  Eliminate a null pointer dereference
+	In the original code, probe_out could be reached when res was null and then
+	when the irq had not yet been requested.  In those cases, the call to
+	free_irq is not needed, so move probe_out down and introduce a new label
+	for the case where calling free_irq is useful.
+
+isnullo/isnull.cocci -  Keep pointer to resource so it can be freed
+	Add a new variable for storing resources accessed subsequent to the one
+	accessed using request_mem_region, so the one accessed using
+	request_mem_region can be released if needed.
+	The resource variable names are also changed to be more descriptive.
+	This code is also missing some calls to iounmap.
+
+itnull/itnull.cocci -  Drop unnecessary null test
+	list_for_each_entry binds its first argument to a non-null value, and thus
+	any null test on the value of that argument is superfluous.
+
+iwcontainer/extra_null.cocci -  Drop unnecessary NULL test
+	
+
+jiffies/jiffies.cocci -  Use time_before, time_before_eq, etc
+	The functions time_before, time_before_eq, time_after, and time_after_eq
+	are more robust for comparing jiffies against other values.
+
+k-zc-alloc/kzalloc.cocci -  Transform some kzalloc calls to kcalloc
+	Transform some kzalloc calls to kcalloc in staging/hv
+
+kasp/kasp.cocci -  Eliminate kstrdup memory leak
+	The string clone is only used as a temporary copy of the argument val
+	within the while loop, and so it should be freed before leaving the
+	function.  The call to strsep, however, modifies clone, so a pointer to the
+	front of the string is kept in saved_clone, to make it possible to free it.
+
+kasprintf2/aspmem.cocci -  Use kstrdup
+	Rewrite the initialization of a dev field.  In the original code, in each
+	case there was a kmalloc followed by a memcpy, as illustrated by the
+	semantic patch below.  In the case that the provided string was the empty
+	string, the allocated memory was then overwritten with a constant string,
+	causing a memory leak.  Finally, there was no provision for returning
+	-ENOMEM in case of failure of the memory allocation.  Indeed, the return
+	value in an error case was err, a variable that was never initialized to
+	anything other than 0.
+	The following patch rewrites the above code to first select a string based
+	on various conditions, and then to copy it into a newly allocated memory
+	region, using kstrdup.  This decreases subtantially the code size
+	and removes the memory leak.  The instruction for getting the length of the
+	string and the associated variable declaration are also deleted.
+	The patch also drops err, changes the return value to retval, which in each
+	file was already initialized elsewhere to an error code, and initializes
+	retval to -ENOMEM when kstrdup fails.
+
+kc/kc.cocci -  Use kzalloc for allocating only one thing
+	Use kzalloc rather than kcalloc(1,...)
+
+kfree3/kmalloc.cocci -  Introduce missing kfree
+	Error handling code following a kzalloc should free the allocated data.
+
+kfree3/kmalloc8a.cocci -  Introduce missing kfree
+	Error handling code following a kzalloc should free the allocated data.
+
+kfree_after/kfree_after.cocci -  Adjust error handling code
+	Use the error handling code at the end of the function, rather than
+	returning directly.
+
+kfree_after2/kfree_after.cocci -  Remove unneeded kfree
+	The label outnodev is only used when kzalloc has not yet taken place or has
+	failed, so there is no need for the call for kfree under this label.
+
+kfree_skb/skbfree.cocci -  Convert kfree/kfree_skb to dev_kfree_skb_irq
+	When values of type struct sk_buff * are freed from within an interrupt
+	handler, dev_kfree_skb_irq should be used rather than kfree or kfree_skb.
+	In most of the cases below, the function containing the free ends up as a
+	URB completion callback.  Such callbacks are called from an interrupt
+	handler.  In drivers/bluetooth/btsdio.c, the enclosing function is
+	ultimately referenced from the second argument of sdio_claim_irq, which is
+	also used as an interrupt handler.
+
+kfrees/kfree.cocci -  Introduce missing kfree
+	Introduce missing kfree
+
+kmalloc9/kmalloc9.cocci -  Add missing kfree
+	At this point, ehv_pic has been allocated but not stored anywhere, so it
+	should be freed before leaving the function.
+
+kmc1/kmc1.cocci -  Free kmem_cache_zalloc'd data using kmem_cache_free
+	Memory allocated using kmem_cache_zalloc should be freed using
+	kmem_cache_free, not kfree.
+
+kmc1a/kmc1.cocci -  eliminate NULL pointer dereference
+	In this code, blkvsc_req is allocated in the cache blkdev->request_pool,
+	but freed in the first case to the cache blkvsc_req->dev->request_pool.
+	blkvsc_req->dev is subsequently initialized to blkdev, making these the
+	same at the second call to kmem_cache_free.  But at the point of the first
+	call, blkvsc_req->dev is NULL.  The second call is changed too, for
+	uniformity.
+
+kmtest/kmtest.cocci -  Add kmalloc NULL tests
+	Check that the result of kmalloc/kzalloc is not NULL before dereferencing it.
+
+kstr/kstr.cocci -  Use kstrtoul, etc
+	Use kstrtoul, etc instead of the now deprecated strict_strtoul, etc.
+
+kstrdup/kstrdup.cocci -  Use kstrdup
+	Use kstrdup when the goal of an allocation is copy a string into the
+	allocated region.
+
+lcd/category2b_back_device_reg.cocci -  Bad error test before a dereference
+	The error test that follows the call to backlight_device_register
+	seems not to concern the right variable.
+
+lenull/lenull.cocci -  Drop NULL test on list_entry result
+	list_entry, which is an alias for container_of, cannot return NULL, as
+	there is no way to add a NULL value to a doubly linked list.
+
+leq/leq.cocci -  Use ERR_PTR/IS_ERR
+	Use ERR_PTR and IS_ERR rather than mixing integers and pointers.
+
+lfee/lfee.cocci -  Remove invalid reference to list iterator variable
+	If list_for_each_entry, etc complete a traversal of the list, the iterator
+	variable ends up pointing to an address at an offset from the list head,
+	and not a meaningful structure.  Thus this value should not be used after
+	the end of the iterator.  Replace c->dev by dev, which is the value that
+	c->dev has been compared to.
+
+list_entry/rcu2.cocci -  Use list_for_each_entry instead of list_for_each
+	Use list_for_each_entry instead of list_for_each in sound/oss drivers.
+
+list_entry_update/list_entry_update.cocci -  Eliminate update of list_for_each_entry loop cursor
+	list_for_each_entry uses its first argument to move from one element to the
+	next, so modifying it can break the iteration.
+
+listfree/listfree.cocci -  Avoid leaving freed data in a list
+	The list_for_each_entry loop can fail, in which case the list element is
+	not removed from the list.  Since this list is not accessed by the loop, 
+	the addition of &data->list into the list is just moved after the loop.
+
+local/local.cocci -  Add local_irq_restore in error handling code
+	The gotos to the labels fail_free_irq and fail_unregister only occur
+	between local_irq_save and local_irq_restore, so it would seem that this
+	code should also call local_irq_restore.
+
+lock/o_lock_inconsistent.cocci -  Unlock the lock that was locked
+	The lock taken was in the ct_ev_lock field, not the hbalock field.
+
+lock_flags/flags1.cocci -  Convert nested spin_lock_irqsave to spin_lock
+	If spin_lock_irqsave is called twice in a row with the same second
+	argument, the interrupt state at the point of the second call overwrites
+	the value saved by the first call.  Indeed, the second call does not need
+	to save the interrupt state, so it is changed to a simple spin_lock.
+
+map_destroy/map_destroy.cocci -  avoid calling map_destroy on NULL
+	map_destroy dereferences its argument.  The call is furthermore only
+	reachable when this argument is NULL.  Thus the call is dropped.
+
+markbusy/usb_mark_last_busy.cocci -  Use usb_mark_last_busy
+	This introduces uses of the function usb_mark_last_busy, define in 
+	include/linux/usb.h. This function only has an effect if 
+	CONFIG_USB_SUSPEND is set.  
+
+mdiobus_unregister/mdiobus_unregister.cocci -  Call mdiobus_unregister before mdiobus_free
+	Based on commit b27393aecf66199f5ddad37c302d3e0cfadbe6c0
+	Calling mdiobus_free without calling mdiobus_unregister causes
+	BUG_ON(). This patch fixes the issue.
+
+mem2/mem2.cocci -  drop redundant memset
+	The region set by the call to memset is immediately overwritten by the
+	subsequent call to memcpy.
+
+memdup/memdup.cocci -  Use kmemdup instead of allocate and memcpy
+	Use kmemdup when some other buffer is immediately copied into the
+	allocated region.
+
+memdup_user/memdup_user.cocci -  Use memdup_user
+	Use memdup_user when user data is immediately copied into the
+	allocated region.
+
+memuser/memuser.cocci -  Add missing kfree
+	The label fail frees dev->buf, but kbuf hasn't yet been stored there at
+	this point.
+
+mesh/mesh.cocci -  Correct the argument to __mesh_table_free
+	In the function mesh_table_grow, it is the new table not the argument table
+	that should be freed if the function fails (cf commit
+	bd9b448f4c0a514559bdae4ca18ca3e8cd999c6d)
+
+mini_lock/mini_lock.cocci -  Add missing spin_unlock
+	Add a spin_unlock missing on the error path.  The spin lock is used in a
+	balanced way elsewhere in the file.
+
+mini_null/mini_null_ref.cocci -  Move a dereference below a NULL test
+	In each case, if the NULL test is necessary, then the dereference should be
+	moved below the NULL test.
+
+mini_null3/mini_null_ref3.cocci -  Move a dereference below a NULL test
+	If the NULL test is necessary, then the dereference should be moved below
+	the NULL test.
+
+mini_null_check/mini_null_check.cocci -  Drop an unneeded a NULL test
+	In each case, the NULL test is not necessary because the function is static
+	and at the only places where it is called, the us argument has already been
+	dereferenced.
+
+mini_null_check/second_mini_null_check.cocci -  Drop an unneeded a NULL test
+	In each case, the NULL test is not necessary because the function is static
+	and at the only places where it is called, the us argument has already been
+	dereferenced.
+
+mini_null_ref_aug10/mini_null_ref.cocci -  Remove potential NULL dereference
+	If the NULL test is necessary, the initialization involving a dereference of
+	the tested value should be moved after the NULL test.
+
+mini_null_ref_aug14/mini_null_ref.cocci -  Remove potential NULL dereferences
+	If the NULL test is necessary, the initialization involving a dereference of
+	the tested value should be moved after the NULL test.
+
+misc_undo/send_m1.cocci -  Add missing snd_card_free
+	The function snd_mixart_create creates a link between mgr and card that
+	allows snd_mixart_free to free card as well.  But if snd_mixart_create
+	fails, then the link has not been created and card has to be freed explicitly.
+
+misc_undo/send_m2.cocci -  Add missing snd_card_free
+	The function snd_mixart_create creates a link between mgr and card that
+	allows snd_mixart_free to free card as well.  But if snd_mixart_create
+	fails, then the link has not been created and card has to be freed explicitly.
+
+missing_put/missing_put.cocci -  Add missing of_node_put
+	There should be an of_node_put when breaking out of a loop that iterates
+	using for_each_node_by_type.
+
+moduleparam/rule5.cocci -  Drop redundant includes of moduleparam.h
+	Drop #include <linux/moduleparam.h> in files that also include #include
+	<linux/module.h>.  module.h includes moduleparam.h already.
+
+more_of_noput/patch.cocci -  Add missing of_node_put
+	Of_get_parent and of_find_compatible_node do a of_node_get, and thus a
+	corresponding of_code_put is needed in both the error case and the normal
+	return case.
+
+more_pci/get_slot.cocci -  Add missing pci_dev_get
+	pci_get_bus_and_slot does a pci_dev_get, so pci_dev_put needs to be called
+	in an error case.
+
+more_pci/more_pci.cocci -  Add missing pci_dev_get
+	pci_get_bus_and_slot does a pci_dev_get, so pci_dev_put needs to be called
+	in an error case.
+
+mutex/mut.cocci -  Release mutex in error handling code
+	The mutex is released on a successful return, so it would seem that it
+	should be released on an error return as well.
+
+mutex2/mutex2.cocci -  Call mutex_unlock in error handling code
+	Adjust the error handling code so that it benefits from the call to
+	mutex_unlock at the end of the function.
+
+ndp/ndp.cocci -  delete useless tests on netdev_priv
+	
+	Netdev_priv performs an addition, not a pointer dereference, so it seems
+	quit unlikely that its result would ever be NULL.
+
+noderef/noderef.cocci -  Correct size computation
+	The size argument to kcalloc should be the size of desired structure,
+	not the pointer to it.
+
+noderef2/noderef2.cocci -  Correct size given to memset
+	Memset should be given the size of the structure, not the size of the pointer.
+
+notnull/notnull.cocci -  Remove redundant test
+	vpage is checked not to be NULL just after it is initialized at the
+	beginning of each loop iteration.
+
+notnull/notnull2.cocci -  Correct redundant test
+	str has already been tested.  It seems that this test should be on the
+	recently returned value snr.
+
+null_ref/null_ref.cocci -  Move dereference after NULL test
+	If the NULL test on h is needed in snd_harmony_mixer_init, then the
+	dereference should be after the NULL test.
+	Actually, there is a sequence of calls: snd_harmony_create, then
+	snd_harmony_pcm_init, and then snd_harmony_mixer_init.  snd_harmony_create
+	initializes h, but may indeed leave it as NULL.  There was no NULL test at
+	the beginning of snd_harmony_pcm_init, so I have added one.  The NULL test
+	in snd_harmony_mixer_init is then not necessary, but in case the ordering
+	of the calls changes, I have left it, and moved the dereference after it.
+
+null_ref2/mini_null_ref2.cocci -  Adjust NULL test
+	Since card must already be non-NULL, it seems that what was intended
+	was to test the result of kmalloc.
+
+oddpe/oddpe.cocci -  adjust inconsistent IS_ERR and PTR_ERR
+	Change the call to PTR_ERR to access the value just tested by IS_ERR.
+
+of_noput/of_noput.cocci -  Add missing of_node_put
+	There should be an of_node_put when breaking out of a loop that iterates
+	over calls to of_find_all_nodes, as this function does an of_node_get on
+	the value it returns.
+
+offset/offset.cocci -  Use offsetof
+	In the patch cc154ac64aa8d3396b187f64cef01ce67f433324, Al Viro observed
+	that the proper way to compute the distance between two structure fields is
+	to use offsetof() or a cast to a pointer to character.  The same change can
+	be applied to a few more files.
+
+ofiomap/of_iomap-iounmap.cocci -  Add missing iounmap
+	of_iomap calls ioremap, and so should be matched with an iounmap.  At the
+	two error returns, the result of calling of_iomap is only stored in a local
+	variable, so these error paths need to call iounmap.  Furthermore, this
+	function ultimately stores the result of of_iomap in an array that is local
+	to the file.  These values should be iounmapped at some point.  I have
+	added a corresponding call to iounmap at the end of the function m8xx_remove.
+
+ofnametype/ofname1.cocci -  Add missing of_node_put
+	of_node_put is needed before discarding a value received from
+	of_find_node_by_name, eg in error handling code.
+
+ofnametype/oftype1.cocci -  add missing of_node_put
+	of_node_put is needed before discarding a value received from
+	of_find_node_by_name, eg in error handling code.
+
+ofnodeget/ofnodeget.cocci -  Add of_node_put to avoid memory leak
+	Add a call to of_node_put in the error handling code following a call to
+	of_find_compatible_node.
+
+ofnodeget/ofnodeget1.cocci -  Add of_node_put to avoid memory leak
+	Add a call to of_node_put in the error handling code following a call to
+	of_find_compatible_node.
+
+ofnodeget/ofnodeget2.cocci -  Add of_node_put to avoid memory leak
+	Add a call to of_node_put in the error handling code following a call to
+	of_find_compatible_node.
+
+ofnodeget3/ofnodeget3.cocci -  Add of_node_put to avoid memory leak
+	This function is implemented as though the function of_get_next_child does
+	not increment the reference count of its result, but actually it does.
+	Thus the patch adds of_node_put in error handling code and drops a call to
+	of_node_get.
+
+ofnodeget4/ofnodeget4.cocci -  Add of_node_put to avoid memory leak
+	In this case, a device_node structure is stored in another structure that
+	is then freed without first decrementing the reference count of the
+	device_node structure.
+
+ofredef/ofredef.cocci -  Add missing of_node_put
+	np is initialized to the result of calling a function that calls
+	of_node_get, so of_node_put should be called before the pointer is dropped.
+
+osdi_isnull/osdi_isnull.cocci -  Eliminate a NULL pointer dereference
+	In each case, the print involves dereferencing a value that is NULL or is
+	near NULL.
+
+osdi_isnull/osdi_isnull3.cocci -  Eliminate a NULL pointer dereference
+	In each case, the print involves dereferencing a value that is NULL or is
+	near NULL.
+
+osdi_kfree/osdi_kfree.cocci -  Eliminate use after free
+	The error value is saved in a new local variable err before freeing the
+	containing structure.
+
+parport/sp8188.cocci -  Put gotten port value
+	parport_find_number calls parport_get_port on its result, so there should
+	be a corresponding call to parport_put_port before dropping the reference.
+	Similar code is found in the function register_device in the same file.
+
+parse_phandle/parse_phandle.cocci -  Add missing of_node_put
+	of_parse_phandle increments the reference count of np, so this should be
+	decremented before trying the next possibility.
+
+pci_add_put/pci_noputm.cocci -  Add missing pci_dev_put
+	There should be a pci_dev_put when breaking out of a loop that iterates
+	over calls to pci_get_device and similar functions.
+
+pci_drop_put/pci_get.cocci -  Drop unnecessary pci_dev_put
+	Remove an unnecessary pci_dev_put.  pci_dev_put is called implicitly by the
+	subsequent call to pci_get_device.
+
+pciom/pciom3.cocci -  Exchange pci_iounmaps
+	The calls to pci_iounmap are in the wrong order, as compared to the
+	associated calls to pci_iomap.
+
+pd/pd.cocci -  Invert calls to platform_device_put and platform_device_del
+	Platform_device_del should be called before platform_device_put, as
+	platform_device_put can delete the structure.
+	Additionally, improve the error handling code for the call to ioremap, so
+	that it calls platform_device_put.
+
+platret/platret.cocci -  failure test for null rather than negative integer
+	dev_get_platdata returns a pointer, so the failure value would be NULL
+	rather than a negative integer.
+
+pointless_err/pointless_err.cocci -  Use ERR_CAST
+	Use ERR_CAST(x) rather than ERR_PTR(PTR_ERR(x)).  The former makes more
+	clear what is the purpose of the operation, which otherwise looks like a
+	no-op.
+
+prepare2/prepare2.cocci -  use clk_prepare_enable and clk_disable_unprepare
+	Clk_prepare_enable and clk_disable_unprepare combine clk_prepare and
+	clk_enable, and clk_disable and clk_unprepare.  They make the code more
+	concise, and ensure that clk_unprepare is called when clk_enable fails.
+
+ptr/ptr.cocci -  Correct error handling code
+	If it is reasonable to apply PTR_ERR to the result of calling clk_get, then
+	that result should first be tested with IS_ERR, not with !.
+
+put_after/put_after.cocci -  Add missing of_node_put
+	dma_channel_np has been accessed at this point, so decrease its reference
+	count before leaving the function.
+
+put_deref/patch.cocci -  Move of_node_put
+	It seems better to dereference master before decrementing the reference
+	count rather than afterwards.
+
+putty/putty.cocci -  Avoid calling put_tty_driver on NULL
+	put_tty_driver calls tty_driver_kref_put on its argument, and then
+	tty_driver_kref_put calls kref_put on the address of a field of this
+	argument.  kref_put checks for NULL, but in this case the field is likely
+	to have some offset and so the result of taking its address will not be
+	NULL.  Labels are added to be able to skip over the call to put_tty_driver
+	when the argument will be NULL.
+
+rcu/rcu.cocci -  Call rcu_read_unlock in default case
+	Adjust the default case so that it benefits from the call to rcu_read_unlock.
+
+reiserfs/category2a_open_xa_dir.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function open_xa_dir returns an ERR pointer,
+	but never returns a NULL pointer. So a NULL test that comes after an
+	IS_ERR test should be deleted.
+
+remap_bar/remap_bar.cocci -  Reorder error handling code to include iounmap
+	The out_msi_disable label should be before cleanup_nomem to additionally
+	benefit from the call to iounmap.  Subsequent gotos are adjusted to go to
+	out_msi_disable instead of cleanup_nomem, which now follows it.  This is
+	safe because pci_disable_msi does nothing if pci_enable_msi was not called.
+
+remove/remove.cocci -  Drop return value from platform_driver remove functions
+	The return value of the remove function of a driver structure, and thus of
+	a platform_driver structure, is ultimately ignored, and is thus
+	unnecessary.  This patch removes the return value for the remove function
+	stored in a platform_driver structure.  For the files in this patch, the
+	return values are always 0.
+
+reqrel2/reqrel2.cocci -  Use release_mem_region after request_mem_region
+	The memory allocated using request_mem_region should be released using
+	release_mem_region, not release_region.
+
+requests/diou.cocci -  use devm_kzalloc and devm_clk_get
+	Using devm_kzalloc and devm_clk_get simplifies the code and ensures that
+	the use of devm_request_irq is safe.  When kzalloc and kfree were used, the
+	interrupt could be triggered after the handler's data argument had been
+	freed.
+
+requests/dirq.cocci -  use devm_kzalloc and devm_clk_get
+	Using devm_kzalloc and devm_clk_get simplifies the code and ensures that
+	the use of devm_request_irq is safe.  When kzalloc and kfree were used, the
+	interrupt could be triggered after the handler's data argument had been
+	freed.
+
+resource/reg.cocci -  Convert release_resource to release_region/release_mem_region
+	Request_region should be used with release_region, not release_resource.
+	The result of request_mem_region is no longer stored.  Instead the field
+	ioarea is used to store a pointer to the resource structure that contains
+	the start address.  This is the information that is needed later in
+	nuc900_i2c_remove to release the region.  The field ioarea is also printed
+	in some debugging code.
+
+resource/resource.cocci -  Convert release_resource to release_region/release_mem_region
+	Request_region should be used with release_region, not release_resource.
+	The result of request_mem_region is no longer stored.  Instead the field
+	ioarea is used to store a pointer to the resource structure that contains
+	the start address.  This is the information that is needed later in
+	nuc900_i2c_remove to release the region.  The field ioarea is also printed
+	in some debugging code.
+
+resource_fix1/resource_fix1.cocci -  Convert release_resource to release_mem_region
+	Request_mem_region should be used with release_mem_region, not
+	release_resource.
+
+resource_size/resource_size.cocci -  Use resource_size
+	Use the function resource_size, which reduces the chance of introducing
+	off-by-one errors in calculating the resource size.
+
+ret3/ret3.cocci -  Fix error return code
+	Convert a nonnegative error return code to a negative one, as returned
+	elsewhere in the function.
+
+ret4/ret4.cocci -  Fix error return code
+	Initialize return variable before exiting on an error path.
+
+retalloc/retalloc.cocci -  Fix error return code
+	Convert a 0 error return code to a negative one, as returned elsewhere in the
+	function.
+
+retest/retest.cocci -  Adjust duplicate test
+	Delete successive tests to the same location.  In this case intc_node has
+	already been tested for being NULL, and calling of_find_node_by_name will
+	not make it NULL.  On the other hand, of_find_node_by_name can return NULL
+	on failure.
+
+rirqp/rirqp.cocci -  Ensure arguments to request_irq and free_irq are compatible
+	Convert calls to free_irq so that the second argument is the same as the
+	last argument of the corresponding call to request_irq.  Without this
+	property, free_irq does nothing.
+
+round/round.cocci -  Use DIV_ROUND_UP
+	The kernel.h macro DIV_ROUND_UP performs the computation (((n) + (d) - 1) /
+	(d)) but is perhaps more readable.
+
+round2/round.cocci -  Use DIV_ROUND_UP
+	The kernel.h macro DIV_ROUND_UP performs the computation (((n) + (d) - 1) /
+	(d)) but is perhaps more readable.
+
+round_closest/round_closest.cocci -  Use DIV_ROUND_CLOSEST
+	The kernel.h macro DIV_ROUND_CLOSEST performs the computation (x + d/2)/d
+	but is perhaps more readable.
+
+rr/rr.cocci -  Correct use of request_region/request_mem_region
+	request_region should be used with release_region, not request_mem_region.
+	Geert Uytterhoeven pointed out that in the case of drivers/video/gbefb.c,
+	the problem is actually the other way around; request_mem_region should be
+	used instead of request_region.
+
+rr/rr1.cocci -  Correct use of request_region/request_mem_region
+	request_region should be used with release_region, not request_mem_region.
+	Geert Uytterhoeven pointed out that in the case of drivers/video/gbefb.c,
+	the problem is actually the other way around; request_mem_region should be
+	used instead of request_region.
+
+rxrpc/category2a_rxrpc_get_transport.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function rxrpc_get_transport returns an ERR
+	pointer, but never returns a NULL pointer. So after a call to this
+	function, a NULL test should be replaced by an IS_ERR test.
+
+s390/category2a_dasd_kmalloc_request.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, functions dasd_kmalloc_request and idal_buffer_alloc
+	return an ERR pointer, but never return the NULL pointer. So after a
+	call to one of these functions, a NULL test should be replaced by an
+	IS_ERR test.
+
+s390/category2a_idal_buffer_alloc.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, functions dasd_kmalloc_request and idal_buffer_alloc
+	return an ERR pointer, but never return the NULL pointer. So after a
+	call to one of these functions, a NULL test should be replaced by an
+	IS_ERR test.
+
+s390/s390.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, functions dasd_kmalloc_request and idal_buffer_alloc
+	return an ERR pointer, but never return the NULL pointer. So after a
+	call to one of these functions, a NULL test should be replaced by an
+	IS_ERR test.
+
+semicolon/semicolon.cocci -  Remove unnecessary semicolon
+	Removes unnecessary semicolon
+
+serial_core/serial_core.cocci -  Use UPIO_MEM rather than SERIAL_IO_MEM
+	As in the commit 9b4a1617772d6d5ab5eeda0cd95302fae119e359, use UPIO_MEM
+	rather than SERIAL_IO_MEM.  Both have the same value.
+
+signed/signed.cocci -  Use unsigned for loop index
+	A few more cases in the spirit of the patch \"Trivial: Replacement of always
+	>0 ints with unsigned ints\" submitted by Ricardo Martins <ricardo@scarybox.net>
+
+simple_kzalloc/simple_kzalloc1.cocci -  Use kzalloc instead of kmalloc and memset
+	Use kzalloc rather than the combination of kmalloc and memset.
+
+sin_family/sin_family.cocci -  Use AF_INET for sin_family field
+	Elsewhere the sin_family field holds a value with a name of the form
+	AF_..., so it seems reasonable to do so here as well.  Also the values of
+	PF_INET and AF_INET are the same.
+
+sizeof/sizeof_sizeof.cocci -  Eliminate double sizeof
+	Taking sizeof the result of sizeof is quite strange and does not seem to be
+	what is wanted here.
+
+sla/sla.cocci -  Use GFP_ATOMIC when a lock is held
+	A spin lock is taken near the beginning of the enclosing function.
+
+slot/slot.cocci -  Add missing pci_dev_put
+	Pci_get_slot calls pci_dev_get, so pci_dev_put is needed before leaving the
+	function.
+
+soc_sound/category2a_ssc_request.cocci -  Useless NULL test
+	The test (ssc != NULL) can only be reached if the call to the function
+	ssc_request, the result of which ssc is assigned, succeeds. Moreover,
+	two statements assign NULL to ssc just before a return, which is useless
+	since it is a local variable. So, we suggest to delete the test and
+	the two assignments.
+
+sockfd/patch.cocci -  Use sockfd_put
+	The function sockfd_lookup uses fget on the value that is stored in the
+	file field of the returned structure, so fput should ultimately be applied
+	to this value.  This can be done directly, but it seems better to use the
+	sockfd specific macro sockfd_put, which does the same thing.
+
+stest/stest.cocci -  Put NULL test before dereference
+	If the NULL test on block is needed, it should be before the dereference of
+	the base field.
+
+strsize/strsizeof.cocci -  Convert strncmp to strcmp
+	As an identical match is wanted in this case, strcmp can be used instead.
+
+strtoul/simple.cocci -  Change simple_strtol to simple_strtoul
+	Since bridge is unsigned, it would seem better to use simple_strtoul that
+	simple_strtol.
+
+sz/sz.cocci -  Correct code taking the size of a pointer
+	sizeof(share_id) is just the size of the pointer.  On the other hand,
+	block->share_id is an array, so its size seems more appropriate.
+
+sz3/sz3.cocci -  Take size of pointed value, not pointer
+	Sizeof a pointer-typed expression returns the size of the pointer, not that
+	of the pointed data.
+
+testeno/testeno.cocci -  correct error check
+	
+	iio_kfifo_allocate returns NULL in case of error.
+
+tipc/tipc.cocci -  Use tipc_port_unlock
+	The file net/tipc/port.c takes a lock using the function tipc_port_lock and
+	then releases the lock sometimes using tipc_port_unlock and sometimes using
+	spin_unlock_bh(p_ptr->publ.lock).  tipc_port_unlock simply does the
+	spin_unlock_bh, but it seems cleaner to use it everywhere.
+
+tty_port/sp10730.cocci -  Put correct tty value
+	The tty value that should be put is the one that was just gotten by
+	tty_port_tty_get, not the one that is the argument to the enclosing
+	function.
+
+typedef/handle.cocci -  Transform typedef HANDLE into void *
+	Remove typedef HANDLE which aliases a void pointer and use void *
+	anywhere HANDLE was used.
+
+typedef/hv/device_object/DEVICE_OBJECT.cocci -  Transform PDEVICE_OBJECT and DEVICE_OBJECT typedefs into their corresponding structs
+	Remove typedef DEVICE_OBJECT and use a struct named hv_device instead.
+	Remove typedef PDEVICE_OBJECT which aliases a pointer and use the
+	struct pointer (struct hv_device *).
+
+typedef/hv/driver_object/DRIVER_OBJECT.cocci -  Remove typedef DRIVER_OBJECT and PDRIVER_OBJECT
+	typedef DRIVER_OBJECT and PDRIVER_OBJECT are removed and their usages
+	are replace by the use of struct hv_driver and struct hv_driver *
+	respectively.
+
+typedef/hv/netvsc/NETVSC_PACKET.cocci -  Remove typedef NETVSC_PACKET and PNETVSC_PACKET
+	typedef NETVSC_PACKET and PNETVSC_PACKET are removed and their usages
+	are replace by the use of struct hv_netvsc_packet and
+	struct hv_netvsc_packet * respectively.
+
+typedef/hv/storvsc/STORVSC_REQUEST.cocci -  Remove typedef STORVSC_REQUEST and PSTORVSC_REQUEST
+	typedef STORVSC_REQUEST and PSTORVSC_REQUEST are removed and their
+	usages are replace by the use of struct hv_storvsc_request and
+	struct hv_storvsc_request * respectively.
+
+ubi/category2b_add_volume.cocci -  Bad IS_ERR test
+	In case of error, the function add_volume returns an ERR pointer. The
+	result of IS_ERR, which is supposed to be used in a test as it is, is
+	here checked to be less than zero, which seems odd. We suggest to
+	replace this test by a simple IS_ERR test.
+
+ubifs/category2a_kthread_create.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function kthread_create returns an ERR pointer,
+	but never returns a NULL pointer. So a NULL test that comes before an
+	IS_ERR test should be deleted.
+
+ulfe/ulfe.cocci -  Use list_for_each_entry
+	Use list_for_each_entry and perform some other induced simplifications.
+
+undevm/undevm.cocci -  Kfree etc should not be used with devm functions
+	Using kfree with devm_kzalloc will cause a double free, and likewise for
+	the other devm functions.
+
+unsf/unsf.cocci -  Fix return value from an unsigned function
+	The function has an unsigned return type, but returns a negative constant
+	to indicate an error condition.  
+
+unsf/unsf_ret0.cocci -  Fix return value from an unsigned function
+	The function has an unsigned return type, but returns a negative constant
+	to indicate an error condition.  Another error condition in the same
+	function is indicated by returning 0, and indeed the only call to the
+	function checks for 0 to detect errors, so the return of a negative value
+	it converted to a return of 0.
+
+unused/unused.cocci -  Remove unused variable
+	Remove unused variable
+
+unused_err/unused_err.cocci -  Use available error codes
+	Error codes are stored in err, but the return value is always 0.  Return
+	err instead.
+
+unused_var_kfree/unused_var_kfree.cocci -  Remove unused variables and useless calls to kfree
+	old_class_name, and new_class_name are never used. This patch remove the
+	declaration and calls to kfree.
+
+urb2/urb2.cocci -  Delete unnecessary call to usb_kill_urb
+	Since in each case nothing has been done with the recently allocated urb,
+	it is not necessary to kill it before freeing it.
+
+urb8/urb8.cocci -  Introduce missing usb_free_urb
+	Error handling code following a usb_alloc_urb should free the allocated data.
+
+usb/category2a_back_device_reg.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function backlight_device_register returns an
+	ERR pointer, but never returns a NULL pointer. So a NULL test that may
+	come after a call to this function should be strengthened by an IS_ERR
+	test.
+
+usb/category2a_isp1760_reg.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function isp1760_register returns an ERR
+	pointer, but never returns a NULL pointer. So after a call to this
+	function, a NULL test should be replaced by an IS_ERR test. Moreover,
+	we have noticed that:
+	(1) the result of isp1760_register is assigned through the function
+	pci_set_drvdata without an error test,
+	(2) if the call to isp1760_register fails, the current function
+	(isp1761_pci_probe) returns 0, and if it succeeds, it returns -ENOMEM,
+	which seems odd.
+	Thus, we suggest to move the test before the call to pci_set_drvdata
+	to correct (1), and to turn it into a non IS_ERR test to correct (2).
+
+usbdata/usb_get_intfdata.cocci -  Use usb_set/get_intfdata
+	Use the USB functions usb_get_intfdata and usb_set_intfdata instead of
+	dev_get_drvdata and dev_set_drvdata, respectively.
+
+usbdata/usb_set_intfdata.cocci -  Use usb_set/get_intfdata
+	Use the USB functions usb_get_intfdata and usb_set_intfdata instead of
+	dev_get_drvdata and dev_set_drvdata, respectively.
+
+usbdir/end.cocci -  Use usb_endpoint_dir_out
+	Use the usb_endpoint_dir_out API function.  Note that the use of
+	USB_TYPE_MASK in the original code is incorrect; it results in a test that
+	is always false.
+
+use_freed_specific/bad_kfree.cocci -  Eliminate use after free
+	__sa1111_remove always frees its argument, so the subsequent reference to
+	sachip->saved_state represents a use after free.  __sa1111_remove does not
+	appear to use the saved_state field, so the patch simply frees it first.
+
+usefreed/bad_kfree.cocci -  Correct use after free
+	Move the kfree after a reference to the freed structure.
+
+uselesskfree/uselesskfree.cocci -  Remove useless kfree
+	Remove useless kfree() and clean up code related to the removal.
+
+video/patch.cocci -  Use video_device_release rather than kfree
+	The file drivers/media/video/videodev.c defines both video_device_alloc and
+	video_device_release.  These are essentially just kzmalloc and kfree,
+	respectively, but it seems better to use video_device_release, as done in
+	the other media files, rather than kfree, in case the implementation some
+	day changes.
+
+videobuf_dvb_get_frontend_return_null/videobuf_dvb_get_frontend_return_null.cocci -  Test if videobuf_dvb_get_frontend return NULL
+	Based on commit: e66131cee501ee720b7b58a4b87073b8fbaaaba6
+	Not testing videobuf_dvb_get_frontend output may cause OOPS if it return
+	NULL. This patch fixes this issue.
+
+warn/warn.cocci -  Use WARN
+	Use WARN rather than printk followed by WARN_ON(1), for conciseness.
+
+warn2/warn2.cocci -  Drop if around WARN_ON
+	Just use WARN_ON rather than an if containing only WARN_ON(1).
+
+write2/write2.cocci -  delete double assignment
+	Delete successive assignments to the same location.
+
+wrongtest/wrongtest.cocci -  Test the just-initialized value
+	Test the just-initialized value rather than some other one.
+
+x25/patch.cocci -  Add missing x25_neigh_put
+	The function x25_get_neigh increments a reference count.  At the point of
+	the second goto out, the result of calling x25_get_neigh is only stored in
+	a local variable, and thus no one outside the function will be able to
+	decrease the reference count.  Thus, x25_neigh_put should be called before
+	the return in this case.
+
+xand/xand.cocci -  Detect duplicated test
+	Look for duplicate && and || tests.
+
+xfrm/category2a_xfrm_bundle_create.cocci -  Use an IS_ERR test rather than a NULL test
+	In case of error, the function xfrm_bundle_create returns an ERR
+	pointer, but never returns a NULL pointer. So a NULL test that comes
+	after an IS_ERR test should be deleted.
+
+zercst/zercst.cocci -  Adjust suspicious bit operation
+	IRQF_TRIGGER_HIGH is 0x00000004, so it seems that & was intended rather than |.
+
+zero/rezero.cocci -  Possible problem with V4L2_TUNER_MODE_MONO
+	The file drivers/media/video/tvaudio.c contains the following code:
+	(starting at line 1257 in a recent linux-next)
+	                if (mode & V4L2_TUNER_MODE_MONO)
+	                        s1 |= TDA8425_S1_STEREO_MONO;
+	                if (mode & V4L2_TUNER_MODE_STEREO)
+	                        s1 |= TDA8425_S1_STEREO_SPATIAL;
+	(starting at line 1856 in a recent linux-next)
+	        if (mode & V4L2_TUNER_MODE_MONO)
+	                vt->rxsubchans |= V4L2_TUNER_SUB_MONO;
+	        if (mode & V4L2_TUNER_MODE_STEREO)
+	                vt->rxsubchans |= V4L2_TUNER_SUB_STEREO;
+	The only possible value of V4L2_TUNER_MODE_MONO, however, seems to be 0, as
+	defined in include/linux/videodev2.h, and thus the first test in each case
+	is never true.  Is this what is intended, or should the tests be expressed
+	in another way?
 
 
 ----------------------------------------------------------------------
