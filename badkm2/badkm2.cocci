@@ -22,7 +22,7 @@ ret = -C
 if@p (...)
 {
   ... when != ret = e2
-      when != ret + e2
+      when != ret += e2
   return ret;
 }
 ... when any
