@@ -6,18 +6,18 @@ Github repository: https://github.com/coccinelle/coccinellery
 Download all files (zip): https://github.com/coccinelle/coccinellery/archive/master.zip
 
 Coccinelle Info
-Coccinelle Home: http://coccinelle.lip6.fr/
-Contacts: http://coccinelle.lip6.fr/contact.php
+Coccinelle Home: https://coccinelle.gitlabpages.inria.fr/website/
+Contacts: https://coccinelle.gitlabpages.inria.fr/website/contact.html
 
 This is a gallery of semantic patches for use with Coccinelle
-(http://coccinelle.lip6.fr/). They are extracted automatically from a
+(https://coccinelle.gitlabpages.inria.fr/website/). They are extracted automatically from a
 collection of semantic patches that have been used to create patches for the
 Linux Kernel and other software. The descriptions are derived from the commit
 messages contained in those patches. There is no guarantee that the
 descriptions are correct or understandable, and no guarantee that the semantic
 patches are correct, complete, or work with the latest version of Coccinelle.
 Comments and corrections may be sent to the Coccinelle mailing list:
-cocci@systeme.lip6.fr / https://systeme.lip6.fr/mailman/listinfo/cocci.
++cocci@inria.fr.
 
 To propose new semantic patches to be added to the gallery, please make a pull
 request (https://help.github.com/articles/fork-a-repo) via Github to
